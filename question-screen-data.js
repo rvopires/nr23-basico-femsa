@@ -155,7 +155,9 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "A brigada é um grupo organizado de colaboradores capacitados para prevenir, combater, evacuar e prestar primeiros socorros.",
           "review": "Definição de Brigada de Incêndio",
-          "transcript": "O que é a Brigada de Incêndio?"
+          "transcript": "O que é a Brigada de Incêndio?",
+          "image": "assets/fotos/m1=p1.png",
+          "imagePosition": "center 28%"
         },
         {
           "id": "m1-q2",
@@ -185,7 +187,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "O Líder da Brigada comanda a ação nos primeiros minutos.",
           "review": "Papel do Líder da Brigada",
-          "transcript": "Quem comanda a ação nos primeiros minutos de uma emergência?"
+          "transcript": "Quem comanda a ação nos primeiros minutos de uma emergência?",
+          "image": "assets/fotos/m1=p2.png"
         },
         {
           "id": "m1-q3",
@@ -215,7 +218,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "No abandono de área, remova todos para um local seguro a no mínimo 100 metros do sinistro.",
           "review": "Distância mínima no abandono de área",
-          "transcript": "Qual é a distância mínima recomendada no abandono de área?"
+          "transcript": "Qual é a distância mínima recomendada no abandono de área?",
+          "image": "assets/fotos/m1=p3.png"
         },
         {
           "id": "m1-q4",
@@ -245,7 +249,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "A sequência é: alerta, análise, corte de energia, abandono, primeiros socorros e confinamento.",
           "review": "Ordem dos procedimentos básicos",
-          "transcript": "Qual é a ordem correta dos procedimentos básicos de emergência?"
+          "transcript": "Qual é a ordem correta dos procedimentos básicos de emergência?",
+          "image": "assets/fotos/m1=p4.png"
         }
       ]
     },
@@ -356,7 +361,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Retira o oxigênio do ar (abafamento).",
           "review": "Abafamento com manta",
-          "transcript": "Cobrir a chama com uma manta grossa e abafada…"
+          "transcript": "Cobrir a chama com uma manta grossa e abafada…",
+          "image": "assets/fotos/m2-p9.png"
         },
         {
           "id": "m2-q2",
@@ -376,7 +382,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Mais ar = mais comburente (oxigênio) disponível.",
           "review": "Corrente de ar perto do foco",
-          "transcript": "Uma corrente de ar entrando por uma janela aberta perto do foco de fogo…"
+          "transcript": "Uma corrente de ar entrando por uma janela aberta perto do foco de fogo…",
+          "image": "assets/fotos/m2-p10.png"
         },
         {
           "id": "m2-q3",
@@ -396,7 +403,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Retira o calor (resfriamento).",
           "review": "Resfriamento com água",
-          "transcript": "Jogar água diretamente sobre a base da chama…"
+          "transcript": "Jogar água diretamente sobre a base da chama…",
+          "image": "assets/fotos/m2-p11.png"
         },
         {
           "id": "m2-q4",
@@ -416,7 +424,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Mantém material combustível disponível.",
           "review": "Combustível perto de calor",
-          "transcript": "Deixar caixas de papelão empilhadas perto de um ponto que está esquentando…"
+          "transcript": "Deixar caixas de papelão empilhadas perto de um ponto que está esquentando…",
+          "image": "assets/fotos/m2-p12.png"
         },
         {
           "id": "m2-q5",
@@ -436,7 +445,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Elimina o material combustível do ambiente.",
           "review": "Retirada do material combustível",
-          "transcript": "Retirar o material que está queimando para uma área isolada…"
+          "transcript": "Retirar o material que está queimando para uma área isolada…",
+          "image": "assets/fotos/m2-p1.png"
         }
       ]
     },
@@ -560,7 +570,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Água é indicada para Classe A.",
           "review": "Agente para Classe A",
-          "transcript": "Classe A — papel, tecido, madeira. Qual agente?"
+          "transcript": "Classe A — papel, tecido, madeira. Qual agente?",
+          "image": "assets/fotos/m3-p8.png"
         },
         {
           "id": "m3-q2",
@@ -585,7 +596,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "PQS é indicado para Classes B e C. (CO₂ também serve em B/C; nesta rodada o gabarito do roteiro é PQS.)",
           "review": "Agente para Classe B",
-          "transcript": "Classe B — álcool, gasolina, GLP. Qual agente?"
+          "transcript": "Classe B — álcool, gasolina, GLP. Qual agente?",
+          "image": "assets/fotos/m3-p9.png"
         },
         {
           "id": "m3-q3",
@@ -610,7 +622,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "CO₂ (ou PQS) para Classe C. Nunca água em equipamento energizado.",
           "review": "Agente para Classe C",
-          "transcript": "Classe C — quadro elétrico energizado. Qual agente?"
+          "transcript": "Classe C — quadro elétrico energizado. Qual agente?",
+          "image": "assets/fotos/m3-p10.png"
         },
         {
           "id": "m3-q4",
@@ -635,7 +648,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Classe D exige agente específico para metais — não use água nem PQS comum.",
           "review": "Agente para Classe D",
-          "transcript": "Classe D — raspas de metal. Qual agente?"
+          "transcript": "Classe D — raspas de metal. Qual agente?",
+          "image": "assets/fotos/m3-p11.png"
         }
       ]
     },
@@ -784,7 +798,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Plugue em T sobrecarrega a tomada — risco real.",
           "review": "Plugue em T na copa",
-          "transcript": "Na copa: várias tomadas ligadas num único plugue em T atrás do micro-ondas. Isso é…"
+          "transcript": "Na copa: várias tomadas ligadas num único plugue em T atrás do micro-ondas. Isso é…",
+          "image": "assets/fotos/m4-p1.png"
         },
         {
           "id": "m4-q2",
@@ -809,7 +824,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Não se deve cobrir fios elétricos com tapetes.",
           "review": "Fio sob o tapete",
-          "transcript": "Fio da cafeteira passando por baixo de um tapete. Isso é…"
+          "transcript": "Fio da cafeteira passando por baixo de um tapete. Isso é…",
+          "image": "assets/fotos/p23.png"
         },
         {
           "id": "m4-q3",
@@ -834,7 +850,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Extintor instalado corretamente é isca — não clique como risco.",
           "review": "Extintor correto (isca)",
-          "transcript": "Extintor de PQS fixado na parede, com o pino no lugar. Isso é…"
+          "transcript": "Extintor de PQS fixado na parede, com o pino no lugar. Isso é…",
+          "image": "assets/fotos/p24.1.png"
         },
         {
           "id": "m4-q4",
@@ -859,7 +876,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Material combustível junto ao quadro elétrico é risco grave.",
           "review": "Caixas no quadro elétrico",
-          "transcript": "Caixas de papelão empilhadas encostadas no quadro de distribuição elétrica. Isso é…"
+          "transcript": "Caixas de papelão empilhadas encostadas no quadro de distribuição elétrica. Isso é…",
+          "image": "assets/fotos/p24.2.png"
         }
       ]
     },
@@ -964,7 +982,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Pânico é uma reação intensa e desorganizada — o foco é reconhecê-la e conter com calma, não “eliminar a qualquer custo”.",
           "review": "Afirmativa sobre pânico",
-          "transcript": "O pânico é sempre a pior reação possível numa emergência e deve ser eliminado a qualquer custo."
+          "transcript": "O pânico é sempre a pior reação possível numa emergência e deve ser eliminado a qualquer custo.",
+          "image": "assets/fotos/m5-p1.png"
         },
         {
           "id": "m5-q2",
@@ -984,7 +1003,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Pessoas tendem a seguir quem demonstra controle e calma.",
           "review": "Calma do brigadista",
-          "transcript": "Um brigadista calmo pode evitar o pânico se espalhar entre as outras pessoas."
+          "transcript": "Um brigadista calmo pode evitar o pânico se espalhar entre as outras pessoas.",
+          "image": "assets/fotos/pergunta-variacao.png"
         },
         {
           "id": "m5-q3",
@@ -1004,7 +1024,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Obediência cega é uma reação possível — não é sempre positiva; o brigadista precisa de comunicação clara e segura.",
           "review": "Obediência cega",
-          "transcript": "A obediência cega, seguir ordens sem questionar, é sempre uma reação positiva numa emergência."
+          "transcript": "A obediência cega, seguir ordens sem questionar, é sempre uma reação positiva numa emergência.",
+          "image": "assets/fotos/capa-modulo1.png"
         },
         {
           "id": "m5-q4",
@@ -1024,7 +1045,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Cuidar de quem cuida faz parte do preparo.",
           "review": "Apoio psicológico após evento crítico",
-          "transcript": "O brigadista também deve buscar apoio psicológico após viver um evento crítico."
+          "transcript": "O brigadista também deve buscar apoio psicológico após viver um evento crítico.",
+          "image": "assets/fotos/final.png"
         }
       ]
     },
@@ -1173,7 +1195,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Nunca toque a vítima enquanto a energia não for cortada.",
           "review": "Primeira decisão — choque elétrico",
-          "transcript": "Colega caído perto de uma tomada, aparentemente após choque. O que fazer primeiro?"
+          "transcript": "Colega caído perto de uma tomada, aparentemente após choque. O que fazer primeiro?",
+          "image": "assets/fotos/capa.png"
         },
         {
           "id": "m6-q2",
@@ -1193,7 +1216,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Pomadas em queimaduras podem piorar a lesão — a orientação nunca é essa.",
           "review": "Segunda decisão — avaliação",
-          "transcript": "Energia desligada. Próximo passo?"
+          "transcript": "Energia desligada. Próximo passo?",
+          "image": "assets/fotos/capafinal.png"
         },
         {
           "id": "m6-q3",
@@ -1213,7 +1237,8 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "explanation": "Gelo direto na lesão agrava o dano nos tecidos — nunca aplique.",
           "review": "Terceira decisão — conduta final",
-          "transcript": "Vítima respirando, com queimadura visível no braço. Ação final?"
+          "transcript": "Vítima respirando, com queimadura visível no braço. Ação final?",
+          "image": "assets/fotos/pag18.png"
         }
       ]
     },
