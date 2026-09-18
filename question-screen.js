@@ -172,7 +172,9 @@
     opts = opts || {};
     var fit = data.imageFit === 'contain' || opts.contain ? 'contain' : 'cover';
     if (data.image) {
-      return `<img class="qs-img qs-img-${fit}" src="${esc(data.image)}" alt="${esc(data.imageAlt || data.title || '')}" loading="eager" decoding="async" fetchpriority="high" onerror="this.classList.add('is-broken');this.nextElementSibling&&this.nextElementSibling.classList.add('show');">` +
+      var pos = data.imagePosition || data.objectPosition || '';
+      var posAttr = pos ? ` style="object-position:${esc(pos)}"` : '';
+      return `<img class="qs-img qs-img-${fit}" src="${esc(data.image)}" alt="${esc(data.imageAlt || data.title || '')}" loading="eager" decoding="async" fetchpriority="high"${posAttr} onerror="this.classList.add('is-broken');this.nextElementSibling&&this.nextElementSibling.classList.add('show');">` +
         `<div class="qs-media-fallback qs-img-fallback" aria-hidden="true">${esc(data.icon || '🖼️')}</div>`;
     }
     return `<div class="qs-media-fallback" aria-hidden="true">${esc(data.icon || '📘')}</div>`;

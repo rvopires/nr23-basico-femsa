@@ -39,7 +39,9 @@ window.QUESTION_SCREEN_SESSION = {
           "type": "cover",
           "title": "Módulo 1 — Fundamentos da Brigada de Incêndio",
           "subtitle": "Abertura, composição da brigada e procedimentos básicos — do alerta ao confinamento.",
-          "transcript": "Módulo 1: Fundamentos da Brigada de Incêndio."
+          "transcript": "Módulo 1: Fundamentos da Brigada de Incêndio.",
+          "image": "assets/fotos/capa-modulo1.png",
+          "imagePosition": "18% 82%"
         },
         {
           "id": "m1-v-abertura",
@@ -262,7 +264,8 @@ window.QUESTION_SCREEN_SESSION = {
           "type": "cover",
           "title": "Módulo 2 — O Fogo: Teoria e Métodos de Extinção",
           "subtitle": "Tetraedro do fogo e os três métodos: abafamento, resfriamento e retirada do material.",
-          "transcript": "Módulo 2: O Fogo — teoria e métodos de extinção."
+          "transcript": "Módulo 2: O Fogo — teoria e métodos de extinção.",
+          "image": "assets/fotos/m2-p1.png"
         },
         {
           "id": "m2-v-oque",
@@ -452,7 +455,8 @@ window.QUESTION_SCREEN_SESSION = {
           "type": "cover",
           "title": "Módulo 3 — Classes de Incêndio e Extintores",
           "subtitle": "Classes A, B, C e D e como operar água, PQS e CO₂.",
-          "transcript": "Módulo 3: Classes de Incêndio e Extintores."
+          "transcript": "Módulo 3: Classes de Incêndio e Extintores.",
+          "image": "assets/fotos/m3-p1.png"
         },
         {
           "id": "m3-v-classes",
@@ -650,7 +654,8 @@ window.QUESTION_SCREEN_SESSION = {
           "type": "cover",
           "title": "Módulo 4 — Prevenção, Riscos e Ação em Emergência",
           "subtitle": "Hábitos de prevenção, primeiros segundos, rotas de fuga e riscos da edificação.",
-          "transcript": "Módulo 4: Prevenção, riscos da edificação e ação em emergência."
+          "transcript": "Módulo 4: Prevenção, riscos da edificação e ação em emergência.",
+          "image": "assets/fotos/m4-p1.png"
         },
         {
           "id": "m4-v-prevenir",
@@ -681,8 +686,8 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "O Que Está em Jogo: Consequências de um Incêndio ou Explosão de Gás",
           "body": "Reforço visual de impacto (banco de imagens / fotojornalismo). Mostrar danos estruturais de forma respeitosa — sem vítimas nem conteúdo gráfico.",
           "icon": "🏚️",
-          "image": "assets/fotos/m4-consequencias.png",
-          "imageAlt": "Consequências de incêndio ou explosão de gás — placeholder para foto de banco",
+          "image": "assets/fotos/m4-p1.png",
+          "imageAlt": "Placeholder — substituir por foto de consequencias (banco de imagens)",
           "imageFit": "contain",
           "bullets": [
             "Buscar: fire damage aftermath building interior / gas explosion structural damage",
@@ -698,8 +703,8 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Sinalização das Rotas de Fuga no Escritório FEMSA",
           "body": "Fotografar no próprio prédio: placas verdes, planta de rota de fuga, sinalização luminosa e ponto de encontro.",
           "icon": "🚪",
-          "image": "assets/fotos/m4-rotas-fuga.png",
-          "imageAlt": "Sinalização de rotas de fuga no escritório FEMSA — placeholder",
+          "image": "assets/fotos/capa.png",
+          "imageAlt": "Placeholder — substituir por fotos das rotas de fuga FEMSA",
           "imageFit": "contain",
           "bullets": [
             "Placas verdes de rota de fuga nos corredores",
@@ -873,7 +878,8 @@ window.QUESTION_SCREEN_SESSION = {
           "type": "cover",
           "title": "Módulo 5 — Psicologia em Emergências",
           "subtitle": "Comportamento humano, reações ao perigo e liderança do brigadista.",
-          "transcript": "Módulo 5: Psicologia em Emergências."
+          "transcript": "Módulo 5: Psicologia em Emergências.",
+          "image": "assets/fotos/m5-p1.png"
         },
         {
           "id": "m5-v-porque",
@@ -1037,7 +1043,8 @@ window.QUESTION_SCREEN_SESSION = {
           "type": "cover",
           "title": "Módulo 6 — Primeiros Socorros",
           "subtitle": "Queimaduras, choque, hemorragia, desmaio, engasgo e convulsão.",
-          "transcript": "Módulo 6: Primeiros Socorros — traumas e emergências clínicas."
+          "transcript": "Módulo 6: Primeiros Socorros — traumas e emergências clínicas.",
+          "image": "assets/fotos/capa.png"
         },
         {
           "id": "m6-v-intro",
@@ -1225,7 +1232,8 @@ window.QUESTION_SCREEN_SESSION = {
           "type": "cover",
           "title": "Módulo 7 — RCP, Infarto e Encerramento",
           "subtitle": "AVC, infarto, passo a passo da RCP, números de emergência e certificado.",
-          "transcript": "Módulo 7: RCP, infarto e encerramento."
+          "transcript": "Módulo 7: RCP, infarto e encerramento.",
+          "image": "assets/fotos/capafinal.png"
         },
         {
           "id": "m7-v-avc-infarto",
@@ -1345,7 +1353,8 @@ window.QUESTION_SCREEN_SESSION = {
             "Brigada de Incêndio",
             "Intermediário"
           ],
-          "transcript": "Parabéns pela conclusão do treinamento NR 23. Todos têm o direito de viver em um ambiente seguro."
+          "transcript": "Parabéns pela conclusão do treinamento NR 23. Todos têm o direito de viver em um ambiente seguro.",
+          "image": "assets/fotos/capafinal.png"
         }
       ]
     }
