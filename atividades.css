@@ -1,0 +1,225 @@
+/* ==========================================================================
+   ATIVIDADES — ajustes visuais das telas order / match / compare
+   Só CSS. Carregado depois de question-screen.css; para desfazer, remova o
+   <link> dele.
+   ========================================================================== */
+
+/* ligar pares: os botões caíam na fonte padrão do navegador (Arial),
+   diferente do resto do curso */
+.qs-match-item {
+  font-family: var(--qs-font-b);
+}
+@media (min-width: 900px) and (min-height: 640px) {
+  .qs-match-item {
+    font-size: 0.92rem;
+    padding: 11px 14px;
+    margin-bottom: 8px;
+  }
+}
+
+/* ligar pares: títulos das colunas em dourado claro sobre branco quase não
+   apareciam; agora no verde do curso */
+.qs-match-col-title {
+  color: var(--qs-green-2);
+}
+
+/* celular: o botão redondo "ver conteúdo abaixo" cobria as últimas linhas do
+   feedback da ordem; deixa uma folga pra ele */
+@media (max-width: 599px) {
+  .qs-seq-fb {
+    scroll-margin-bottom: 64px;
+    margin-bottom: 56px;
+  }
+}
+
+/* ordenar: o feedback de "não é a ordem" (com a ordem certa) usava o mesmo
+   dourado claro sobre amarelo claro; agora âmbar escuro */
+.qs-seq-fb.is-nok {
+  color: #7a5f00;
+}
+
+/* certo × errado: o rótulo "✕" usava um dourado claro sobre amarelo claro
+   (contraste ~2:1); agora um âmbar escuro, legível */
+.qs-compare-col.is-bad .qs-compare-lbl {
+  color: #7a5f00;
+}
+
+/* ==========================================================================
+   RITMO (tela rhythm) — tocar no compasso das compressões da RCP
+   ========================================================================== */
+.qs-rhythm { display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:10px; width:100%; }
+.qs-rhythm-status { margin:0; min-height:2.6em; text-align:center; font-weight:600; color:var(--qs-green-2); font-size:.95rem; }
+.qs-rhythm-stage { position:relative; width:150px; height:150px; display:grid; place-items:center; }
+.qs-rhythm-ring { position:absolute; inset:0; pointer-events:none; border-radius:50%; border:4px solid var(--qs-green-2); opacity:0; }
+.qs-rhythm-ring.is-pulse { animation:qsRhythmPulse .5s ease-out; }
+@keyframes qsRhythmPulse { 0%{transform:scale(.7);opacity:.9} 100%{transform:scale(1.15);opacity:0} }
+.qs-rhythm-btn { position:relative; z-index:1; width:112px; height:112px; border-radius:50%; border:0; cursor:pointer; touch-action:manipulation;
+  background:var(--qs-green-2); color:#fff; font-family:var(--qs-font-b); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+  box-shadow:0 8px 20px rgba(0,80,64,.32); transition:transform .08s; user-select:none; -webkit-user-select:none; }
+.qs-rhythm-btn.is-down { transform:scale(.92); }
+.qs-rhythm-ico { font-size:1.9rem; line-height:1; }
+.qs-rhythm-btn-txt { font-size:.78rem; font-weight:700; }
+.qs-rhythm[data-qs-r-phase="result"] .qs-rhythm-btn { opacity:.55; pointer-events:none; }
+.qs-rhythm-gauge { position:relative; width:min(100%,320px); height:14px; border-radius:7px; background:rgba(0,0,0,.1); }
+.qs-rhythm-zone { position:absolute; top:0; bottom:0; border-radius:7px; background:var(--qs-green-2); opacity:.85; }
+.qs-rhythm-marker { position:absolute; top:-4px; width:6px; height:22px; margin-left:-3px; border-radius:3px; background:#F4D242; border:2px solid #5a4700; transition:left .15s; }
+.qs-rhythm-scale { position:relative; width:min(100%,320px); height:1em; font-size:.75rem; font-weight:700; color:var(--qs-green-2); }
+.qs-rhythm-scale span { position:absolute; transform:translateX(-50%); }
+.qs-rhythm-hud { display:flex; gap:16px; font-size:.85rem; color:#333; flex-wrap:wrap; justify-content:center; }
+.qs-rhythm-act { font-family:var(--qs-font-b); font-weight:700; padding:10px 18px; border-radius:999px; border:2px solid var(--qs-green-2); background:#fff; color:var(--qs-green-2); cursor:pointer; }
+.qs-rhythm-act:hover { background:var(--qs-green-2); color:#fff; }
+.qs-rhythm-act[hidden], .qs-rhythm-marker[hidden] { display:none; }
+@media (max-height:679px) { .qs-rhythm-stage{width:120px;height:120px} .qs-rhythm-btn{width:92px;height:92px} .qs-rhythm{gap:8px} }
+@media (prefers-reduced-motion:reduce) { .qs-rhythm-ring.is-pulse{animation:none;opacity:.6} }
+
+/* ==========================================================================
+   VARIANTES DE PERGUNTA — cada módulo com um jeito diferente de responder
+   (o data.js marca cada pergunta com "variant"; sem variant = blocos coloridos)
+     lista     (M3)  linhas brancas com letras A/B/C
+     cartoes   (M4)  cartões altos lado a lado, borda amarela
+     duelo     (M5)  dois botões grandes, um contra o outro (VS)
+     confirmar (M6)  ação em linha + botão "Confirmar esta decisão"
+   Só CSS + um pouco de JS em question-screen.js (data-variant / confirmar).
+   ========================================================================== */
+.qs-screen[data-variant] .qs-opt {
+  box-shadow: none;
+  color: var(--qs-ink, #0b2e27);
+}
+.qs-screen[data-variant] .qs-opt:hover:not(:disabled) { filter: none; }
+.qs-screen[data-variant] .qs-opt.is-selected:not(.is-revealed) { outline: none; }
+/* resultado nas variantes claras: acerto em verde-claro, erro em amarelo-claro */
+.qs-screen[data-variant="lista"] .qs-opt.is-correct,
+.qs-screen[data-variant="cartoes"] .qs-opt.is-correct,
+.qs-screen[data-variant="confirmar"] .qs-opt.is-correct { background: #dfe9fb; border-color: #1E4FA8; outline: none; }
+.qs-screen[data-variant="lista"] .qs-opt.is-wrong,
+.qs-screen[data-variant="cartoes"] .qs-opt.is-wrong,
+.qs-screen[data-variant="confirmar"] .qs-opt.is-wrong { background: #fff3c4; border-color: #c9a100; outline: none; }
+
+/* ---- LISTA (M3) ---- */
+.qs-screen[data-variant="lista"] .qs-opts,
+.qs-screen[data-variant="lista"] .qs-opts.count-3,
+.qs-screen[data-variant="lista"] .qs-opts.count-2 { grid-template-columns: 1fr; gap: 8px; }
+.qs-screen[data-variant="lista"] .qs-opts.count-3 .qs-opt:last-child { grid-column: auto; }
+.qs-screen[data-variant="lista"] .qs-opt {
+  background: #fff;
+  border: 2px solid #c9d6ee;
+  border-left: 7px solid #1E4FA8;
+  border-radius: 10px;
+  min-height: 46px;
+  padding: 9px 14px;
+  font-family: var(--qs-font-b);
+  font-weight: 600;
+}
+.qs-screen[data-variant="lista"] .qs-opt:hover:not(:disabled) { background: #eef3fd; transform: translateX(5px); }
+.qs-screen[data-variant="lista"] .qs-opt .qs-num { background: #1E4FA8; color: #fff; border-radius: 50%; }
+
+/* ---- CARTÕES (M4) ---- */
+.qs-screen[data-variant="cartoes"] .qs-opts,
+.qs-screen[data-variant="cartoes"] .qs-opts.count-3 { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.qs-screen[data-variant="cartoes"] .qs-opts.count-3 .qs-opt:last-child { grid-column: auto; }
+.qs-screen[data-variant="cartoes"] .qs-opt {
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  gap: 8px;
+  min-height: 118px;
+  padding: 14px 12px;
+  background: #fff;
+  border: 2px solid #ecd97a;
+  border-top: 7px solid #F4D242;
+  border-radius: 16px;
+  font-family: var(--qs-font-b);
+  font-weight: 600;
+}
+.qs-screen[data-variant="cartoes"] .qs-opt:hover:not(:disabled) { background: #fffbe6; transform: translateY(-4px); }
+.qs-screen[data-variant="cartoes"] .qs-opt .qs-num { width: 34px; height: 34px; background: #F4D242; color: #0b2e27; border-radius: 50%; font-size: 1rem; }
+.qs-screen[data-variant="cartoes"] .qs-opt .qs-txt { flex: 0 1 auto; }
+.qs-screen[data-variant="cartoes"] .qs-opt .qs-mark { position: absolute; top: 8px; right: 8px; }
+
+/* ---- DUELO (M5): dois botões grandes ---- */
+.qs-screen[data-variant="duelo"] .qs-opts,
+.qs-screen[data-variant="duelo"] .qs-opts.count-2 { grid-template-columns: 1fr 1fr; gap: 16px; position: relative; }
+.qs-screen[data-variant="duelo"] .qs-opts::after {
+  content: 'VS';
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: #fff;
+  color: #0b2e27;
+  font-family: var(--qs-font-h);
+  font-weight: 900;
+  font-size: .8rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+  pointer-events: none;
+}
+.qs-screen[data-variant="duelo"] .qs-opt {
+  min-height: 112px;
+  justify-content: center;
+  text-align: center;
+  border-radius: 22px;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 800;
+  padding: 18px 26px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, .18);
+}
+.qs-screen[data-variant="duelo"] .qs-opt .qs-num { display: none; }
+.qs-screen[data-variant="duelo"] .qs-opt .qs-txt { flex: 0 1 auto; }
+.qs-screen[data-variant="duelo"] .qs-opt[data-tone="0"] { background: #1E4FA8; color: #fff; }
+.qs-screen[data-variant="duelo"] .qs-opt[data-tone="1"] { background: #F4D242; color: #0b2e27; }
+.qs-screen[data-variant="duelo"] .qs-opt .qs-mark { position: absolute; top: 10px; right: 10px; }
+.qs-screen[data-variant="duelo"] .qs-opt.is-wrong { outline: 3px dashed #fff; }
+
+/* ---- CONFIRMAR (M6): escolhe, depois confirma ---- */
+.qs-screen[data-variant="confirmar"] .qs-opts,
+.qs-screen[data-variant="confirmar"] .qs-opts.count-2,
+.qs-screen[data-variant="confirmar"] .qs-opts.count-3 { grid-template-columns: 1fr; gap: 10px; }
+.qs-screen[data-variant="confirmar"] .qs-opts.count-3 .qs-opt:last-child { grid-column: auto; }
+.qs-screen[data-variant="confirmar"] .qs-opt {
+  background: #fff;
+  border: 2px solid #1E4FA8;
+  border-radius: 14px;
+  min-height: 52px;
+  padding: 12px 16px;
+  font-family: var(--qs-font-b);
+  font-weight: 600;
+  transition: background .15s, color .15s, transform .12s;
+}
+.qs-screen[data-variant="confirmar"] .qs-opt .qs-num { background: transparent; font-size: 1.2rem; width: 20px; }
+.qs-screen[data-variant="confirmar"] .qs-opt .qs-num::before { content: '➜'; }
+.qs-screen[data-variant="confirmar"] .qs-opt .qs-num { font-size: 0; }
+.qs-screen[data-variant="confirmar"] .qs-opt .qs-num::before { font-size: 1.1rem; color: #1E4FA8; }
+.qs-screen[data-variant="confirmar"] .qs-opt:hover:not(:disabled) { background: #eef3fd; }
+.qs-screen[data-variant="confirmar"] .qs-opt.is-selected:not(.is-revealed) { background: #1E4FA8; color: #fff; }
+.qs-screen[data-variant="confirmar"] .qs-opt.is-selected:not(.is-revealed) .qs-num::before { color: #F4D242; }
+.qs-confirm {
+  display: block;
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--qs-font-h);
+  font-weight: 800;
+  font-size: .95rem;
+  letter-spacing: .02em;
+  background: #F4D242;
+  color: #0b2e27;
+  box-shadow: 0 4px 0 rgba(120, 96, 8, .35);
+}
+.qs-confirm:disabled { background: #e6e9e8; color: #7a8783; box-shadow: none; cursor: default; }
+.qs-confirm[hidden] { display: none; }
+
+@media (max-width: 599px) {
+  .qs-screen[data-variant="cartoes"] .qs-opts,
+  .qs-screen[data-variant="cartoes"] .qs-opts.count-3 { grid-template-columns: 1fr; gap: 8px; }
+  .qs-screen[data-variant="cartoes"] .qs-opt { flex-direction: row; text-align: left; min-height: 54px; padding: 10px 12px; border-top-width: 2px; border-left: 7px solid #F4D242; }
+  .qs-screen[data-variant="cartoes"] .qs-opt .qs-mark { position: static; }
+  .qs-screen[data-variant="duelo"] .qs-opts,
+  .qs-screen[data-variant="duelo"] .qs-opts.count-2 { grid-template-columns: 1fr; gap: 14px; }
+  .qs-screen[data-variant="duelo"] .qs-opt { min-height: 78px; }
+}

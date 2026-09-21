@@ -120,6 +120,8 @@
         beepNote(783.99, 0.16, 0.22, 0.16, 'sine');
       } else if (type === 'nok') {
         beepNote(320, 0, 0.28, 0.16, 'triangle', 140);
+      } else if (type === 'tick') {
+        beepNote(1000, 0, 0.035, 0.11, 'sine');   // guia do ritmo: estalo curto, mais grave que o "click"
       } else if (type === 'end') {
         beepNote(523.25, 0, 0.16, 0.18, 'triangle');
         beepNote(659.25, 0.1, 0.16, 0.18, 'triangle');
@@ -581,18 +583,63 @@
       <article class="qs-screen is-content is-text is-match is-dense" data-qs-root data-type="match">
         <div class="qs-panel qs-panel-text">
           <h2 class="qs-title">${esc(data.title || 'Associe os pares')}</h2>
+          ${data.body ? `<p class="qs-body">${esc(data.body)}</p>` : ''}
           <div class="qs-match-hud">
             <span data-qs-match-time>⏱️ 0s</span>
             <span data-qs-match-progress>0 de ${pairs.length} pares</span>
           </div>
           <div class="qs-match">
             <div class="qs-match-side is-ex">
-              <div class="qs-match-col-title">Exercício</div>
+              <div class="qs-match-col-title">${esc(data.leftTitle || 'Exercício')}</div>
               <div data-qs-match-ex></div>
             </div>
             <div class="qs-match-side is-body">
-              <div class="qs-match-col-title">Região do corpo</div>
+              <div class="qs-match-col-title">${esc(data.rightTitle || 'Região do corpo')}</div>
               <div data-qs-match-body></div>
+            </div>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  /* Ritmo: o aluno toca no compasso (ex.: compressões da RCP, 100–120 por minuto).
+     Campos: title, body, bpmMin, bpmMax, guideBpm, taps, tries, scaleMin, scaleMax. */
+  function rhythmHTML(data) {
+    var min = Number(data.bpmMin) || 100;
+    var max = Number(data.bpmMax) || 120;
+    var taps = Math.max(6, Number(data.taps) || 12);
+    var sMin = Number(data.scaleMin) || 60;
+    var sMax = Number(data.scaleMax) || 160;
+    function pct(v) { return Math.max(0, Math.min(100, ((v - sMin) / (sMax - sMin)) * 100)); }
+    return `
+      <article class="qs-screen is-content is-text is-rhythm" data-qs-root data-type="rhythm">
+        <div class="qs-panel qs-panel-text">
+          <h2 class="qs-title">${esc(data.title || 'Ritmo')}</h2>
+          ${data.body ? `<p class="qs-body">${esc(data.body)}</p>` : ''}
+          <div class="qs-rhythm" data-qs-r-phase="guide">
+            <p class="qs-rhythm-status" data-qs-r-status role="status" aria-live="polite"></p>
+            <div class="qs-rhythm-stage">
+              <span class="qs-rhythm-ring" data-qs-r-ring aria-hidden="true"></span>
+              <button type="button" class="qs-rhythm-btn" data-qs-r-btn aria-label="Comprimir: toque no ritmo">
+                <span class="qs-rhythm-ico" aria-hidden="true">🫀</span>
+                <span class="qs-rhythm-btn-txt">Comprimir</span>
+              </button>
+            </div>
+            <div class="qs-rhythm-gauge" aria-hidden="true">
+              <span class="qs-rhythm-zone" style="left:${pct(min)}%;width:${pct(max) - pct(min)}%"></span>
+              <span class="qs-rhythm-marker" data-qs-r-marker hidden></span>
+            </div>
+            <div class="qs-rhythm-scale" aria-hidden="true">
+              <span style="left:${pct(min)}%">${min}</span>
+              <span style="left:${pct(max)}%">${max}</span>
+            </div>
+            <div class="qs-rhythm-hud">
+              <span data-qs-r-bpm>— por minuto</span>
+              <span data-qs-r-count>0 de ${taps} toques</span>
+            </div>
+            <div class="qs-rhythm-actions">
+              <button type="button" class="qs-rhythm-act" data-qs-r-go>Já peguei o ritmo</button>
+              <button type="button" class="qs-rhythm-act" data-qs-r-retry hidden>Tentar de novo</button>
             </div>
           </div>
         </div>
@@ -694,17 +741,18 @@
   function questionHTML(data) {
     var alts = Array.isArray(data.alternatives) ? data.alternatives.slice(0, 4) : [];
     var count = Math.max(1, alts.length);
+    var variant = data.variant || '';
     var opts = alts.map(function (a, i) {
       return `
         <button type="button" class="qs-opt" data-tone="${i % 4}" data-id="${esc(a.id != null ? a.id : i)}" data-index="${i}">
-          <span class="qs-num">${i + 1}</span>
+          <span class="qs-num">${variant === 'lista' ? String.fromCharCode(65 + i) : i + 1}</span>
           <span class="qs-txt">${esc(a.text)}</span>
           <span class="qs-mark" aria-hidden="true"></span>
         </button>`;
     }).join('');
 
     return `
-      <article class="qs-screen is-question" data-qs-root data-type="question">
+      <article class="qs-screen is-question" data-qs-root data-type="question"${variant ? ` data-variant="${esc(variant)}"` : ''}>
         <div class="qs-timer" aria-hidden="true"><i data-qs-timer></i></div>
         <div class="qs-media qs-media-hero">
           ${mediaHTML(data)}
@@ -719,6 +767,7 @@
           ${opts}
         </div>
         <div class="qs-foot qs-foot-quiz">
+          ${variant === 'confirmar' ? '<button type="button" class="qs-confirm" data-qs-confirm disabled>Escolha uma ação</button>' : ''}
           <div class="qs-explain" data-qs-explain></div>
         </div>
       </article>`;
@@ -741,6 +790,7 @@
     this._stopTimer();
     this.data = data || {};
     this.state.answered = false;
+    this._pending = null;
     this.state.selectedIndex = null;
     this.state.correct = false;
 
@@ -755,6 +805,7 @@
     else if (type === 'compare') html = compareHTML(this.data);
     else if (type === 'order') html = orderHTML(this.data);
     else if (type === 'match') html = matchHTML(this.data);
+    else if (type === 'rhythm') html = rhythmHTML(this.data);
     else if (type === 'quiz-intro') html = quizIntroHTML(this.data);
     else if (type === 'quiz-result') html = quizResultHTML(this.data);
 
@@ -764,7 +815,7 @@
     this.el.addEventListener('click', this._onClick);
 
     var lockedVideo = type === 'video' && !!(this.data.embed || this.data.panda || this.data.video);
-    var gated = type === 'question' || type === 'order' || type === 'match' || type === 'reflect' || type === 'compare' || lockedVideo || (type === 'content' && !!(this.data && this.data.steps));
+    var gated = type === 'question' || type === 'order' || type === 'match' || type === 'rhythm' || type === 'reflect' || type === 'compare' || lockedVideo || (type === 'content' && !!(this.data && this.data.steps));
     if (!gated) this.state.answered = true;
 
     if (type === 'video' && (this.data.embed || this.data.panda || this.data.youtube || this.data.video)) {
@@ -774,6 +825,7 @@
     if (type === 'compare') this._bindCompare();
     if (type === 'order') this._bindOrder();
     if (type === 'match') this._bindMatch();
+    if (type === 'rhythm') this._bindRhythm();
     if (type === 'content' && this.data && this.data.steps) this._bindSteps();
 
     if ((type === 'question' || type === 'order') && this.options.quizScoring) {
@@ -1009,6 +1061,25 @@
     var start = e.target.closest('[data-qs-start]');
     var retry = e.target.closest('[data-qs-retry]');
     var finish = e.target.closest('[data-qs-finish]');
+    var conf = e.target.closest('[data-qs-confirm]');
+    if (conf) {
+      if (!this.state.answered && this._pending != null) {
+        beep('click');
+        var pend = this._pending;
+        this._pending = null;
+        this.select(pend);
+      }
+      return;
+    }
+    /* variante 'confirmar': o 1º toque escolhe, o botão de baixo confirma (dá para trocar de ideia) */
+    if (opt && !this.state.answered && this.data.variant === 'confirmar') {
+      beep('click');
+      this._pending = +opt.dataset.index;
+      this.el.querySelectorAll('.qs-opt').forEach(function (b) { b.classList.toggle('is-selected', b === opt); });
+      var cb = this.el.querySelector('[data-qs-confirm]');
+      if (cb) { cb.disabled = false; cb.textContent = 'Confirmar esta decisão'; }
+      return;
+    }
     if (opt && !this.state.answered) {
       beep('click');
       this.select(+opt.dataset.index);
@@ -1218,6 +1289,8 @@
         return (i + 1) + '. ' + it.text;
       }).join(' · ');
       fb.textContent = (timedOut ? 'Tempo esgotado. ' : '') + (correct ? 'Ordem certa! ' : 'Essa não é a ordem mais lógica. ') + orderTxt;
+      /* a lista + o feedback podem passar da altura do cartão: leva o texto para a vista */
+      try { fb.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {}
     }
     var pts = this.options.quizScoring ? this._quizPoints(correct) : 0;
     beep(correct ? 'ok' : 'nok');
@@ -1313,6 +1386,155 @@
     render();
   };
 
+  QuestionScreen.prototype._bindRhythm = function () {
+    var self = this;
+    var d = this.data;
+    var min = Number(d.bpmMin) || 100;
+    var max = Number(d.bpmMax) || 120;
+    var guide = Number(d.guideBpm) || Math.round((min + max) / 2);
+    var need = Math.max(5, Number(d.taps) || 8);
+    var maxTries = Math.max(1, Number(d.tries) || 5);
+    var tol = d.tolerance != null ? Number(d.tolerance) : 10;   /* folga: aceita um pouco antes/depois da faixa */
+    var sMin = Number(d.scaleMin) || 60;
+    var sMax = Number(d.scaleMax) || 160;
+    var el = this.el;
+    var wrap = el.querySelector('.qs-rhythm');
+    var status = el.querySelector('[data-qs-r-status]');
+    var ring = el.querySelector('[data-qs-r-ring]');
+    var btn = el.querySelector('[data-qs-r-btn]');
+    var marker = el.querySelector('[data-qs-r-marker]');
+    var bpmEl = el.querySelector('[data-qs-r-bpm]');
+    var cntEl = el.querySelector('[data-qs-r-count]');
+    var goBtn = el.querySelector('[data-qs-r-go]');
+    var retryBtn = el.querySelector('[data-qs-r-retry]');
+    if (!wrap || !btn) return;
+    var phase = 'guide';
+    var stamps = [];
+    var tries = 0;
+    var lastBpm = 0;
+
+    function setStatus(t) { if (status) status.textContent = t; }
+    function pulse() {
+      if (!ring) return;
+      ring.classList.remove('is-pulse');
+      void ring.offsetWidth;
+      ring.classList.add('is-pulse');
+    }
+    function bpmOf(list) {
+      if (list.length < 3) return 0;
+      var iv = [];
+      for (var i = 1; i < list.length; i++) iv.push(list[i] - list[i - 1]);
+      iv.sort(function (a, b) { return a - b; });
+      var cut = Math.floor(iv.length * 0.15);
+      var core = iv.slice(cut, iv.length - cut);
+      if (!core.length) core = iv;
+      var avg = core.reduce(function (s, v) { return s + v; }, 0) / core.length;
+      return 60000 / avg;
+    }
+    function show(bpm) {
+      if (bpmEl) bpmEl.textContent = bpm ? Math.round(bpm) + ' por minuto' : '— por minuto';
+      if (cntEl) cntEl.textContent = stamps.length + ' de ' + need + ' toques';
+      if (marker) {
+        if (!bpm) { marker.hidden = true; return; }
+        marker.hidden = false;
+        var p = Math.max(0, Math.min(100, ((bpm - sMin) / (sMax - sMin)) * 100));
+        marker.style.left = p + '%';
+      }
+    }
+    function setPhase(p) { phase = p; wrap.setAttribute('data-qs-r-phase', p); }
+    /* orientação ao vivo enquanto a pessoa toca */
+    function coach(bpm) {
+      if (!bpm || stamps.length < 3) return;
+      if (bpm < min - tol) setStatus('Um pouco mais rápido! Acompanhe a pulsação.');
+      else if (bpm > max + tol) setStatus('Mais devagar! Espere a pulsação para tocar.');
+      else setStatus('Isso! Continue assim, nesse ritmo.');
+    }
+
+    function startGuide() {
+      setPhase('guide');
+      stamps = [];
+      show(0);
+      if (goBtn) goBtn.hidden = false;
+      if (retryBtn) retryBtn.hidden = true;
+      setStatus('Passo 1: toque no botão junto com a pulsação. Quando se sentir seguro, clique em "Já peguei o ritmo".');
+      self._rGuide = setInterval(function () { pulse(); beep('tick'); }, 60000 / guide);
+      pulse(); beep('tick');
+    }
+    function stopGuide() {
+      if (self._rGuide) { clearInterval(self._rGuide); self._rGuide = null; }
+    }
+    function startTest() {
+      stopGuide();
+      setPhase('test');
+      stamps = [];
+      show(0);
+      if (goBtn) goBtn.hidden = true;
+      if (retryBtn) retryBtn.hidden = true;
+      setStatus('Passo 2: continue tocando, ' + need + ' vezes. A pulsação segue como apoio, sem som.');
+      self._rGuide = setInterval(pulse, 60000 / guide);   /* apoio visual, sem "tic" */
+    }
+    function finish() {
+      var bpm = bpmOf(stamps);
+      lastBpm = bpm;
+      show(bpm);
+      tries += 1;
+      var ok = bpm >= min - tol && bpm <= max + tol;
+      setPhase('result');
+      if (ok) {
+        setStatus('Ritmo certo! ' + Math.round(bpm) + ' por minuto. O ideal na RCP é de ' + min + ' a ' + max + '.');
+        beep('end');
+        var pts = self.options.quizScoring ? self._quizPoints(true) : 0;
+        self._complete({ kind: 'rhythm', correct: true, points: pts, bpm: Math.round(bpm) });
+        return;
+      }
+      var msg = bpm < min ? 'Ainda lento' : 'Ainda rápido';
+      msg += ': ' + Math.round(bpm) + ' por minuto. Tente de novo, o ideal é de ' + min + ' a ' + max + '.';
+      beep('nok');
+      if (tries >= maxTries) {
+        setStatus(msg + ' Depois revise o ritmo com o guia.');
+        var pts0 = 0;
+        self._complete({ kind: 'rhythm', correct: false, points: pts0, bpm: Math.round(bpm) });
+      } else {
+        setStatus(msg + ' Tentativa ' + tries + ' de ' + maxTries + '.');
+        if (retryBtn) retryBtn.hidden = false;
+      }
+    }
+    function tap(ev) {
+      if (self.state.answered && phase === 'result') return;
+      if (phase === 'result') return;
+      if (ev && ev.preventDefault) ev.preventDefault();
+      var now = (window.performance && performance.now) ? performance.now() : Date.now();
+      btn.classList.add('is-down');
+      setTimeout(function () { btn.classList.remove('is-down'); }, 90);
+      pulse();
+      beep('tick');
+      if (stamps.length && now - stamps[stamps.length - 1] > 2000) stamps = [];
+      stamps.push(now);
+      if (phase === 'guide') {
+        if (stamps.length > 6) stamps.shift();
+        show(bpmOf(stamps));
+        coach(bpmOf(stamps));
+        return;
+      }
+      show(bpmOf(stamps));
+      coach(bpmOf(stamps));
+      if (stamps.length >= need) finish();
+    }
+
+    btn.addEventListener('pointerdown', tap);
+    btn.addEventListener('keydown', function (ev) {
+      if (ev.repeat) return;
+      if (ev.key === ' ' || ev.key === 'Enter') tap(ev);
+    });
+    /* clique sintético/teclado já tratado; evita duplo disparo */
+    btn.addEventListener('click', function (ev) { ev.preventDefault(); });
+    if (goBtn) goBtn.addEventListener('click', startTest);
+    if (retryBtn) retryBtn.addEventListener('click', startGuide);
+
+    this._rhythmStop = stopGuide;
+    startGuide();
+  };
+
   QuestionScreen.prototype.select = function (index, extra) {
     if (this.state.answered) return;
     extra = extra || {};
@@ -1322,6 +1544,8 @@
 
     this._stopTimer();
     this.state.answered = true;
+    var cfBtn = this.el.querySelector('[data-qs-confirm]');
+    if (cfBtn) cfBtn.hidden = true;
     this.state.selectedIndex = timedOut ? null : index;
     var opinion = !!this.data.opinion;
     var chosen = timedOut ? null : alts[index];
@@ -1397,6 +1621,7 @@
 
   QuestionScreen.prototype.destroy = function () {
     this._stopTimer();
+    if (this._rhythmStop) { this._rhythmStop(); this._rhythmStop = null; }
     if (this._matchTick) {
       clearInterval(this._matchTick);
       this._matchTick = null;

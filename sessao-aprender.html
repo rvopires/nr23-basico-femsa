@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="capa-animada.css?v=3">
   <link rel="stylesheet" href="fundo-novo.css?v=1">
   <link rel="stylesheet" href="menu-compacto.css?v=1">
+  <link rel="stylesheet" href="atividades.css?v=7">
   <style>
     html, body { margin: 0; height: 100%; overflow: hidden; }
   </style>
@@ -149,8 +150,8 @@
 
   <audio id="bg-music" loop preload="metadata" aria-hidden="true"></audio>
 
-  <script src="question-screen-data.js?v=mob51"></script>
-  <script src="question-screen.js?v=mob49"></script>
+  <script src="question-screen-data.js?v=mob55"></script>
+  <script src="question-screen.js?v=mob54"></script>
   <script src="capa-animada.js?v=2"></script>
   <script src="narration-text.js?v=mob40"></script>
   <script src="narration.js?v=mob40"></script>
@@ -191,6 +192,7 @@
           s.type === 'compare' ? 'Compare' :
           s.type === 'order' ? 'Ordenar' :
           s.type === 'match' ? 'Associação' :
+          s.type === 'rhythm' ? 'Ritmo' :
           s.type === 'finale' ? 'Conclusão' :
           s.type
         )
@@ -220,7 +222,7 @@
   var sessionAnswers = {};
   var PTS_MAX = 50;
   function isScoreType(type) {
-    return type === 'question' || type === 'order' || type === 'match';
+    return type === 'question' || type === 'order' || type === 'match' || type === 'rhythm';
   }
   function isGateType(type) {
     return isScoreType(type) || type === 'reflect' || type === 'compare';
@@ -802,6 +804,7 @@
       type === 'compare' ? 'Compare' :
       type === 'order' ? 'Ordenar' :
       type === 'match' ? 'Associação' :
+      type === 'rhythm' ? 'Ritmo' :
       type === 'finale' ? 'Conclusão' :
       type || 'Tela'
     );
@@ -1019,10 +1022,12 @@
         }
         if (!isQuizStep(s)) return;
         clearAutoAdvance();
+        /* ordenar errado: a tela mostra a ordem certa, então dá tempo de ler */
+        var ordemErrada = s.type === 'order' && !(result && result.correct);
         autoAdvanceTimer = setTimeout(function () {
           if (isLastQuizQuestion()) showQuizResult();
           else go(1);
-        }, s.type === 'order' || s.type === 'match' ? 1600 : 3000);
+        }, ordemErrada ? 8000 : (s.type === 'rhythm' ? 4000 : s.type === 'order' || s.type === 'match' ? 1600 : 3000));
       },
       onContinue: handleContinue
     });

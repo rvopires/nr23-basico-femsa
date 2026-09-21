@@ -2,21 +2,21 @@
  * Conteúdo — NR 23 Brigada de Incêndio (Intermediário) · FEMSA / Coca-Cola
  * Gerado a partir de Roteiro-NR23-Brigada-Incendio.txt
  *
- * Tipos: cover | content | video | image | quiz-intro | question | order | finale
+ * Tipos: cover | content | video | image | quiz-intro | question | order | match | compare | reflect | finale
  *
  * Vídeos: SEM embed — só nome + scene/brief no frame "Vídeo a gravar".
  *         Depois cole embed/playerId Panda em cada tela type:"video".
  * Fotos: caminhos placeholder em assets/fotos/ — substitua pelos arquivos reais.
  *
- * Atividades mapeadas para o motor atual:
- *  M1 Contra o Alarme → question (4 opções)
- *  M2 Apaga ou Alimenta? → question (2 opções)
- *  M3 Combinação Certa → question
- *  M4 Caça ao Risco → question (hotspot do roteiro vira perguntas até haver foto clicável)
- *  M5 Guerra de Palpites → question V/F
- *  M6 Corrente de Decisão → question em cadeia (1 cenário do roteiro)
- *  M7 Roleta da RCP → order (5 etapas)
- */
+ * Atividades por módulo — cada módulo tem um formato diferente:
+ *  M1 Contra o Alarme → 3 question + 1 order (montar o protocolo em 6 passos)
+ *  M2 Apaga ou Alimenta? → match (5 pares: situação → efeito no fogo)
+ *  M3 Combinação Certa → question com foto (classe de incêndio → agente)
+ *  M4 Caça ao Risco → 3 compare (certo × errado) + 4 question
+ *  M5 Guerra de Palpites → 2 reflect (reconheça a reação) + 4 question V/F
+ *  M6 Corrente de Decisão → 3 question em cadeia (o erro mostra a consequência)
+ *  M7 Roleta da RCP → order (5 etapas) + rhythm (tocar no ritmo das compressões, 100–120/min)
+  */
 window.QUESTION_SCREEN_SESSION = {
   "meta": {
     "title": "NR 23 — Brigada de Incêndio",
@@ -130,7 +130,7 @@ window.QUESTION_SCREEN_SESSION = {
           "count": 4,
           "minCorrect": 3,
           "icon": "🚨",
-          "body": "4 perguntas cronometradas. Mínimo de <strong>3 acertos</strong> para avançar.",
+          "body": "3 perguntas e 1 sequência para montar, tudo cronometrado. Mínimo de <strong>3 acertos</strong> para avançar.",
           "transcript": "Desafio do módulo 1: Contra o Alarme."
         },
         {
@@ -229,34 +229,45 @@ window.QUESTION_SCREEN_SESSION = {
         },
         {
           "id": "m1-q4",
-          "type": "question",
-          "question": "Qual é a ordem correta dos procedimentos básicos de emergência?",
-          "alternatives": [
+          "type": "order",
+          "kicker": "🔢 Monte o protocolo",
+          "title": "Monte o protocolo de emergência",
+          "body": "Toque nos seis passos na ordem em que a brigada age, do alerta ao confinamento.",
+          "time": 45,
+          "items": [
             {
-              "id": "a",
-              "text": "Alerta → Análise → Corte de energia → Abandono → Socorros → Confinamento",
-              "correct": true
+              "key": "alerta",
+              "text": "Dar o alerta pelos meios de comunicação disponíveis",
+              "rank": 0
             },
             {
-              "id": "b",
-              "text": "Confinamento → Alerta → Abandono",
-              "correct": false
+              "key": "analise",
+              "text": "Líder analisa a situação e decide os próximos passos",
+              "rank": 1
             },
             {
-              "id": "c",
-              "text": "Abandono → Alerta → Corte de energia",
-              "correct": false
+              "key": "energia",
+              "text": "Cortar a energia elétrica no quadro principal",
+              "rank": 2
             },
             {
-              "id": "d",
-              "text": "Análise → Confinamento → Alerta",
-              "correct": false
+              "key": "abandono",
+              "text": "Abandono de área: todos a 100 m do sinistro",
+              "rank": 3
+            },
+            {
+              "key": "socorros",
+              "text": "Prestar os primeiros socorros às vítimas",
+              "rank": 4
+            },
+            {
+              "key": "confinamento",
+              "text": "Confinamento: evitar a propagação e eliminar o sinistro",
+              "rank": 5
             }
           ],
-          "explanation": "A sequência é: alerta, análise, corte de energia, abandono, primeiros socorros e confinamento.",
           "review": "Ordem dos procedimentos básicos",
-          "transcript": "Qual é a ordem correta dos procedimentos básicos de emergência?",
-          "image": "assets/fotos/m1=p4.png"
+          "transcript": "Monte o protocolo de emergência: ordene os seis passos, do alerta ao confinamento."
         }
       ]
     },
@@ -343,116 +354,43 @@ window.QUESTION_SCREEN_SESSION = {
           "id": "m2-quiz-intro",
           "type": "quiz-intro",
           "title": "Desafio — Apaga ou Alimenta?",
-          "count": 5,
-          "minCorrect": 4,
+          "count": 1,
+          "minCorrect": 1,
           "icon": "🧯",
-          "body": "Decida se a ação <strong>APAGA</strong> ou <strong>ALIMENTA</strong> o fogo. Mínimo de <strong>4 acertos</strong> em 5.",
+          "body": "Ligue cada situação ao efeito dela sobre o fogo: <strong>APAGA</strong> ou <strong>ALIMENTA</strong>. Só avança com todos os pares certos.",
           "transcript": "Desafio do módulo 2: Apaga ou Alimenta?"
         },
         {
-          "id": "m2-q1",
-          "type": "question",
-          "question": "Cobrir a chama com uma manta grossa e abafada…",
-          "alternatives": [
+          "id": "m2-match",
+          "type": "match",
+          "title": "Apaga ou Alimenta?",
+          "body": "Toque numa situação e depois no efeito dela sobre o fogo.",
+          "leftTitle": "Situação",
+          "rightTitle": "Efeito no fogo",
+          "pairs": [
             {
-              "id": "a",
-              "text": "APAGA",
-              "correct": true
+              "ex": "Cobrir a chama com uma manta",
+              "body": "Apaga: tira o oxigênio"
             },
             {
-              "id": "b",
-              "text": "ALIMENTA",
-              "correct": false
-            }
-          ],
-          "explanation": "Retira o oxigênio do ar (abafamento).",
-          "review": "Abafamento com manta",
-          "transcript": "Cobrir a chama com uma manta grossa e abafada…",
-          "image": "assets/fotos/m2-p9.png"
-        },
-        {
-          "id": "m2-q2",
-          "type": "question",
-          "question": "Uma corrente de ar entrando por uma janela aberta perto do foco de fogo…",
-          "alternatives": [
-            {
-              "id": "a",
-              "text": "APAGA",
-              "correct": false
+              "ex": "Jogar água na base da chama",
+              "body": "Apaga: tira o calor"
             },
             {
-              "id": "b",
-              "text": "ALIMENTA",
-              "correct": true
-            }
-          ],
-          "explanation": "Mais ar = mais comburente (oxigênio) disponível.",
-          "review": "Corrente de ar perto do foco",
-          "transcript": "Uma corrente de ar entrando por uma janela aberta perto do foco de fogo…",
-          "image": "assets/fotos/m2-p10.png"
-        },
-        {
-          "id": "m2-q3",
-          "type": "question",
-          "question": "Jogar água diretamente sobre a base da chama…",
-          "alternatives": [
-            {
-              "id": "a",
-              "text": "APAGA",
-              "correct": true
+              "ex": "Levar o material que queima para uma área isolada",
+              "body": "Apaga: tira o combustível"
             },
             {
-              "id": "b",
-              "text": "ALIMENTA",
-              "correct": false
-            }
-          ],
-          "explanation": "Retira o calor (resfriamento).",
-          "review": "Resfriamento com água",
-          "transcript": "Jogar água diretamente sobre a base da chama…",
-          "image": "assets/fotos/m2-p11.png"
-        },
-        {
-          "id": "m2-q4",
-          "type": "question",
-          "question": "Deixar caixas de papelão empilhadas perto de um ponto que está esquentando…",
-          "alternatives": [
-            {
-              "id": "a",
-              "text": "APAGA",
-              "correct": false
+              "ex": "Abrir a janela perto do foco de fogo",
+              "body": "Alimenta: dá mais oxigênio"
             },
             {
-              "id": "b",
-              "text": "ALIMENTA",
-              "correct": true
+              "ex": "Empilhar papelão perto de um ponto quente",
+              "body": "Alimenta: dá mais combustível"
             }
           ],
-          "explanation": "Mantém material combustível disponível.",
-          "review": "Combustível perto de calor",
-          "transcript": "Deixar caixas de papelão empilhadas perto de um ponto que está esquentando…",
-          "image": "assets/fotos/m2-p12.png"
-        },
-        {
-          "id": "m2-q5",
-          "type": "question",
-          "question": "Retirar o material que está queimando para uma área isolada…",
-          "alternatives": [
-            {
-              "id": "a",
-              "text": "APAGA",
-              "correct": true
-            },
-            {
-              "id": "b",
-              "text": "ALIMENTA",
-              "correct": false
-            }
-          ],
-          "explanation": "Elimina o material combustível do ambiente.",
-          "review": "Retirada do material combustível",
-          "transcript": "Retirar o material que está queimando para uma área isolada…",
-          "image": "assets/fotos/m2-p1.png"
+          "review": "Tetraedro do fogo: o que apaga e o que alimenta",
+          "transcript": "Ligue cada situação ao efeito dela sobre o fogo: apaga ou alimenta."
         }
       ]
     },
@@ -556,6 +494,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m3-q1",
           "type": "question",
+          "variant": "lista",
           "question": "Classe A — papel, tecido, madeira. Qual agente?",
           "alternatives": [
             {
@@ -582,6 +521,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m3-q2",
           "type": "question",
+          "variant": "lista",
           "question": "Classe B — álcool, gasolina, GLP. Qual agente?",
           "alternatives": [
             {
@@ -608,6 +548,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m3-q3",
           "type": "question",
+          "variant": "lista",
           "question": "Classe C — quadro elétrico energizado. Qual agente?",
           "alternatives": [
             {
@@ -634,6 +575,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m3-q4",
           "type": "question",
+          "variant": "lista",
           "question": "Classe D — raspas de metal. Qual agente?",
           "alternatives": [
             {
@@ -662,7 +604,7 @@ window.QUESTION_SCREEN_SESSION = {
     {
       "id": 4,
       "title": "Prevenção, Riscos e Ação em Emergência",
-      "meta": "Vídeos + fotos + texto · desafio Caça ao Risco",
+      "meta": "Vídeos + fotos + texto · Certo × errado + desafio Caça ao Risco",
       "titleUnlock": {
         "title": "OLHO NO RISCO",
         "body": "Você previne no dia a dia e age nos primeiros segundos.",
@@ -772,6 +714,63 @@ window.QUESTION_SCREEN_SESSION = {
           "transcript": "Tipos de risco da edificação e papel do brigadista."
         },
         {
+          "id": "m4-cmp-fios",
+          "type": "compare",
+          "title": "Certo × errado: fios elétricos",
+          "body": "Toque nos dois lados para ver a diferença.",
+          "compare": [
+            {
+              "ok": false,
+              "label": "✕ Fio da cafeteira sob o tapete",
+              "text": "O fio coberto esquenta sem ninguém ver e pode iniciar um incêndio. Não cubra fios elétricos com tapetes nem improvise instalações elétricas."
+            },
+            {
+              "ok": true,
+              "label": "✓ Cabos organizados e à vista",
+              "text": "Cabos visíveis e organizados, longe de tapetes e de áreas de passagem: qualquer dano aparece logo."
+            }
+          ],
+          "transcript": "Certo ou errado: fios elétricos."
+        },
+        {
+          "id": "m4-cmp-tomadas",
+          "type": "compare",
+          "title": "Certo × errado: tomadas",
+          "body": "Toque nos dois lados para ver a diferença.",
+          "compare": [
+            {
+              "ok": false,
+              "label": "✕ Vários aparelhos num plugue em T",
+              "text": "Sobrecarrega a tomada, que esquenta e pode causar curto-circuito. Não sobrecarregue as tomadas usando plugues em T."
+            },
+            {
+              "ok": true,
+              "label": "✓ Cada aparelho na sua tomada",
+              "text": "Distribuir os aparelhos evita a sobrecarga. E ao fim do expediente, desligue da tomada o que não está em uso."
+            }
+          ],
+          "transcript": "Certo ou errado: tomadas."
+        },
+        {
+          "id": "m4-cmp-gas",
+          "type": "compare",
+          "title": "Certo × errado: cheiro de gás",
+          "body": "Toque nos dois lados para ver a diferença.",
+          "compare": [
+            {
+              "ok": false,
+              "label": "✕ Acender um fósforo para achar o vazamento",
+              "text": "A faísca pode ser suficiente para provocar uma explosão. Não ligue nem desligue interruptores e não acenda fósforo ou isqueiro."
+            },
+            {
+              "ok": true,
+              "label": "✓ Abrir janelas e portas para ventilar",
+              "text": "Abra todas as janelas e portas para ventilar o ambiente, sem acionar nenhum interruptor."
+            }
+          ],
+          "transcript": "Certo ou errado: cheiro de gás."
+        },
+        {
           "id": "m4-quiz-intro",
           "type": "quiz-intro",
           "title": "Desafio — Caça ao Risco",
@@ -784,6 +783,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m4-q1",
           "type": "question",
+          "variant": "cartoes",
           "question": "Na copa: várias tomadas ligadas num único plugue em T atrás do micro-ondas. Isso é…",
           "alternatives": [
             {
@@ -810,6 +810,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m4-q2",
           "type": "question",
+          "variant": "cartoes",
           "question": "Fio da cafeteira passando por baixo de um tapete. Isso é…",
           "alternatives": [
             {
@@ -836,6 +837,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m4-q3",
           "type": "question",
+          "variant": "cartoes",
           "question": "Extintor de PQS fixado na parede, com o pino no lugar. Isso é…",
           "alternatives": [
             {
@@ -862,6 +864,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m4-q4",
           "type": "question",
+          "variant": "cartoes",
           "question": "Caixas de papelão empilhadas encostadas no quadro de distribuição elétrica. Isso é…",
           "alternatives": [
             {
@@ -890,7 +893,7 @@ window.QUESTION_SCREEN_SESSION = {
     {
       "id": 5,
       "title": "Psicologia em Emergências",
-      "meta": "Vídeos + texto · desafio Guerra de Palpites",
+      "meta": "Vídeos + texto · Reconheça a reação + desafio Guerra de Palpites",
       "titleUnlock": {
         "title": "LÍDER SERENO",
         "body": "Você reconhece reações e lidera com calma.",
@@ -961,6 +964,52 @@ window.QUESTION_SCREEN_SESSION = {
           "transcript": "Saúde emocional do próprio brigadista."
         },
         {
+          "id": "m5-refl-paralisia",
+          "type": "reflect",
+          "title": "Reconheça a reação",
+          "prompt": "Durante o alarme, um colega para no meio do corredor e não consegue decidir nem se mover.",
+          "promptAccent": "Que reação é essa?",
+          "choices": [
+            {
+              "icon": "🙅",
+              "text": "Negação"
+            },
+            {
+              "icon": "🧊",
+              "text": "Paralisia"
+            },
+            {
+              "icon": "🏃",
+              "text": "Pânico"
+            }
+          ],
+          "answer": "É a paralisia: a pessoa fica incapaz de tomar decisões ou de se mover. Aproxime-se com calma, mantenha contato visual e use comandos simples e diretos.",
+          "transcript": "Reconheça a reação: um colega paralisado no corredor."
+        },
+        {
+          "id": "m5-refl-negacao",
+          "type": "reflect",
+          "title": "Reconheça a reação",
+          "prompt": "Um colega diz “deve ser só um teste” e continua na mesa, ignorando o alarme.",
+          "promptAccent": "Que reação é essa?",
+          "choices": [
+            {
+              "icon": "🙈",
+              "text": "Negação"
+            },
+            {
+              "icon": "🐑",
+              "text": "Obediência cega"
+            },
+            {
+              "icon": "😱",
+              "text": "Histeria coletiva"
+            }
+          ],
+          "answer": "É a negação: a pessoa se recusa a acreditar na gravidade da situação. Fale de forma clara e direta, sem discutir nem impor ordens com agressividade, e conduza-a à saída.",
+          "transcript": "Reconheça a reação: um colega que ignora o alarme."
+        },
+        {
           "id": "m5-quiz-intro",
           "type": "quiz-intro",
           "title": "Desafio — Guerra de Palpites",
@@ -973,6 +1022,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m5-q1",
           "type": "question",
+          "variant": "duelo",
           "question": "O pânico é sempre a pior reação possível numa emergência e deve ser eliminado a qualquer custo.",
           "alternatives": [
             {
@@ -994,6 +1044,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m5-q2",
           "type": "question",
+          "variant": "duelo",
           "question": "Um brigadista calmo pode evitar o pânico se espalhar entre as outras pessoas.",
           "alternatives": [
             {
@@ -1015,6 +1066,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m5-q3",
           "type": "question",
+          "variant": "duelo",
           "question": "A obediência cega, seguir ordens sem questionar, é sempre uma reação positiva numa emergência.",
           "alternatives": [
             {
@@ -1036,6 +1088,7 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m5-q4",
           "type": "question",
+          "variant": "duelo",
           "question": "O brigadista também deve buscar apoio psicológico após viver um evento crítico.",
           "alternatives": [
             {
@@ -1180,13 +1233,14 @@ window.QUESTION_SCREEN_SESSION = {
           "count": 3,
           "minCorrect": 2,
           "icon": "⛓️",
-          "body": "Cenário de choque elétrico: 3 decisões em sequência. Mínimo de <strong>2 acertos</strong>.",
+          "body": "Cenário de choque elétrico: 3 decisões em sequência, e cada erro mostra a consequência. Mínimo de <strong>2 acertos</strong>.",
           "transcript": "Desafio do módulo 6: Corrente de Decisão."
         },
         {
           "id": "m6-q1",
           "type": "question",
-          "question": "Colega caído perto de uma tomada, aparentemente após choque. O que fazer primeiro?",
+          "variant": "confirmar",
+          "question": "Decisão 1 de 3 · Colega caído perto de uma tomada, aparentemente após choque. O que fazer primeiro?",
           "alternatives": [
             {
               "id": "a",
@@ -1199,15 +1253,16 @@ window.QUESTION_SCREEN_SESSION = {
               "correct": false
             }
           ],
-          "explanation": "Nunca toque a vítima enquanto a energia não for cortada.",
+          "explanation": "Se você puxar a vítima com a energia ligada, a corrente passa para você também. Desligue a eletricidade antes de qualquer contato.",
           "review": "Primeira decisão — choque elétrico",
-          "transcript": "Colega caído perto de uma tomada, aparentemente após choque. O que fazer primeiro?",
+          "transcript": "Decisão 1 de 3 · Colega caído perto de uma tomada, aparentemente após choque. O que fazer primeiro?",
           "image": "assets/fotos/capa.png"
         },
         {
           "id": "m6-q2",
           "type": "question",
-          "question": "Energia desligada. Próximo passo?",
+          "variant": "confirmar",
+          "question": "Decisão 2 de 3 · Energia desligada. Próximo passo?",
           "alternatives": [
             {
               "id": "a",
@@ -1220,15 +1275,16 @@ window.QUESTION_SCREEN_SESSION = {
               "correct": false
             }
           ],
-          "explanation": "Pomadas em queimaduras podem piorar a lesão — a orientação nunca é essa.",
+          "explanation": "Pomadas em queimaduras podem piorar a lesão — a orientação nunca é essa. Primeiro, verifique a respiração e a pulsação.",
           "review": "Segunda decisão — avaliação",
-          "transcript": "Energia desligada. Próximo passo?",
+          "transcript": "Decisão 2 de 3 · Energia desligada. Próximo passo?",
           "image": "assets/fotos/capafinal.png"
         },
         {
           "id": "m6-q3",
           "type": "question",
-          "question": "Vítima respirando, com queimadura visível no braço. Ação final?",
+          "variant": "confirmar",
+          "question": "Decisão 3 de 3 · Vítima respirando, com queimadura visível no braço. Ação final?",
           "alternatives": [
             {
               "id": "a",
@@ -1241,9 +1297,9 @@ window.QUESTION_SCREEN_SESSION = {
               "correct": false
             }
           ],
-          "explanation": "Gelo direto na lesão agrava o dano nos tecidos — nunca aplique.",
+          "explanation": "Gelo direto na lesão agrava o dano nos tecidos — nunca aplique. Cubra com compressa limpa e úmida e chame o SAMU.",
           "review": "Terceira decisão — conduta final",
-          "transcript": "Vítima respirando, com queimadura visível no braço. Ação final?",
+          "transcript": "Decisão 3 de 3 · Vítima respirando, com queimadura visível no braço. Ação final?",
           "image": "assets/fotos/pag18.png"
         }
       ]
@@ -1328,10 +1384,10 @@ window.QUESTION_SCREEN_SESSION = {
           "id": "m7-quiz-intro",
           "type": "quiz-intro",
           "title": "Desafio — Roleta da RCP",
-          "count": 1,
-          "minCorrect": 1,
+          "count": 2,
+          "minCorrect": 2,
           "icon": "⚡",
-          "body": "Monte a <strong>sequência correta da RCP</strong> arrastando as 5 etapas na ordem certa.",
+          "body": "2 desafios: monte a <strong>sequência da RCP</strong> e depois toque no <strong>ritmo das compressões</strong>.",
           "transcript": "Desafio final: Roleta da RCP."
         },
         {
@@ -1370,6 +1426,21 @@ window.QUESTION_SCREEN_SESSION = {
           ],
           "review": "Sequência correta da RCP",
           "transcript": "Ordene as 5 etapas da RCP."
+        },
+        {
+          "id": "m7-rhythm",
+          "type": "rhythm",
+          "kicker": "🫀 Ritmo da compressão",
+          "title": "Ritmo da compressão",
+          "body": "Na RCP, as compressões torácicas seguem um ritmo de 100 a 120 por minuto. Primeiro acompanhe a pulsação, depois toque 8 vezes no mesmo ritmo. Você recebe dicas enquanto toca e pode tentar quantas vezes precisar.",
+          "bpmMin": 100,
+          "bpmMax": 120,
+          "guideBpm": 110,
+          "taps": 8,
+          "tries": 5,
+          "tolerance": 10,
+          "review": "Ritmo das compressões torácicas",
+          "transcript": "Toque no ritmo das compressões torácicas: de 100 a 120 por minuto."
         },
         {
           "id": "m7-finale",
