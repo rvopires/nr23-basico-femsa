@@ -130,7 +130,7 @@ window.QUESTION_SCREEN_SESSION = {
           "count": 4,
           "minCorrect": 3,
           "icon": "🚨",
-          "body": "3 perguntas e 1 sequência para montar, tudo cronometrado. Mínimo de <strong>3 acertos</strong> para avançar.",
+          "body": "4 perguntas cronometradas. Mínimo de <strong>3 acertos</strong> para avançar.",
           "transcript": "Desafio do módulo 1: Contra o Alarme."
         },
         {
@@ -162,7 +162,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "A brigada é um grupo organizado de colaboradores capacitados para prevenir, combater, evacuar e prestar primeiros socorros.",
           "review": "Definição de Brigada de Incêndio",
           "transcript": "O que é a Brigada de Incêndio?",
-          "image": "assets/fotos/m1=p1.png",
+          "image": "assets/fotos/m1p1.png",
           "imagePosition": "center 28%"
         },
         {
@@ -194,7 +194,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "O Líder da Brigada comanda a ação nos primeiros minutos.",
           "review": "Papel do Líder da Brigada",
           "transcript": "Quem comanda a ação nos primeiros minutos de uma emergência?",
-          "image": "assets/fotos/m1=p2.png"
+          "image": "assets/fotos/m1p2.png"
         },
         {
           "id": "m1-q3",
@@ -225,49 +225,38 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "No abandono de área, remova todos para um local seguro a no mínimo 100 metros do sinistro.",
           "review": "Distância mínima no abandono de área",
           "transcript": "Qual é a distância mínima recomendada no abandono de área?",
-          "image": "assets/fotos/m1=p3.png"
+          "image": "assets/fotos/m1p3.png"
         },
         {
           "id": "m1-q4",
-          "type": "order",
-          "kicker": "🔢 Monte o protocolo",
-          "title": "Monte o protocolo de emergência",
-          "body": "Toque nos seis passos na ordem em que a brigada age, do alerta ao confinamento.",
-          "time": 45,
-          "items": [
+          "type": "question",
+          "question": "Qual é a ordem correta dos procedimentos básicos de emergência?",
+          "alternatives": [
             {
-              "key": "alerta",
-              "text": "Dar o alerta pelos meios de comunicação disponíveis",
-              "rank": 0
+              "id": "a",
+              "text": "Alerta → Análise → Corte de energia → Abandono → Socorros → Confinamento",
+              "correct": true
             },
             {
-              "key": "analise",
-              "text": "Líder analisa a situação e decide os próximos passos",
-              "rank": 1
+              "id": "b",
+              "text": "Confinamento → Alerta → Abandono",
+              "correct": false
             },
             {
-              "key": "energia",
-              "text": "Cortar a energia elétrica no quadro principal",
-              "rank": 2
+              "id": "c",
+              "text": "Abandono → Alerta → Corte de energia",
+              "correct": false
             },
             {
-              "key": "abandono",
-              "text": "Abandono de área: todos a 100 m do sinistro",
-              "rank": 3
-            },
-            {
-              "key": "socorros",
-              "text": "Prestar os primeiros socorros às vítimas",
-              "rank": 4
-            },
-            {
-              "key": "confinamento",
-              "text": "Confinamento: evitar a propagação e eliminar o sinistro",
-              "rank": 5
+              "id": "d",
+              "text": "Análise → Confinamento → Alerta",
+              "correct": false
             }
           ],
+          "explanation": "A sequência é: alerta, análise, corte de energia, abandono, primeiros socorros e confinamento.",
           "review": "Ordem dos procedimentos básicos",
-          "transcript": "Monte o protocolo de emergência: ordene os seis passos, do alerta ao confinamento."
+          "transcript": "Qual é a ordem correta dos procedimentos básicos de emergência?",
+          "image": "assets/fotos/m1p4.png"
         }
       ]
     },
@@ -516,7 +505,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Água é indicada para Classe A.",
           "review": "Agente para Classe A",
           "transcript": "Classe A — papel, tecido, madeira. Qual agente?",
-          "image": "assets/fotos/m3-p8.png"
+          "image": "assets/fotos/m3p1.png"
         },
         {
           "id": "m3-q2",
@@ -543,7 +532,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "PQS é indicado para Classes B e C. (CO₂ também serve em B/C; nesta rodada o gabarito do roteiro é PQS.)",
           "review": "Agente para Classe B",
           "transcript": "Classe B — álcool, gasolina, GLP. Qual agente?",
-          "image": "assets/fotos/m3-p9.png"
+          "image": "assets/fotos/m3p2.png"
         },
         {
           "id": "m3-q3",
@@ -570,7 +559,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "CO₂ (ou PQS) para Classe C. Nunca água em equipamento energizado.",
           "review": "Agente para Classe C",
           "transcript": "Classe C — quadro elétrico energizado. Qual agente?",
-          "image": "assets/fotos/m3-p10.png"
+          "image": "assets/fotos/m3p3.png"
         },
         {
           "id": "m3-q4",
@@ -597,7 +586,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Classe D exige agente específico para metais — não use água nem PQS comum.",
           "review": "Agente para Classe D",
           "transcript": "Classe D — raspas de metal. Qual agente?",
-          "image": "assets/fotos/m3-p11.png"
+          "image": "assets/fotos/m3p4.png"
         }
       ]
     },
@@ -651,11 +640,6 @@ window.QUESTION_SCREEN_SESSION = {
           "image": "assets/fotos/m4-p1.png",
           "imageAlt": "Placeholder — substituir por foto de consequencias (banco de imagens)",
           "imageFit": "contain",
-          "bullets": [
-            "Buscar: fire damage aftermath building interior / gas explosion structural damage",
-            "Fontes sugeridas: Getty, Reuters, AP",
-            "Evitar imagens com vítimas"
-          ],
           "transcript": "Foto: consequências de um incêndio ou explosão de gás."
         },
         {
@@ -805,7 +789,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Plugue em T sobrecarrega a tomada — risco real.",
           "review": "Plugue em T na copa",
           "transcript": "Na copa: várias tomadas ligadas num único plugue em T atrás do micro-ondas. Isso é…",
-          "image": "assets/fotos/m4-p1.png"
+          "image": "assets/fotos/m4p1.png"
         },
         {
           "id": "m4-q2",
@@ -832,7 +816,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Não se deve cobrir fios elétricos com tapetes.",
           "review": "Fio sob o tapete",
           "transcript": "Fio da cafeteira passando por baixo de um tapete. Isso é…",
-          "image": "assets/fotos/p23.png"
+          "image": "assets/fotos/m4p2.png"
         },
         {
           "id": "m4-q3",
@@ -859,7 +843,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Extintor instalado corretamente é isca — não clique como risco.",
           "review": "Extintor correto (isca)",
           "transcript": "Extintor de PQS fixado na parede, com o pino no lugar. Isso é…",
-          "image": "assets/fotos/p24.1.png"
+          "image": "assets/fotos/m4p3.png"
         },
         {
           "id": "m4-q4",
@@ -886,7 +870,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Material combustível junto ao quadro elétrico é risco grave.",
           "review": "Caixas no quadro elétrico",
           "transcript": "Caixas de papelão empilhadas encostadas no quadro de distribuição elétrica. Isso é…",
-          "image": "assets/fotos/p24.2.png"
+          "image": "assets/fotos/m4p4.png"
         }
       ]
     },
@@ -1039,7 +1023,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Pânico é uma reação intensa e desorganizada — o foco é reconhecê-la e conter com calma, não “eliminar a qualquer custo”.",
           "review": "Afirmativa sobre pânico",
           "transcript": "O pânico é sempre a pior reação possível numa emergência e deve ser eliminado a qualquer custo.",
-          "image": "assets/fotos/m5-p1.png"
+          "image": "assets/fotos/m5p1.png"
         },
         {
           "id": "m5-q2",
@@ -1061,7 +1045,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Pessoas tendem a seguir quem demonstra controle e calma.",
           "review": "Calma do brigadista",
           "transcript": "Um brigadista calmo pode evitar o pânico se espalhar entre as outras pessoas.",
-          "image": "assets/fotos/pergunta-variacao.png"
+          "image": "assets/fotos/m5p2.png"
         },
         {
           "id": "m5-q3",
@@ -1083,7 +1067,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Obediência cega é uma reação possível — não é sempre positiva; o brigadista precisa de comunicação clara e segura.",
           "review": "Obediência cega",
           "transcript": "A obediência cega, seguir ordens sem questionar, é sempre uma reação positiva numa emergência.",
-          "image": "assets/fotos/capa-modulo1.png"
+          "image": "assets/fotos/m5p3.png"
         },
         {
           "id": "m5-q4",
@@ -1105,7 +1089,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Cuidar de quem cuida faz parte do preparo.",
           "review": "Apoio psicológico após evento crítico",
           "transcript": "O brigadista também deve buscar apoio psicológico após viver um evento crítico.",
-          "image": "assets/fotos/final.png"
+          "image": "assets/fotos/m5p4.png"
         }
       ]
     },
@@ -1256,7 +1240,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Se você puxar a vítima com a energia ligada, a corrente passa para você também. Desligue a eletricidade antes de qualquer contato.",
           "review": "Primeira decisão — choque elétrico",
           "transcript": "Decisão 1 de 3 · Colega caído perto de uma tomada, aparentemente após choque. O que fazer primeiro?",
-          "image": "assets/fotos/capa.png"
+          "image": "assets/fotos/m6p1.png"
         },
         {
           "id": "m6-q2",
@@ -1278,7 +1262,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Pomadas em queimaduras podem piorar a lesão — a orientação nunca é essa. Primeiro, verifique a respiração e a pulsação.",
           "review": "Segunda decisão — avaliação",
           "transcript": "Decisão 2 de 3 · Energia desligada. Próximo passo?",
-          "image": "assets/fotos/capafinal.png"
+          "image": "assets/fotos/m6p2.png"
         },
         {
           "id": "m6-q3",
@@ -1300,7 +1284,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Gelo direto na lesão agrava o dano nos tecidos — nunca aplique. Cubra com compressa limpa e úmida e chame o SAMU.",
           "review": "Terceira decisão — conduta final",
           "transcript": "Decisão 3 de 3 · Vítima respirando, com queimadura visível no braço. Ação final?",
-          "image": "assets/fotos/pag18.png"
+          "image": "assets/fotos/m6p3.png"
         }
       ]
     },
