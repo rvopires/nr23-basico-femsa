@@ -3744,7 +3744,7 @@ html.qs-lightbox-open body {
   font-size: 0.82rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
 }
 .qs-compare-col.is-ok .qs-compare-lbl { color: var(--qs-ok-dk); }
 .qs-compare-col.is-bad .qs-compare-lbl { color: var(--qs-red-dk); }
@@ -3767,38 +3767,58 @@ html.qs-lightbox-open body {
   line-height: 1.4;
 }
 
-/* Foto pequena 1x1 dentro do card; texto so apos o toque */
+/* Compare com fotos — layout NR17 pag. 29: label, foto grande, texto sempre visível */
+.qs-screen.is-compare.has-photos .qs-panel-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding-bottom: 12px;
+}
+.qs-screen.is-compare.has-photos .qs-title {
+  flex: 0 0 auto;
+  margin-bottom: 10px;
+}
 .qs-screen.is-compare.has-photos .qs-compare {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  max-width: 560px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: 14px;
+  margin: 0;
   align-items: stretch;
+  max-width: none;
+  width: 100%;
 }
 .qs-screen.is-compare.has-photos .qs-compare-col {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 12px;
+  min-height: 0;
+  padding: 10px;
   overflow: hidden;
+  align-items: stretch;
+  cursor: default;
+}
+.qs-screen.is-compare.has-photos .qs-compare-col[disabled] {
+  opacity: 1;
+  pointer-events: none;
 }
 .qs-screen.is-compare.has-photos .qs-compare-lbl {
-  text-align: center;
-  margin-bottom: 10px;
-  width: 100%;
+  margin: 0 0 8px;
+  flex: 0 0 auto;
+  text-align: left;
+  width: auto;
 }
-.qs-screen.is-compare.has-photos .qs-compare-media {
+.qs-compare-media {
   position: relative;
-  width: 132px;
-  height: 132px;
-  flex: 0 0 132px;
+  flex: 1 1 auto;
+  min-height: 140px;
   border-radius: 12px;
   overflow: hidden;
   background: #00332C;
-  margin: 0 auto;
+  margin: 0 0 8px;
 }
 .qs-screen.is-compare.has-photos .qs-compare-media .qs-zoom-wrap {
   position: absolute;
@@ -3807,39 +3827,39 @@ html.qs-lightbox-open body {
   height: 100%;
 }
 .qs-screen.is-compare.has-photos .qs-compare-media .qs-zoom-wrap > img,
-.qs-screen.is-compare.has-photos .qs-compare-img {
+.qs-compare-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   display: block;
 }
-.qs-screen.is-compare.has-photos .qs-compare-hint,
-.qs-screen.is-compare.has-photos .qs-compare-reveal {
-  text-align: center;
-  width: 100%;
-  font-size: 0.84rem;
+.qs-screen.is-compare.has-photos .qs-compare-hint {
+  flex: 0 0 auto;
+  margin-top: 0;
 }
 .qs-screen.is-compare.has-photos .qs-compare-reveal {
+  display: block;
+  margin: 0;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.4;
+  flex: 0 0 auto;
+  text-align: left;
+  width: auto;
+  font-size: inherit;
 }
 @media (max-width: 760px) {
   .qs-screen.is-compare.has-photos .qs-compare {
-    grid-template-columns: 1fr 1fr;
-    max-width: 100%;
-    gap: 8px;
+    gap: 10px;
   }
-  .qs-screen.is-compare.has-photos .qs-compare-col { padding: 10px 8px; }
-  .qs-screen.is-compare.has-photos .qs-compare-media {
-    width: 112px;
-    height: 112px;
-    flex-basis: 112px;
+  .qs-screen.is-compare.has-photos .qs-compare-col {
+    padding: 8px;
   }
-  .qs-screen.is-compare.has-photos .qs-compare-lbl { font-size: 0.7rem; }
-  .qs-screen.is-compare.has-photos .qs-compare-reveal { font-size: 0.76rem; }
+  .qs-compare-media {
+    min-height: 110px;
+  }
 }
 
 .qs-reflect {

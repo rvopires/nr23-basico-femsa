@@ -655,10 +655,13 @@
           ${data.body && !open ? `<p class="qs-compare-guide">${esc(data.body)}</p>` : ''}
           <div class="qs-compare">${sides.map(function (c, i) {
             var ok = !!c.ok;
-            var img = c.image
-              ? `<div class="qs-compare-media">${zoomWrap(c.image, `<img class="qs-compare-img" src="${esc(c.image)}" alt="${esc(c.imageAlt || c.label || '')}" loading="eager" decoding="async">`)}</div>`
+            var imgInner = c.image
+              ? `<img class="qs-compare-img" src="${esc(c.image)}" alt="${esc(c.imageAlt || c.label || '')}" loading="eager" decoding="async">`
               : '';
-            return `<button type="button" class="qs-compare-col ${ok ? 'is-ok' : 'is-bad'}${c.image ? ' has-img' : ''}${open ? ' is-open' : ''}" data-qs-compare="${i}">
+            var img = c.image
+              ? `<div class="qs-compare-media">${hasPhotos && !open ? zoomWrap(c.image, imgInner) : imgInner}</div>`
+              : '';
+            return `<button type="button" class="qs-compare-col ${ok ? 'is-ok' : 'is-bad'}${c.image ? ' has-img' : ''}${open ? ' is-open' : ''}" data-qs-compare="${i}"${open ? ' disabled' : ''}>
               <div class="qs-compare-lbl">${esc(c.label || (ok ? '✓ Correto' : '✕ Evitar'))}</div>
               ${img}
               ${open ? '' : '<p class="qs-compare-hint">Toque para ver</p>'}

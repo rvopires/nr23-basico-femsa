@@ -770,17 +770,21 @@ window.QUESTION_SCREEN_SESSION = {
           "id": "m4-cmp-fios",
           "type": "compare",
           "title": "Certo × errado: fios elétricos",
-          "body": "Toque nos dois lados para ver a diferença.",
+          "open": true,
           "compare": [
             {
-              "ok": false,
-              "label": "✕ Fio da cafeteira sob o tapete",
-              "text": "O fio coberto esquenta sem ninguém ver e pode iniciar um incêndio. Não cubra fios elétricos com tapetes nem improvise instalações elétricas."
+              "ok": true,
+              "label": "✓ Correto",
+              "image": "assets/fotos/certo.png",
+              "imageAlt": "Cabos organizados e à vista",
+              "text": "Cabos organizados e à vista, longe de tapetes e de passagem."
             },
             {
-              "ok": true,
-              "label": "✓ Cabos organizados e à vista",
-              "text": "Cabos visíveis e organizados, longe de tapetes e de áreas de passagem: qualquer dano aparece logo."
+              "ok": false,
+              "label": "✕ Evitar",
+              "image": "assets/fotos/errado.png",
+              "imageAlt": "Fio da cafeteira sob o tapete",
+              "text": "Fio sob o tapete esquenta sem ninguém ver e pode iniciar um incêndio."
             }
           ],
           "transcript": "Certo ou errado: fios elétricos."
