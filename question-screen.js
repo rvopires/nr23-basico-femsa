@@ -170,14 +170,68 @@
     return m ? m[1] : '';
   }
 
+  var ZOOM_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L21 21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+
+  function zoomWrap(src, imgHtml) {
+    if (!src) return imgHtml;
+    return `<div class="qs-zoom-wrap">
+      ${imgHtml}
+      <button type="button" class="qs-zoom-btn" data-qs-zoom="${esc(src)}" aria-label="Ampliar imagem">${ZOOM_ICON}</button>
+    </div>`;
+  }
+
+  function ensureLightbox() {
+    if (document.getElementById('qs-lightbox')) return;
+    var box = document.createElement('div');
+    box.id = 'qs-lightbox';
+    box.className = 'qs-lightbox';
+    box.hidden = true;
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', 'Imagem ampliada');
+    box.innerHTML = `<button type="button" class="qs-lightbox-close" data-qs-lightbox-close aria-label="Fechar">×</button>
+      <img class="qs-lightbox-img" alt="">`;
+    document.body.appendChild(box);
+    box.addEventListener('click', function (e) {
+      if (e.target === box || e.target.closest('[data-qs-lightbox-close]')) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  }
+
+  function openLightbox(src, alt) {
+    if (!src) return;
+    ensureLightbox();
+    var box = document.getElementById('qs-lightbox');
+    var img = box.querySelector('.qs-lightbox-img');
+    img.src = src;
+    img.alt = alt || '';
+    box.hidden = false;
+    document.documentElement.classList.add('qs-lightbox-open');
+  }
+
+  function closeLightbox() {
+    var box = document.getElementById('qs-lightbox');
+    if (!box || box.hidden) return;
+    box.hidden = true;
+    var img = box.querySelector('.qs-lightbox-img');
+    if (img) img.removeAttribute('src');
+    document.documentElement.classList.remove('qs-lightbox-open');
+  }
+
   function mediaHTML(data, opts) {
     opts = opts || {};
     var fit = data.imageFit === 'contain' || opts.contain ? 'contain' : 'cover';
     if (data.image) {
       var pos = data.imagePosition || data.objectPosition || '';
       var posAttr = pos ? ` style="object-position:${esc(pos)}"` : '';
-      return `<img class="qs-img qs-img-${fit}" src="${esc(data.image)}" alt="${esc(data.imageAlt || data.title || '')}" loading="eager" decoding="async" fetchpriority="high"${posAttr} onerror="this.classList.add('is-broken');this.nextElementSibling&&this.nextElementSibling.classList.add('show');">` +
+      var onErr = opts.noZoom
+        ? `this.classList.add('is-broken');this.nextElementSibling&&this.nextElementSibling.classList.add('show');`
+        : `this.classList.add('is-broken');var f=this.parentNode&&this.parentNode.querySelector('.qs-img-fallback');f&&f.classList.add('show');`;
+      var img = `<img class="qs-img qs-img-${fit}" src="${esc(data.image)}" alt="${esc(data.imageAlt || data.title || '')}" loading="eager" decoding="async" fetchpriority="high"${posAttr} onerror="${onErr}">` +
         `<div class="qs-media-fallback qs-img-fallback" aria-hidden="true">${esc(data.icon || '🖼️')}</div>`;
+      return opts.noZoom ? img : zoomWrap(data.image, img);
     }
     return `<div class="qs-media-fallback" aria-hidden="true">${esc(data.icon || '📘')}</div>`;
   }
@@ -242,11 +296,33 @@
         }).join('')}</ul>`
       : '';
     var body = data.body ? `<p class="qs-body">${esc(data.body)}</p>` : '';
+    var stack = data.layout === 'stack';
+    var media;
+    if (Array.isArray(data.images) && data.images.length) {
+      media = `<div class="qs-media qs-media-gallery count-${data.images.length}${stack ? ' qs-media-wide' : ' qs-media-split'}">${data.images.map(function (img) {
+        var src = typeof img === 'string' ? img : (img.src || img.image || '');
+        var alt = typeof img === 'string' ? (data.title || '') : (img.alt || img.imageAlt || data.title || '');
+        var fit = (data.imageFit === 'contain') ? 'contain' : 'cover';
+        var inner = `<img class="qs-img qs-img-${fit}" src="${esc(src)}" alt="${esc(alt)}" loading="eager" decoding="async">`;
+        return zoomWrap(src, inner);
+      }).join('')}</div>`;
+    } else {
+      media = `<div class="qs-media${stack ? ' qs-media-wide' : ' qs-media-split'}">${mediaHTML(data, { contain: data.imageFit === 'contain' })}</div>`;
+    }
+    if (stack) {
+      return `
+      <article class="qs-screen is-image is-stack" data-qs-root data-type="image">
+        <div class="qs-panel qs-panel-stack">
+          <h2 class="qs-title">${esc(data.title || '')}</h2>
+          ${body}
+          ${bullets}
+        </div>
+        ${media}
+      </article>`;
+    }
     return `
       <article class="qs-screen is-image has-split" data-qs-root data-type="image">
-        <div class="qs-media qs-media-split">
-          ${mediaHTML(data, { contain: true })}
-        </div>
+        ${media}
         <div class="qs-panel qs-panel-split">
           <h2 class="qs-title">${esc(data.title || '')}</h2>
           ${body}
@@ -259,7 +335,7 @@
     return `
       <article class="qs-screen is-cover" data-qs-root data-type="cover">
         <div class="qs-media">
-          ${mediaHTML(data)}
+          ${mediaHTML(data, { noZoom: true })}
           <div class="qs-cover-labels">
             <h1>${esc(data.title || '')}</h1>
             ${data.subtitle ? `<p>${esc(data.subtitle)}</p>` : ''}
@@ -271,7 +347,7 @@
   function finaleHTML(data) {
     var chips = Array.isArray(data.chips) ? data.chips : [];
     var photo = data.image
-      ? `<img class="qs-finale-photo" src="${esc(data.image)}" alt="" aria-hidden="true">`
+      ? zoomWrap(data.image, `<img class="qs-finale-photo" src="${esc(data.image)}" alt="" aria-hidden="true">`)
       : '';
     var chipHtml = chips.map(function (c) {
       return `<span class="qs-finale-chip">${esc(c)}</span>`;
@@ -314,11 +390,38 @@
       }).join('')}</div>`;
     }
     if (Array.isArray(data.cards) && data.cards.length) {
-      html += `<div class="qs-cards count-${data.cards.length}">${data.cards.map(function (c) {
-        return `<article class="qs-card">
-          ${c.icon ? `<div class="qs-card-ico" aria-hidden="true">${esc(c.icon)}</div>` : ''}
-          ${c.title ? `<h3>${esc(c.title)}</h3>` : ''}
+      var aspectClass = (data.cardAspect === 'landscape' || data.cardAspect === 'horizontal')
+        ? ' is-landscape'
+        : (data.cardAspect === 'square' || data.cardAspect === '1x1' ? ' is-square' : '');
+      var skinClass = data.skin === 'actions' ? ' is-actions' : '';
+      html += `<div class="qs-cards count-${data.cards.length}${aspectClass}${skinClass}">${data.cards.map(function (c) {
+        var imgOnly = !!(c.image && !c.title && !c.body && !c.icon && !(c.points && c.points.length));
+        var img = c.image
+          ? `<div class="qs-card-media">${zoomWrap(c.image, `<img class="qs-card-img" src="${esc(c.image)}" alt="${esc(c.imageAlt || c.title || '')}" loading="eager" decoding="async">`)}</div>`
+          : '';
+        var points = Array.isArray(c.points) && c.points.length
+          ? `<ul class="qs-card-points">${c.points.map(function (p, pi) {
+              var txt = typeof p === 'string' ? p : (p.text || p.label || '');
+              var pico = typeof p === 'string' ? '' : (p.icon || '');
+              return `<li>
+                <span class="qs-point-num" aria-hidden="true">${pi + 1}</span>
+                ${pico ? `<span class="qs-point-ico" aria-hidden="true">${esc(pico)}</span>` : ''}
+                <span class="qs-point-txt">${esc(txt)}</span>
+              </li>`;
+            }).join('')}</ul>`
+          : '';
+        var tone = c.tone ? ' tone-' + esc(c.tone) : '';
+        return `<article class="qs-card${c.image ? ' has-img' : ''}${imgOnly ? ' is-img-only' : ''}${points ? ' has-points' : ''}${tone}">
+          ${img}
+          <div class="qs-card-top">
+            ${c.icon && !c.image ? `<div class="qs-card-ico" aria-hidden="true">${esc(c.icon)}</div>` : ''}
+            <div class="qs-card-head">
+              ${c.title ? `<h3>${esc(c.title)}</h3>` : ''}
+              ${c.lead ? `<span class="qs-card-lead">${esc(c.lead)}</span>` : ''}
+            </div>
+          </div>
           ${c.body ? `<p>${esc(c.body)}</p>` : ''}
+          ${points}
         </article>`;
       }).join('')}</div>`;
     }
@@ -338,7 +441,7 @@
             return `<span class="qs-dose ${rep ? 'is-rep' : 'is-time'}">${esc(t)}</span>`;
           }).join('');
           var thumb = it.image
-            ? `<div class="qs-item-thumb"><img src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="eager" decoding="async"></div>`
+            ? `<div class="qs-item-thumb">${zoomWrap(it.image, `<img src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="eager" decoding="async">`)}</div>`
             : `<span class="qs-item-num">${esc(it.n)}</span>`;
           return `<div class="qs-item is-step${it.image ? ' has-thumb' : ''}">
             ${thumb}
@@ -440,8 +543,9 @@
       </article>`;
     }
     var dense = (data.items && data.items.length > 6) || (data.cards && data.cards.length > 3);
+    var skin = data.skin === 'actions' ? ' is-actions' : '';
     return `
-      <article class="qs-screen is-content is-text${dense ? ' is-dense' : ''}" data-qs-root data-type="content">
+      <article class="qs-screen is-content is-text${dense ? ' is-dense' : ''}${skin}" data-qs-root data-type="content">
         <div class="qs-panel qs-panel-text">
           ${head}
         </div>
@@ -450,6 +554,11 @@
 
   function stepsHTML(data) {
     var items = data.items || [];
+    var unit = data.stepUnit || 'Exercício';
+    var nextLbl = data.stepNext || 'Próximo exercício';
+    var photoOnly = items.every(function (it) {
+      return !!(it.image && !(it.title || it.text || it.body));
+    });
     var slides = items.map(function (it, i) {
       var raw = it.text || it.body || '';
       var d = splitDose(raw);
@@ -458,13 +567,9 @@
         return `<span class="qs-dose ${rep ? 'is-rep' : 'is-time'}">${esc(t)}</span>`;
       }).join('');
       var num = it.n != null ? it.n : (i + 1);
-      return `<div class="qs-step${i === 0 ? ' is-on' : ''}" data-qs-step="${i}"${i === 0 ? '' : ' hidden'}>
-        <div class="qs-step-media">
-          ${it.image
-            ? `<img class="qs-step-img" src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">`
-            : `<div class="qs-step-fallback">${esc(num)}</div>`}
-        </div>
-        <div class="qs-step-info">
+      var hasInfo = !!(it.title || raw);
+      var info = hasInfo
+        ? `<div class="qs-step-info">
           <div class="qs-step-head">
             <span class="qs-step-num">${esc(num)}</span>
             ${it.title ? `<b class="qs-step-title">${esc(it.title)}</b>` : ''}
@@ -472,22 +577,30 @@
           </div>
           <p class="qs-step-move">${esc(d ? d.move : raw)}</p>
           ${d && d.caveat ? `<span class="qs-item-warn">${esc(d.caveat)}</span>` : ''}
+        </div>`
+        : '';
+      return `<div class="qs-step${i === 0 ? ' is-on' : ''}${photoOnly ? ' is-photo' : ''}" data-qs-step="${i}"${i === 0 ? '' : ' hidden'}>
+        <div class="qs-step-media">
+          ${it.image
+            ? zoomWrap(it.image, `<img class="qs-step-img" src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">`)
+            : `<div class="qs-step-fallback">${esc(num)}</div>`}
         </div>
+        ${info}
       </div>`;
     }).join('');
 
     return `
-      <article class="qs-screen is-content is-steps" data-qs-root data-type="content">
-        <div class="qs-steps" data-qs-steps>
+      <article class="qs-screen is-content is-steps${photoOnly ? ' is-photo-steps' : ''}" data-qs-root data-type="content">
+        <div class="qs-steps" data-qs-steps data-step-unit="${esc(unit)}" data-step-next="${esc(nextLbl)}" data-step-finish="${esc(data.stepFinish || 'Concluir sequência')}">
           <header class="qs-steps-top">
             <h2 class="qs-title">${esc(data.title || '')}</h2>
-            <span class="qs-steps-count" data-qs-step-count>Exercício 1 de ${items.length}</span>
+            <span class="qs-steps-count" data-qs-step-count>${esc(unit)} 1 de ${items.length}</span>
           </header>
           <div class="qs-steps-track">${slides}</div>
           <div class="qs-steps-actions">
             <button type="button" class="qs-step-back" data-qs-step-prev hidden>Ver anterior</button>
             <button type="button" class="qs-step-cta" data-qs-step-next>
-              Próximo exercício
+              ${esc(nextLbl)}
             </button>
           </div>
         </div>
@@ -543,9 +656,9 @@
           <div class="qs-compare">${sides.map(function (c, i) {
             var ok = !!c.ok;
             var img = c.image
-              ? `<div class="qs-compare-media"><img class="qs-compare-img" src="${esc(c.image)}" alt="${esc(c.imageAlt || c.label || '')}" loading="eager" decoding="async"></div>`
+              ? `<div class="qs-compare-media">${zoomWrap(c.image, `<img class="qs-compare-img" src="${esc(c.image)}" alt="${esc(c.imageAlt || c.label || '')}" loading="eager" decoding="async">`)}</div>`
               : '';
-            return `<button type="button" class="qs-compare-col ${ok ? 'is-ok' : 'is-bad'}${c.image ? ' has-img' : ''}${open ? ' is-open' : ''}" data-qs-compare="${i}"${open ? ' disabled' : ''}>
+            return `<button type="button" class="qs-compare-col ${ok ? 'is-ok' : 'is-bad'}${c.image ? ' has-img' : ''}${open ? ' is-open' : ''}" data-qs-compare="${i}">
               <div class="qs-compare-lbl">${esc(c.label || (ok ? '✓ Correto' : '✕ Evitar'))}</div>
               ${img}
               ${open ? '' : '<p class="qs-compare-hint">Toque para ver</p>'}
@@ -813,6 +926,7 @@
     this.root = this.el.querySelector('[data-qs-root]');
     this.el.removeEventListener('click', this._onClick);
     this.el.addEventListener('click', this._onClick);
+    ensureLightbox();
 
     var lockedVideo = type === 'video' && !!(this.data.embed || this.data.panda || this.data.video);
     var gated = type === 'question' || type === 'order' || type === 'match' || type === 'rhythm' || type === 'reflect' || type === 'compare' || lockedVideo || (type === 'content' && !!(this.data && this.data.steps));
@@ -1057,6 +1171,14 @@
   };
 
   QuestionScreen.prototype._onClick = function (e) {
+    var zoomBtn = e.target.closest('[data-qs-zoom]');
+    if (zoomBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var zImg = zoomBtn.parentNode && zoomBtn.parentNode.querySelector('img');
+      openLightbox(zoomBtn.getAttribute('data-qs-zoom'), zImg ? zImg.alt : '');
+      return;
+    }
     var opt = e.target.closest('.qs-opt');
     var start = e.target.closest('[data-qs-start]');
     var retry = e.target.closest('[data-qs-retry]');
@@ -1158,7 +1280,8 @@
     var opened = {};
     var cols = this.el.querySelectorAll('[data-qs-compare]');
     cols.forEach(function (btn) {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', function (e) {
+        if (e.target.closest('[data-qs-zoom]')) return;
         if (btn.classList.contains('is-open')) return;
         btn.classList.add('is-open');
         beep('click');
@@ -1183,6 +1306,9 @@
     var count = root.querySelector('[data-qs-step-count]');
     var prev = root.querySelector('[data-qs-step-prev]');
     var next = root.querySelector('[data-qs-step-next]');
+    var unit = root.getAttribute('data-step-unit') || 'Exercício';
+    var nextLbl = root.getAttribute('data-step-next') || 'Próximo exercício';
+    var finishLbl = root.getAttribute('data-step-finish') || 'Concluir sequência';
     var i = 0;
     var total = slides.length;
     var farthest = 0; // só avança em ordem; não dá para pular exercício
@@ -1193,7 +1319,7 @@
         s.classList.toggle('is-on', on);
         s.hidden = !on;
       });
-      if (count) count.textContent = 'Exercício ' + (i + 1) + ' de ' + total;
+      if (count) count.textContent = unit + ' ' + (i + 1) + ' de ' + total;
       if (prev) prev.hidden = i <= 0;
 
       if (!next) return;
@@ -1203,10 +1329,10 @@
       }
       next.hidden = false;
       if (i < total - 1) {
-        next.textContent = 'Próximo exercício';
+        next.textContent = nextLbl;
         next.classList.remove('is-finish');
       } else {
-        next.textContent = 'Concluir sequência';
+        next.textContent = finishLbl;
         next.classList.add('is-finish');
       }
     }

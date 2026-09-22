@@ -276,7 +276,7 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 2 — O Fogo: Teoria e Métodos de Extinção",
           "subtitle": "Tetraedro do fogo e os três métodos: abafamento, resfriamento e retirada do material.",
           "transcript": "Módulo 2: O Fogo — teoria e métodos de extinção.",
-          "image": "assets/fotos/m2-p1.png"
+          "image": "assets/fotos/m2-capa.png"
         },
         {
           "id": "m2-v-oque",
@@ -318,19 +318,22 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Transmissão de Calor",
           "cards": [
             {
-              "icon": "🔗",
               "title": "Condução",
-              "body": "Transmite a temperatura molécula a molécula. Ex.: colher na água fervente."
+              "body": "Transmite a temperatura molécula a molécula. Ex.: colher na água fervente.",
+              "image": "assets/fotos/m2-conducao.png",
+              "imageAlt": "Condução de calor"
             },
             {
-              "icon": "🌬️",
               "title": "Convecção",
-              "body": "Ar quente sobe e encontra ar frio, formando looping. Pode atingir o ponto de fulgor e iniciar novo foco."
+              "body": "Ar quente sobe e encontra ar frio, formando looping. Pode atingir o ponto de fulgor e iniciar novo foco.",
+              "image": "assets/fotos/m2-conveccao.png",
+              "imageAlt": "Convecção de calor"
             },
             {
-              "icon": "☀️",
               "title": "Irradiação",
-              "body": "Transmissão por ondas caloríferas de uma fonte de calor, como o sol."
+              "body": "Transmissão por ondas caloríferas de uma fonte de calor, como o sol.",
+              "image": "assets/fotos/m2-irradiacao.png",
+              "imageAlt": "Irradiação de calor"
             }
           ],
           "note": {
@@ -441,34 +444,46 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Qual Agente Extintor Usar em Cada Classe",
           "cards": [
             {
-              "icon": "💧",
               "title": "Água",
-              "body": "Indicada para Classe A."
+              "body": "Indicada para Classe A.",
+              "image": "assets/fotos/agua.png",
+              "imageAlt": "Extintor de água"
             },
             {
-              "icon": "☁️",
               "title": "Pó Químico Seco (PQS)",
-              "body": "Indicado para Classes B e C."
+              "body": "Indicado para Classes B e C.",
+              "image": "assets/fotos/pqs.png",
+              "imageAlt": "Extintor de pó químico seco"
             },
             {
-              "icon": "🫧",
               "title": "Gás Carbônico (CO₂)",
-              "body": "Classes B e C — especialmente equipamentos elétricos sensíveis."
+              "body": "Classes B e C — especialmente equipamentos elétricos sensíveis.",
+              "image": "assets/fotos/m3-gas.png",
+              "imageAlt": "Extintor de gás carbônico"
             }
           ],
-          "items": [
+          "transcript": "Tabela agente x classe."
+        },
+        {
+          "id": "m3-equipamentos",
+          "type": "content",
+          "kicker": "📄 Texto",
+          "title": "Mangueira e Hidrante",
+          "cards": [
             {
-              "icon": "🧵",
-              "title": "Mangueira:",
-              "text": "fibra sintética com revestimento de borracha; 15 ou 30 m (30 m não é mais usado)"
+              "title": "Mangueira",
+              "body": "Fibra sintética com revestimento de borracha; 15 ou 30 m (30 m não é mais usado).",
+              "image": "assets/fotos/mangueira.png",
+              "imageAlt": "Mangueira de incêndio"
             },
             {
-              "icon": "🚪",
-              "title": "Hidrante / abrigo:",
-              "text": "chapa de aço, porta com ventilação e visor “Incêndio”, suporte em meia-lua"
+              "title": "Hidrante / abrigo",
+              "body": "Chapa de aço, porta com ventilação e visor “Incêndio”, suporte em meia-lua.",
+              "image": "assets/fotos/hidrante.png",
+              "imageAlt": "Hidrante e abrigo de incêndio"
             }
           ],
-          "transcript": "Tabela agente x classe e equipamentos de apoio."
+          "transcript": "Mangueira e hidrante: equipamentos de apoio da brigada."
         },
         {
           "id": "m3-quiz-intro",
@@ -632,70 +647,124 @@ window.QUESTION_SCREEN_SESSION = {
         },
         {
           "id": "m4-foto-consequencias",
-          "type": "image",
+          "type": "content",
           "kicker": "📷 Foto",
           "title": "O Que Está em Jogo: Consequências de um Incêndio ou Explosão de Gás",
-          "body": "Reforço visual de impacto (banco de imagens / fotojornalismo). Mostrar danos estruturais de forma respeitosa — sem vítimas nem conteúdo gráfico.",
-          "icon": "🏚️",
-          "image": "assets/fotos/m4-p1.png",
-          "imageAlt": "Placeholder — substituir por foto de consequencias (banco de imagens)",
-          "imageFit": "contain",
+          "cardAspect": "landscape",
+          "cards": [
+            {
+              "image": "assets/fotos/consequencias1.png",
+              "imageAlt": "Consequências de incêndio ou explosão — imagem 1"
+            },
+            {
+              "image": "assets/fotos/consequencias2.png",
+              "imageAlt": "Consequências de incêndio ou explosão — imagem 2"
+            }
+          ],
           "transcript": "Foto: consequências de um incêndio ou explosão de gás."
         },
         {
           "id": "m4-foto-rotas",
           "type": "image",
+          "layout": "stack",
           "kicker": "📷 Foto",
-          "title": "Sinalização das Rotas de Fuga no Escritório FEMSA",
-          "body": "Fotografar no próprio prédio: placas verdes, planta de rota de fuga, sinalização luminosa e ponto de encontro.",
-          "icon": "🚪",
-          "image": "assets/fotos/capa.png",
-          "imageAlt": "Placeholder — substituir por fotos das rotas de fuga FEMSA",
+          "title": "Sinalização das Rotas de Fuga no Escritório",
+          "image": "assets/fotos/m4-sinalizacao1.png",
+          "imageAlt": "Sinalização de rota de fuga — imagem 1",
           "imageFit": "contain",
-          "bullets": [
-            "Placas verdes de rota de fuga nos corredores",
-            "Planta de rota de fuga perto de elevadores/escadas",
-            "Sinalização luminosa acima das saídas",
-            "Ponto de encontro externo (se houver placa)"
-          ],
-          "transcript": "Foto: sinalização das rotas de fuga no escritório FEMSA."
+          "transcript": "Foto: sinalização das rotas de fuga no escritório."
+        },
+        {
+          "id": "m4-foto-rotas-2",
+          "type": "image",
+          "layout": "stack",
+          "kicker": "📷 Foto",
+          "title": "Sinalização das Rotas de Fuga no Escritório",
+          "image": "assets/fotos/m4-sinalizacao.png",
+          "imageAlt": "Sinalização de rota de fuga — imagem 2",
+          "imageFit": "contain",
+          "transcript": "Foto: sinalização das rotas de fuga — imagem 2."
         },
         {
           "id": "m4-riscos",
           "type": "content",
           "kicker": "📄 Texto",
           "title": "Riscos Específicos da Edificação",
+          "cardAspect": "square",
           "cards": [
             {
-              "icon": "🏗️",
               "title": "Estruturais",
-              "body": "Materiais inflamáveis, pé-direito baixo, ausência de rotas de fuga."
+              "body": "Materiais inflamáveis, pé-direito baixo, ausência de rotas de fuga.",
+              "image": "assets/fotos/m4-estrutural.png",
+              "imageAlt": "Riscos estruturais"
             },
             {
-              "icon": "⚙️",
               "title": "Operacionais",
-              "body": "Máquinas quentes, eletricidade, soldas, combustíveis."
-            },
+              "body": "Máquinas quentes, eletricidade, soldas, combustíveis.",
+              "image": "assets/fotos/m4-operacionais.png",
+              "imageAlt": "Riscos operacionais"
+            }
+          ],
+          "transcript": "Riscos estruturais e operacionais."
+        },
+        {
+          "id": "m4-riscos-2",
+          "type": "content",
+          "kicker": "📄 Texto",
+          "title": "Riscos Específicos da Edificação",
+          "cardAspect": "square",
+          "cards": [
             {
-              "icon": "🌡️",
               "title": "Ambientais",
-              "body": "Calor, ventilação inadequada, poeiras combustíveis."
+              "body": "Calor, ventilação inadequada, poeiras combustíveis.",
+              "image": "assets/fotos/m4-ambientais.png",
+              "imageAlt": "Riscos ambientais"
             },
             {
-              "icon": "🧑",
               "title": "Humanos",
-              "body": "Falta de treinamento, negligência, uso incorreto de EPIs."
+              "body": "Falta de treinamento, negligência, uso incorreto de EPIs.",
+              "image": "assets/fotos/m4-humanos.png",
+              "imageAlt": "Riscos humanos"
             }
           ],
-          "rules": [
+          "transcript": "Riscos ambientais e humanos."
+        },
+        {
+          "id": "m4-prevenir-brigada",
+          "type": "content",
+          "kicker": "📄 Texto",
+          "title": "Prevenir e o Papel da Brigada",
+          "skin": "actions",
+          "cards": [
             {
-              "text": "Prevenir: mapear setores de risco, inspeções periódicas, armazenar inflamáveis corretamente, manter elétrica em dia, conhecer extintores/hidrantes/saídas, treinar e simular evacuação."
+              "icon": "🛡️",
+              "tone": "prevent",
+              "title": "Prevenir",
+              "lead": "Antes do fogo começar",
+              "points": [
+                { "icon": "🗺️", "text": "Mapear setores de risco" },
+                { "icon": "🔍", "text": "Fazer inspeções periódicas" },
+                { "icon": "🛢️", "text": "Armazenar inflamáveis corretamente" },
+                { "icon": "⚡", "text": "Manter a elétrica em dia" },
+                { "icon": "🧯", "text": "Conhecer extintores, hidrantes e saídas" },
+                { "icon": "🏃", "text": "Treinar e simular evacuação" }
+              ]
             },
             {
-              "text": "Papel do brigadista: agir primeiro, identificar causas potenciais, inspecionar áreas e equipamentos, monitorar normas e comunicar irregularidades ao superior."
+              "icon": "👷",
+              "tone": "role",
+              "title": "Papel do brigadista",
+              "lead": "Quando a emergência chega",
+              "points": [
+                { "icon": "🚨", "text": "Agir primeiro, com segurança" },
+                { "icon": "🔎", "text": "Identificar causas potenciais" },
+                { "icon": "🛠️", "text": "Inspecionar áreas e equipamentos" },
+                { "icon": "📋", "text": "Monitorar o cumprimento das normas" },
+                { "icon": "📢", "text": "Comunicar irregularidades ao superior" }
+              ]
             }
           ],
-          "transcript": "Tipos de risco da edificação e papel do brigadista."
+          "transcript": "Prevenir riscos e o papel do brigadista."
         },
         {
           "id": "m4-cmp-fios",

@@ -6,7 +6,7 @@
   <meta name="referrer" content="no-referrer">
   <title>NR 23 — Brigada de Incêndio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="question-screen.css?v=mob49">
+  <link rel="stylesheet" href="question-screen.css?v=mob78">
   <link rel="stylesheet" href="capa-animada.css?v=3">
   <link rel="stylesheet" href="fundo-novo.css?v=1">
   <link rel="stylesheet" href="menu-compacto.css?v=1">
@@ -150,8 +150,8 @@
 
   <audio id="bg-music" loop preload="metadata" aria-hidden="true"></audio>
 
-  <script src="question-screen-data.js?v=mob59"></script>
-  <script src="question-screen.js?v=mob54"></script>
+  <script src="question-screen-data.js?v=mob79"></script>
+  <script src="question-screen.js?v=mob66"></script>
   <script src="capa-animada.js?v=2"></script>
   <script src="narration-text.js?v=mob40"></script>
   <script src="narration.js?v=mob40"></script>
@@ -374,14 +374,63 @@
     }
   }
 
-  /* O progresso vive só na memória: os módulos vão se liberando durante a
-     visita, mas recarregar a página recomeça da abertura. A linha abaixo
-     limpa o que as versões anteriores tinham deixado salvo no navegador. */
+  /* Progresso e posição da página: salvos no navegador para o F5 não
+     jogar de volta na abertura enquanto se revisa o conteúdo. */
+  var RESUME_KEY = 'nr23-sessao-aprender-resume';
   var progress = { unlockedUpTo: 0, completed: {} };
-  try { localStorage.removeItem('nr17-sessao-aprender-resume'); } catch (err) {}
+
+  function saveResume() {
+    try {
+      var s = (mode === 'play') ? current() : null;
+      localStorage.setItem(RESUME_KEY, JSON.stringify({
+        v: 1,
+        mode: mode,
+        modIndex: modIndex,
+        slideIndex: slideIndex,
+        screenId: s && s.id ? s.id : null,
+        progress: progress,
+        demoMode: !!demoMode
+      }));
+    } catch (err) {}
+  }
+
+  function readResume() {
+    try {
+      var raw = localStorage.getItem(RESUME_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function findScreenById(id) {
+    if (!id) return null;
+    for (var mi = 0; mi < modules.length; mi++) {
+      var list = modules[mi].screens || [];
+      for (var si = 0; si < list.length; si++) {
+        if (list[si] && list[si].id === id) return { mi: mi, si: si };
+      }
+    }
+    return null;
+  }
+
+  function markSeenUpTo(mi, si) {
+    var list = (modules[mi] && modules[mi].screens) || [];
+    for (var i = 0; i <= si && i < list.length; i++) {
+      if (list[i] && list[i].id) answered[list[i].id] = true;
+    }
+  }
 
   var demoMode = false;
   try { demoMode = sessionStorage.getItem('nr17-demoMode') === '1'; } catch (err) {}
+  var savedBoot = readResume();
+  if (savedBoot) {
+    if (savedBoot.progress && typeof savedBoot.progress === 'object') {
+      progress.unlockedUpTo = Math.max(0, Number(savedBoot.progress.unlockedUpTo) || 0);
+      progress.completed = savedBoot.progress.completed || {};
+    }
+    if (savedBoot.demoMode) demoMode = true;
+  }
 
   function isUnlocked(i) {
     if (demoMode) return true;
@@ -477,6 +526,7 @@
     setChrome(false);
     renderProgress();
     syncJumpUI();
+    saveResume();
     if (window.Narration) Narration.pageChanged();
   }
 
@@ -723,6 +773,7 @@
     updateNav();
     syncJumpUI();
     revelarModuloLiberado();
+    saveResume();
     if (window.Narration) Narration.pageChanged();
   }
 
@@ -1038,6 +1089,7 @@
     updateNav();
     updatePtsChip();
     syncJumpUI();
+    saveResume();
     if (window.Narration) Narration.pageChanged();
   }
 
@@ -1210,6 +1262,7 @@
     applyDemoUI();
     showSimToast(demoMode ? '🔓 Modo Simulação ATIVADO' : '🔒 Modo Simulação DESATIVADO');
     setJumpOpen(demoMode);
+    saveResume();
     if (mode === 'menu') showMenu();
   }
 
@@ -1360,7 +1413,33 @@
     }
   });
 
-  showHome();
+  function bootFromResume() {
+    var saved = savedBoot || readResume();
+    if (!saved || !saved.mode) {
+      showHome();
+      return;
+    }
+    if (saved.mode === 'menu') {
+      showMenu();
+      return;
+    }
+    if (saved.mode === 'play') {
+      var where = findScreenById(saved.screenId);
+      var mi = where ? where.mi : Number(saved.modIndex);
+      var si = where ? where.si : Number(saved.slideIndex);
+      if (!modules[mi] || !modules[mi].screens || !modules[mi].screens[si]) {
+        showHome();
+        return;
+      }
+      progress.unlockedUpTo = Math.max(progress.unlockedUpTo, mi);
+      markSeenUpTo(mi, si);
+      jumpToScreen(mi, si);
+      return;
+    }
+    showHome();
+  }
+
+  bootFromResume();
 })();
   </script>
 </body>
