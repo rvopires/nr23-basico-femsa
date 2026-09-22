@@ -793,17 +793,21 @@ window.QUESTION_SCREEN_SESSION = {
           "id": "m4-cmp-tomadas",
           "type": "compare",
           "title": "Certo × errado: tomadas",
-          "body": "Toque nos dois lados para ver a diferença.",
+          "open": true,
           "compare": [
             {
-              "ok": false,
-              "label": "✕ Vários aparelhos num plugue em T",
-              "text": "Sobrecarrega a tomada, que esquenta e pode causar curto-circuito. Não sobrecarregue as tomadas usando plugues em T."
+              "ok": true,
+              "label": "✓ Correto",
+              "image": "assets/fotos/certop41.png",
+              "imageAlt": "Cada aparelho na sua tomada",
+              "text": "Cada aparelho na sua tomada. Ao fim do expediente, desligue o que não está em uso."
             },
             {
-              "ok": true,
-              "label": "✓ Cada aparelho na sua tomada",
-              "text": "Distribuir os aparelhos evita a sobrecarga. E ao fim do expediente, desligue da tomada o que não está em uso."
+              "ok": false,
+              "label": "✕ Evitar",
+              "image": "assets/fotos/erradop41.png",
+              "imageAlt": "Vários aparelhos num plugue em T",
+              "text": "Vários aparelhos num plugue em T sobrecarregam a tomada e podem causar curto-circuito."
             }
           ],
           "transcript": "Certo ou errado: tomadas."
@@ -812,17 +816,21 @@ window.QUESTION_SCREEN_SESSION = {
           "id": "m4-cmp-gas",
           "type": "compare",
           "title": "Certo × errado: cheiro de gás",
-          "body": "Toque nos dois lados para ver a diferença.",
+          "open": true,
           "compare": [
             {
-              "ok": false,
-              "label": "✕ Acender um fósforo para achar o vazamento",
-              "text": "A faísca pode ser suficiente para provocar uma explosão. Não ligue nem desligue interruptores e não acenda fósforo ou isqueiro."
+              "ok": true,
+              "label": "✓ Correto",
+              "image": "assets/fotos/certop42.png",
+              "imageAlt": "Abrir janelas e portas para ventilar",
+              "text": "Abra janelas e portas para ventilar, sem acionar nenhum interruptor."
             },
             {
-              "ok": true,
-              "label": "✓ Abrir janelas e portas para ventilar",
-              "text": "Abra todas as janelas e portas para ventilar o ambiente, sem acionar nenhum interruptor."
+              "ok": false,
+              "label": "✕ Evitar",
+              "image": "assets/fotos/erradop42.png",
+              "imageAlt": "Acender um fósforo para achar o vazamento",
+              "text": "Não acenda fósforo nem mexa em interruptores — a faísca pode provocar explosão."
             }
           ],
           "transcript": "Certo ou errado: cheiro de gás."
