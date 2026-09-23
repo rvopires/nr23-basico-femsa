@@ -6,7 +6,7 @@
   <meta name="referrer" content="no-referrer">
   <title>NR 23 — Brigada de Incêndio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="question-screen.css?v=cmpnr17b">
+  <link rel="stylesheet" href="question-screen.css?v=ficha48">
   <link rel="stylesheet" href="capa-animada.css?v=3">
   <link rel="stylesheet" href="fundo-novo.css?v=1">
   <link rel="stylesheet" href="menu-compacto.css?v=1">
@@ -150,8 +150,8 @@
 
   <audio id="bg-music" loop preload="metadata" aria-hidden="true"></audio>
 
-  <script src="question-screen-data.js?v=cmp42"></script>
-  <script src="question-screen.js?v=cmpnr17b"></script>
+  <script src="question-screen-data.js?v=ficha48"></script>
+  <script src="question-screen.js?v=ficha49"></script>
   <script src="capa-animada.js?v=2"></script>
   <script src="narration-text.js?v=mob40"></script>
   <script src="narration.js?v=mob40"></script>
@@ -227,9 +227,9 @@
   function isGateType(type) {
     return isScoreType(type) || type === 'reflect' || type === 'compare';
   }
-  // ficha com sequência de fotos: a seta só libera depois de ver todas
+  // ficha com sequência de fotos / cartões: a seta só libera depois de ver todas
   function isStepsGate(s) {
-    return !!(s && s.type === 'content' && s.steps);
+    return !!(s && s.type === 'content' && (s.steps || s.skin === 'ficha'));
   }
   // vídeo com player: só libera o avanço faltando ~8s para o fim
   function isVideoGate(s) {

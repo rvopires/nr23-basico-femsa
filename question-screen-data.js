@@ -1251,45 +1251,65 @@ window.QUESTION_SCREEN_SESSION = {
           "id": "m6-ficha",
           "type": "content",
           "kicker": "📄 Texto",
+          "steps": true,
+          "stepUnit": "Emergência",
+          "stepNext": "Próxima emergência",
+          "stepFinish": "Concluir ficha",
           "title": "Ficha Rápida: O Que Fazer em Cada Emergência",
           "items": [
             {
+              "n": 1,
               "icon": "🔥",
-              "title": "Queimaduras:",
-              "text": "abafar/rolar; químico → água; cobrir úmido; socorro. Nunca furar bolhas, pomada ou puxar roupa grudada."
+              "title": "Queimaduras",
+              "text": "Abafar/rolar; químico → água; cobrir úmido; socorro.",
+              "warn": "Nunca furar bolhas, usar pomada ou puxar roupa grudada.",
+              "tone": "e1"
             },
             {
+              "n": 2,
               "icon": "⚡",
-              "title": "Choque elétrico:",
-              "text": "desligar energia primeiro; respiração/pulso; cobrir; SAMU."
+              "title": "Choque elétrico",
+              "text": "Desligar energia primeiro; checar respiração/pulso; cobrir; SAMU.",
+              "tone": "e2"
             },
             {
+              "n": 3,
               "icon": "🩸",
-              "title": "Hemorragia:",
-              "text": "curativo compressivo; chamar socorro."
+              "title": "Hemorragia",
+              "text": "Curativo compressivo; chamar socorro.",
+              "tone": "e3"
             },
             {
+              "n": 4,
               "icon": "😵",
-              "title": "Desmaio:",
-              "text": "arejado; deitar com pernas elevadas; afrouxar roupas."
+              "title": "Desmaio",
+              "text": "Local arejado; deitar com pernas elevadas; afrouxar roupas.",
+              "tone": "e4"
             },
             {
+              "n": 5,
               "icon": "🫁",
-              "title": "Engasgo adulto:",
-              "text": "tosse → Heimlich → SAMU → RCP se necessário."
+              "title": "Engasgo adulto",
+              "text": "Tosse → Heimlich → SAMU → RCP se necessário.",
+              "tone": "e5"
             },
             {
+              "n": 6,
               "icon": "👶",
-              "title": "Engasgo bebê:",
-              "text": "bruços no antebraço + palmadas nas costas → SAMU → RCP se necessário."
+              "title": "Engasgo bebê",
+              "text": "Bruços no antebraço + palmadas nas costas → SAMU → RCP se necessário.",
+              "tone": "e6"
             },
             {
+              "n": 7,
               "icon": "🧠",
-              "title": "Convulsão:",
-              "text": "proteger cabeça; afastar objetos; pano entre dentes; nunca medicação/líquido; nunca deixar sozinha."
+              "title": "Convulsão",
+              "text": "Proteger a cabeça; afastar objetos; pano entre os dentes.",
+              "warn": "Nunca medicação/líquido; nunca deixar sozinha.",
+              "tone": "e7"
             }
           ],
-          "transcript": "Ficha rápida de conduta em cada emergência."
+          "transcript": "Ficha rápida de conduta em cada emergência. Avance emergência por emergência."
         },
         {
           "id": "m6-quiz-intro",

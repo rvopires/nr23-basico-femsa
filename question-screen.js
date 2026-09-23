@@ -347,7 +347,7 @@
   function finaleHTML(data) {
     var chips = Array.isArray(data.chips) ? data.chips : [];
     var photo = data.image
-      ? zoomWrap(data.image, `<img class="qs-finale-photo" src="${esc(data.image)}" alt="" aria-hidden="true">`)
+      ? `<img class="qs-finale-photo" src="${esc(data.image)}" alt="" aria-hidden="true">`
       : '';
     var chipHtml = chips.map(function (c) {
       return `<span class="qs-finale-chip">${esc(c)}</span>`;
@@ -457,8 +457,18 @@
         }
 
         var mark = it.icon ? `<span class="qs-item-ico" aria-hidden="true">${esc(it.icon)}</span>` : '';
-        var title = it.title ? `<b>${esc(it.title)}</b> ` : '';
-        return `<div class="qs-item">${mark}<p>${title}${esc(raw)}</p></div>`;
+        var warn = it.warn ? `<span class="qs-item-warn">${esc(it.warn)}</span>` : '';
+        if (it.title) {
+          return `<div class="qs-item has-title${it.icon ? ' has-ico' : ''}">
+            ${mark}
+            <div class="qs-item-txt">
+              <b class="qs-item-title">${esc(String(it.title).replace(/:\s*$/, ''))}</b>
+              <p>${esc(raw)}</p>
+              ${warn}
+            </div>
+          </div>`;
+        }
+        return `<div class="qs-item">${mark}<p>${esc(raw)}</p>${warn}</div>`;
       }).join('')}</div>`;
     }
     if (Array.isArray(data.compare) && data.compare.length) {
@@ -524,6 +534,9 @@
     if (data.steps && Array.isArray(data.items) && data.items.length) {
       return stepsHTML(data);
     }
+    if (data.skin === 'ficha' && Array.isArray(data.items) && data.items.length) {
+      return fichaHTML(data);
+    }
 
     var head = `<h2 class="qs-title">${esc(data.title || '')}</h2>
           ${contentBlocks(data)}`;
@@ -552,6 +565,32 @@
       </article>`;
   }
 
+  function fichaHTML(data) {
+    var items = Array.isArray(data.items) ? data.items : [];
+    var list = items.map(function (it, i) {
+      var title = String(it.title || '').replace(/:\s*$/, '');
+      var text = it.text || it.body || '';
+      var warn = it.warn
+        ? `<span class="qs-ficha-warn">${esc(it.warn)}</span>`
+        : '';
+      return `<article class="qs-ficha-item" data-qs-ficha="${i}">
+        <span class="qs-ficha-ico" aria-hidden="true">${esc(it.icon || '•')}</span>
+        <div class="qs-ficha-body">
+          <b class="qs-ficha-title">${esc(title)}</b>
+          <p class="qs-ficha-text">${esc(text)}</p>
+          ${warn}
+        </div>
+      </article>`;
+    }).join('');
+    return `
+      <article class="qs-screen is-content is-text is-ficha" data-qs-root data-type="content" data-ficha="1">
+        <div class="qs-panel qs-panel-text">
+          <h2 class="qs-title">${esc(data.title || '')}</h2>
+          <div class="qs-ficha-list">${list}</div>
+        </div>
+      </article>`;
+  }
+
   function stepsHTML(data) {
     var items = data.items || [];
     var unit = data.stepUnit || 'Exercício';
@@ -559,6 +598,7 @@
     var photoOnly = items.every(function (it) {
       return !!(it.image && !(it.title || it.text || it.body));
     });
+    var textOnly = items.every(function (it) { return !it.image; });
     var slides = items.map(function (it, i) {
       var raw = it.text || it.body || '';
       var d = splitDose(raw);
@@ -567,6 +607,7 @@
         return `<span class="qs-dose ${rep ? 'is-rep' : 'is-time'}">${esc(t)}</span>`;
       }).join('');
       var num = it.n != null ? it.n : (i + 1);
+      var warn = it.warn || (d && d.caveat) || '';
       var hasInfo = !!(it.title || raw);
       var info = hasInfo
         ? `<div class="qs-step-info">
@@ -576,21 +617,24 @@
             ${doses ? `<span class="qs-doses">${doses}</span>` : ''}
           </div>
           <p class="qs-step-move">${esc(d ? d.move : raw)}</p>
-          ${d && d.caveat ? `<span class="qs-item-warn">${esc(d.caveat)}</span>` : ''}
+          ${warn ? `<span class="qs-item-warn">${esc(warn)}</span>` : ''}
         </div>`
         : '';
-      return `<div class="qs-step${i === 0 ? ' is-on' : ''}${photoOnly ? ' is-photo' : ''}" data-qs-step="${i}"${i === 0 ? '' : ' hidden'}>
-        <div class="qs-step-media">
-          ${it.image
-            ? zoomWrap(it.image, `<img class="qs-step-img" src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">`)
-            : `<div class="qs-step-fallback">${esc(num)}</div>`}
-        </div>
+      var mediaInner = it.image
+        ? zoomWrap(it.image, `<img class="qs-step-img" src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">`)
+        : (it.icon
+          ? `<div class="qs-step-fallback is-icon"><span aria-hidden="true">${esc(it.icon)}</span></div>`
+          : `<div class="qs-step-fallback">${esc(num)}</div>`);
+      var tone = it.tone || (textOnly ? ('e' + ((i % 7) + 1)) : '');
+      var toneClass = tone ? ' tone-' + esc(tone) : '';
+      return `<div class="qs-step${i === 0 ? ' is-on' : ''}${photoOnly ? ' is-photo' : ''}${textOnly ? ' is-text' : ''}${toneClass}" data-qs-step="${i}"${i === 0 ? '' : ' hidden'}>
+        <div class="qs-step-media">${mediaInner}</div>
         ${info}
       </div>`;
     }).join('');
 
     return `
-      <article class="qs-screen is-content is-steps${photoOnly ? ' is-photo-steps' : ''}" data-qs-root data-type="content">
+      <article class="qs-screen is-content is-steps${photoOnly ? ' is-photo-steps' : ''}${textOnly ? ' is-text-steps' : ''}" data-qs-root data-type="content">
         <div class="qs-steps" data-qs-steps data-step-unit="${esc(unit)}" data-step-next="${esc(nextLbl)}" data-step-finish="${esc(data.stepFinish || 'Concluir sequência')}">
           <header class="qs-steps-top">
             <h2 class="qs-title">${esc(data.title || '')}</h2>
@@ -932,7 +976,8 @@
     ensureLightbox();
 
     var lockedVideo = type === 'video' && !!(this.data.embed || this.data.panda || this.data.video);
-    var gated = type === 'question' || type === 'order' || type === 'match' || type === 'rhythm' || type === 'reflect' || type === 'compare' || lockedVideo || (type === 'content' && !!(this.data && this.data.steps));
+    var fichaGate = type === 'content' && this.data && this.data.skin === 'ficha';
+    var gated = type === 'question' || type === 'order' || type === 'match' || type === 'rhythm' || type === 'reflect' || type === 'compare' || lockedVideo || (type === 'content' && !!(this.data && this.data.steps)) || fichaGate;
     if (!gated) this.state.answered = true;
 
     if (type === 'video' && (this.data.embed || this.data.panda || this.data.youtube || this.data.video)) {
@@ -944,6 +989,7 @@
     if (type === 'match') this._bindMatch();
     if (type === 'rhythm') this._bindRhythm();
     if (type === 'content' && this.data && this.data.steps) this._bindSteps();
+    if (fichaGate) this._bindFicha();
 
     if ((type === 'question' || type === 'order') && this.options.quizScoring) {
       if (this.root) this.root.classList.add('is-timed');
@@ -1299,6 +1345,10 @@
         }
       });
     });
+  };
+
+  QuestionScreen.prototype._bindFicha = function () {
+    this._complete({ kind: 'ficha' });
   };
 
   QuestionScreen.prototype._bindSteps = function () {
