@@ -276,7 +276,8 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 2 — O Fogo: Teoria e Métodos de Extinção",
           "subtitle": "Tetraedro do fogo e os três métodos: abafamento, resfriamento e retirada do material.",
           "transcript": "Módulo 2: O Fogo — teoria e métodos de extinção.",
-          "image": "assets/fotos/m2-capa.png"
+          "image": "assets/fotos/m2-capa.png",
+          "imagePosition": "70% 78%"
         },
         {
           "id": "m2-v-oque",
@@ -402,7 +403,7 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 3 — Classes de Incêndio e Extintores",
           "subtitle": "Classes A, B, C e D e como operar água, PQS e CO₂.",
           "transcript": "Módulo 3: Classes de Incêndio e Extintores.",
-          "image": "assets/fotos/m3-p1.png"
+          "image": "assets/fotos/capa-modulo3.png"
         },
         {
           "id": "m3-v-classes",
@@ -621,7 +622,7 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 4 — Prevenção, Riscos e Ação em Emergência",
           "subtitle": "Hábitos de prevenção, primeiros segundos, rotas de fuga e riscos da edificação.",
           "transcript": "Módulo 4: Prevenção, riscos da edificação e ação em emergência.",
-          "image": "assets/fotos/m4-p1.png"
+          "image": "assets/fotos/capa-modulo4.png"
         },
         {
           "id": "m4-v-prevenir",
@@ -971,7 +972,7 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 5 — Psicologia em Emergências",
           "subtitle": "Comportamento humano, reações ao perigo e liderança do brigadista.",
           "transcript": "Módulo 5: Psicologia em Emergências.",
-          "image": "assets/fotos/m5-p1.png"
+          "image": "assets/fotos/capa-modulo5.png"
         },
         {
           "id": "m5-v-porque",
@@ -1190,7 +1191,7 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 6 — Primeiros Socorros",
           "subtitle": "Queimaduras, choque, hemorragia, desmaio, engasgo e convulsão.",
           "transcript": "Módulo 6: Primeiros Socorros — traumas e emergências clínicas.",
-          "image": "assets/fotos/capa.png"
+          "image": "assets/fotos/capa-modulo6.png"
         },
         {
           "id": "m6-v-intro",
@@ -1405,7 +1406,7 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 7 — RCP, Infarto e Encerramento",
           "subtitle": "AVC, infarto, passo a passo da RCP, números de emergência e certificado.",
           "transcript": "Módulo 7: RCP, infarto e encerramento.",
-          "image": "assets/fotos/capafinal.png"
+          "image": "assets/fotos/capa-modulo7.png"
         },
         {
           "id": "m7-v-avc-infarto",
