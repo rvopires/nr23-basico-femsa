@@ -6,11 +6,11 @@
   <meta name="referrer" content="no-referrer">
   <title>NR 23 — Brigada de Incêndio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="question-screen.css?v=ficha48">
+  <link rel="stylesheet" href="question-screen.css?v=reflect">
   <link rel="stylesheet" href="capa-animada.css?v=12">
   <link rel="stylesheet" href="fundo-novo.css?v=1">
   <link rel="stylesheet" href="menu-compacto.css?v=1">
-  <link rel="stylesheet" href="atividades.css?v=7">
+  <link rel="stylesheet" href="atividades.css?v=8">
   <style>
     html, body { margin: 0; height: 100%; overflow: hidden; }
   </style>
@@ -150,8 +150,8 @@
 
   <audio id="bg-music" loop preload="metadata" aria-hidden="true"></audio>
 
-  <script src="question-screen-data.js?v=m7capa"></script>
-  <script src="question-screen.js?v=ficha49"></script>
+  <script src="question-screen-data.js?v=reflect"></script>
+  <script src="question-screen.js?v=semLupa"></script>
   <script src="capa-animada.js?v=10"></script>
   <script src="narration-text.js?v=mob40"></script>
   <script src="narration.js?v=mob40"></script>
@@ -557,7 +557,7 @@
   }
 
   function canForward() {
-    if (isFinale()) return false;
+    if (isFinale()) return modIndex + 1 < modules.length;
     if (showingResult) return !!quizState.passed;
     var s = current();
     if (!s) return false;
@@ -686,6 +686,8 @@
     while (next < list.length && isScoreType(list[next].type)) next++;
     if (next >= list.length) {
       completeCurrentModule();
+      var nextMod = modIndex + 1;
+      if (nextMod < modules.length) { openModule(nextMod); return; }
       showMenu();
       return;
     }
@@ -721,6 +723,8 @@
     if (slideIndex >= screens().length - 1) {
       completeCurrentModule();
       if (isFinale()) {
+        var nextMod = modIndex + 1;
+        if (nextMod < modules.length) { openModule(nextMod); return; }
         updateNav();
         return;
       }

@@ -9,7 +9,7 @@
  *  - quiz-intro: { type, title, body?, count?, minCorrect?, image? }
  *  - quiz-result: { type, passed, score, total, minCorrect, title?, titleUnlock? }
  *  - finale:   { type, title?, body?, eyebrow?, chips?, image?, kicker? }
- *  - reflect:  { type, prompt, answer, choices?[{icon,text}] }
+ *  - reflect:  { type, prompt, answer, choices?[{icon,text,correct?}] }
  *  - compare:  { type, compare:[{ok,label,text}] }
  *  - order:    { type, items:[{key,text,rank}], time? }
  *  - match:    { type, pairs:[{ex,body}] }
@@ -774,8 +774,10 @@
     return `
       <article class="qs-screen is-content is-text is-rhythm" data-qs-root data-type="rhythm">
         <div class="qs-panel qs-panel-text">
-          <h2 class="qs-title">${esc(data.title || 'Ritmo')}</h2>
-          ${data.body ? `<p class="qs-body">${esc(data.body)}</p>` : ''}
+          <header class="qs-rhythm-head">
+            <h2 class="qs-title">${esc(data.title || 'Ritmo')}</h2>
+            ${data.body ? `<p class="qs-body">${esc(data.body)}</p>` : ''}
+          </header>
           <div class="qs-rhythm" data-qs-r-phase="guide">
             <p class="qs-rhythm-status" data-qs-r-status role="status" aria-live="polite"></p>
             <div class="qs-rhythm-stage">
@@ -785,17 +787,19 @@
                 <span class="qs-rhythm-btn-txt">Comprimir</span>
               </button>
             </div>
-            <div class="qs-rhythm-gauge" aria-hidden="true">
-              <span class="qs-rhythm-zone" style="left:${pct(min)}%;width:${pct(max) - pct(min)}%"></span>
-              <span class="qs-rhythm-marker" data-qs-r-marker hidden></span>
-            </div>
-            <div class="qs-rhythm-scale" aria-hidden="true">
-              <span style="left:${pct(min)}%">${min}</span>
-              <span style="left:${pct(max)}%">${max}</span>
-            </div>
-            <div class="qs-rhythm-hud">
-              <span data-qs-r-bpm>— por minuto</span>
-              <span data-qs-r-count>0 de ${taps} toques</span>
+            <div class="qs-rhythm-meter">
+              <div class="qs-rhythm-gauge" aria-hidden="true">
+                <span class="qs-rhythm-zone" style="left:${pct(min)}%;width:${pct(max) - pct(min)}%"></span>
+                <span class="qs-rhythm-marker" data-qs-r-marker hidden></span>
+              </div>
+              <div class="qs-rhythm-scale" aria-hidden="true">
+                <span style="left:${pct(min)}%">${min}</span>
+                <span style="left:${pct(max)}%">${max}</span>
+              </div>
+              <div class="qs-rhythm-hud">
+                <span data-qs-r-bpm>— por minuto</span>
+                <span data-qs-r-count>0 de ${taps} toques</span>
+              </div>
             </div>
             <div class="qs-rhythm-actions">
               <button type="button" class="qs-rhythm-act" data-qs-r-go>Já peguei o ritmo</button>
@@ -843,8 +847,11 @@
       ? ('Você acertou <strong>' + hits + '</strong> de <strong>' + total + '</strong> questões.')
       : ('Você acertou <strong>' + hits + '</strong> de <strong>' + total + '</strong>. É necessário acertar pelo menos <strong>' + min + '</strong>. Estude e tente novamente.'));
     var actions = passed
-      ? `<button type="button" class="qs-quiz-intro-btn" data-qs-finish>Continuar</button>`
+      ? ''
       : `<button type="button" class="qs-quiz-intro-btn" data-qs-retry>Jogar novamente</button>`;
+    var actionsBlock = actions
+      ? `<div class="qs-quiz-result-actions">${actions}</div>`
+      : '';
 
     // reprovado: mostra os temas das questões erradas (sem entregar as respostas)
     var topics = (!passed && Array.isArray(data.review)) ? data.review.filter(Boolean) : [];
@@ -877,7 +884,7 @@
           <h2 class="qs-title-earned-name">${esc(unlock.title)}</h2>
           ${unlock.body ? `<p class="qs-title-earned-body">${esc(unlock.body)}</p>` : ''}
           ${scoreBar}
-          <div class="qs-quiz-result-actions">${actions}</div>
+          ${actionsBlock}
         </div>
       </article>`;
     }
@@ -893,7 +900,7 @@
           ${scoreBar}
           <p class="qs-quiz-result-desc">${desc}</p>
           ${reviewBlock}
-          <div class="qs-quiz-result-actions">${actions}</div>
+          ${actionsBlock}
         </div>
       </article>`;
   }
@@ -915,7 +922,7 @@
       <article class="qs-screen is-question" data-qs-root data-type="question"${variant ? ` data-variant="${esc(variant)}"` : ''}>
         <div class="qs-timer" aria-hidden="true"><i data-qs-timer></i></div>
         <div class="qs-media qs-media-hero">
-          ${mediaHTML(data)}
+          ${mediaHTML(data, { noZoom: true })}
           <div class="qs-result-banner" data-qs-result role="status" aria-live="polite" hidden>
             <span data-qs-result-text></span>
           </div>
@@ -1295,29 +1302,59 @@
     var root = this.el;
     var card = root.querySelector('.qs-reflect');
     var answer = root.querySelector('[data-qs-answer]');
-    function reveal(btn) {
-      beep('click');
-      if (btn) btn.classList.add('is-chosen');
-      if (card) card.classList.add('is-revealed');
-      if (answer) {
-        answer.hidden = false;
-        answer.classList.add('show');
+    var choices = Array.isArray(this.data.choices) ? this.data.choices : [];
+    var hasCorrect = choices.some(function (c) { return !!c.correct; });
+
+    function reveal(btn, ok) {
+      if (btn) {
+        btn.classList.add(ok ? 'is-correct' : 'is-wrong');
+        btn.classList.add('is-chosen');
       }
-      var tap = root.querySelector('[data-qs-reveal]');
-      if (tap) tap.hidden = true;
-      if (!self.state.answered) {
-        beep('ok');
-        self._complete({ kind: 'reflect' });
+      if (ok) {
+        if (card) card.classList.add('is-revealed');
+        if (answer) {
+          answer.hidden = false;
+          answer.classList.add('show');
+        }
+        var tap = root.querySelector('[data-qs-reveal]');
+        if (tap) tap.hidden = true;
+        root.querySelectorAll('[data-qs-choice]').forEach(function (b) {
+          b.disabled = true;
+          var idx = Number(b.getAttribute('data-qs-choice'));
+          if (choices[idx] && choices[idx].correct) b.classList.add('is-correct');
+        });
+        if (!self.state.answered) {
+          beep('ok');
+          self._complete({ kind: 'reflect', correct: true });
+        }
+      } else {
+        beep('nok');
+        window.setTimeout(function () {
+          if (btn) {
+            btn.classList.remove('is-wrong', 'is-chosen');
+            btn.disabled = false;
+          }
+        }, 700);
       }
     }
+
     root.querySelectorAll('[data-qs-choice]').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        root.querySelectorAll('[data-qs-choice]').forEach(function (b) { b.classList.remove('is-chosen'); });
-        reveal(btn);
+        if (self.state.answered || btn.disabled) return;
+        var idx = Number(btn.getAttribute('data-qs-choice'));
+        var ok = hasCorrect ? !!(choices[idx] && choices[idx].correct) : true;
+        beep('click');
+        reveal(btn, ok);
       });
     });
     var tap = root.querySelector('[data-qs-reveal]');
-    if (tap) tap.addEventListener('click', function () { reveal(tap); });
+    if (tap) {
+      tap.addEventListener('click', function () {
+        if (self.state.answered) return;
+        beep('click');
+        reveal(tap, true);
+      });
+    }
   };
 
   QuestionScreen.prototype._bindCompare = function () {

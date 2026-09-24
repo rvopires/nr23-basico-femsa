@@ -4154,6 +4154,23 @@ html.qs-lightbox-open body {
   color: #fff;
   border-color: transparent;
 }
+.qs-reflect-choice.is-correct {
+  background: var(--qs-green);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 0 rgba(0, 100, 80, 0.25);
+}
+.qs-reflect-choice.is-wrong {
+  background: #fff3c4;
+  color: #7a5f00;
+  border-color: #c9a100;
+  animation: qsReflectShake 0.35s ease;
+}
+@keyframes qsReflectShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
 .qs-reflect-answer {
   margin: 0;
   width: 100%;

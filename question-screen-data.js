@@ -1038,15 +1038,18 @@ window.QUESTION_SCREEN_SESSION = {
           "choices": [
             {
               "icon": "🙅",
-              "text": "Negação"
+              "text": "Negação",
+              "correct": false
             },
             {
               "icon": "🧊",
-              "text": "Paralisia"
+              "text": "Paralisia",
+              "correct": true
             },
             {
               "icon": "🏃",
-              "text": "Pânico"
+              "text": "Pânico",
+              "correct": false
             }
           ],
           "answer": "É a paralisia: a pessoa fica incapaz de tomar decisões ou de se mover. Aproxime-se com calma, mantenha contato visual e use comandos simples e diretos.",
@@ -1061,15 +1064,18 @@ window.QUESTION_SCREEN_SESSION = {
           "choices": [
             {
               "icon": "🙈",
-              "text": "Negação"
+              "text": "Negação",
+              "correct": true
             },
             {
               "icon": "🐑",
-              "text": "Obediência cega"
+              "text": "Obediência cega",
+              "correct": false
             },
             {
               "icon": "😱",
-              "text": "Histeria coletiva"
+              "text": "Histeria coletiva",
+              "correct": false
             }
           ],
           "answer": "É a negação: a pessoa se recusa a acreditar na gravidade da situação. Fale de forma clara e direta, sem discutir nem impor ordens com agressividade, e conduza-a à saída.",
@@ -1105,7 +1111,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Pânico é uma reação intensa e desorganizada — o foco é reconhecê-la e conter com calma, não “eliminar a qualquer custo”.",
           "review": "Afirmativa sobre pânico",
           "transcript": "O pânico é sempre a pior reação possível numa emergência e deve ser eliminado a qualquer custo.",
-          "image": "assets/fotos/m5p1.png"
+          "image": "assets/fotos/m5-p1.png"
         },
         {
           "id": "m5-q2",
@@ -1127,7 +1133,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Pessoas tendem a seguir quem demonstra controle e calma.",
           "review": "Calma do brigadista",
           "transcript": "Um brigadista calmo pode evitar o pânico se espalhar entre as outras pessoas.",
-          "image": "assets/fotos/m5p2.png"
+          "image": "assets/fotos/m5-p2.png"
         },
         {
           "id": "m5-q3",
@@ -1149,7 +1155,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Obediência cega é uma reação possível — não é sempre positiva; o brigadista precisa de comunicação clara e segura.",
           "review": "Obediência cega",
           "transcript": "A obediência cega, seguir ordens sem questionar, é sempre uma reação positiva numa emergência.",
-          "image": "assets/fotos/m5p3.png"
+          "image": "assets/fotos/m5-p3.png"
         },
         {
           "id": "m5-q4",
@@ -1171,7 +1177,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Cuidar de quem cuida faz parte do preparo.",
           "review": "Apoio psicológico após evento crítico",
           "transcript": "O brigadista também deve buscar apoio psicológico após viver um evento crítico.",
-          "image": "assets/fotos/m5p4.png"
+          "image": "assets/fotos/m5-p4.png"
         }
       ]
     },
@@ -1342,7 +1348,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Se você puxar a vítima com a energia ligada, a corrente passa para você também. Desligue a eletricidade antes de qualquer contato.",
           "review": "Primeira decisão — choque elétrico",
           "transcript": "Decisão 1 de 3 · Colega caído perto de uma tomada, aparentemente após choque. O que fazer primeiro?",
-          "image": "assets/fotos/m6p1.png"
+          "image": "assets/fotos/m6-p1.png"
         },
         {
           "id": "m6-q2",
@@ -1364,7 +1370,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Pomadas em queimaduras podem piorar a lesão — a orientação nunca é essa. Primeiro, verifique a respiração e a pulsação.",
           "review": "Segunda decisão — avaliação",
           "transcript": "Decisão 2 de 3 · Energia desligada. Próximo passo?",
-          "image": "assets/fotos/m6p2.png"
+          "image": "assets/fotos/m6-p2.png"
         },
         {
           "id": "m6-q3",
@@ -1386,7 +1392,7 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Gelo direto na lesão agrava o dano nos tecidos — nunca aplique. Cubra com compressa limpa e úmida e chame o SAMU.",
           "review": "Terceira decisão — conduta final",
           "transcript": "Decisão 3 de 3 · Vítima respirando, com queimadura visível no braço. Ação final?",
-          "image": "assets/fotos/m6p3.png"
+          "image": "assets/fotos/m6-p3.png"
         }
       ]
     },
@@ -1518,7 +1524,7 @@ window.QUESTION_SCREEN_SESSION = {
           "type": "rhythm",
           "kicker": "🫀 Ritmo da compressão",
           "title": "Ritmo da compressão",
-          "body": "Na RCP, as compressões torácicas seguem um ritmo de 100 a 120 por minuto. Primeiro acompanhe a pulsação, depois toque 8 vezes no mesmo ritmo. Você recebe dicas enquanto toca e pode tentar quantas vezes precisar.",
+          "body": "Compressões de 100 a 120 por minuto. Acompanhe a pulsação e depois toque 8 vezes no mesmo ritmo.",
           "bpmMin": 100,
           "bpmMax": 120,
           "guideBpm": 110,

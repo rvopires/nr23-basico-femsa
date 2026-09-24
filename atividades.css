@@ -47,30 +47,217 @@
 /* ==========================================================================
    RITMO (tela rhythm) — tocar no compasso das compressões da RCP
    ========================================================================== */
-.qs-rhythm { display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:10px; width:100%; }
-.qs-rhythm-status { margin:0; min-height:2.6em; text-align:center; font-weight:600; color:var(--qs-green-2); font-size:.95rem; }
-.qs-rhythm-stage { position:relative; width:150px; height:150px; display:grid; place-items:center; }
-.qs-rhythm-ring { position:absolute; inset:0; pointer-events:none; border-radius:50%; border:4px solid var(--qs-green-2); opacity:0; }
-.qs-rhythm-ring.is-pulse { animation:qsRhythmPulse .5s ease-out; }
-@keyframes qsRhythmPulse { 0%{transform:scale(.7);opacity:.9} 100%{transform:scale(1.15);opacity:0} }
-.qs-rhythm-btn { position:relative; z-index:1; width:112px; height:112px; border-radius:50%; border:0; cursor:pointer; touch-action:manipulation;
-  background:var(--qs-green-2); color:#fff; font-family:var(--qs-font-b); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
-  box-shadow:0 8px 20px rgba(0,80,64,.32); transition:transform .08s; user-select:none; -webkit-user-select:none; }
-.qs-rhythm-btn.is-down { transform:scale(.92); }
-.qs-rhythm-ico { font-size:1.9rem; line-height:1; }
-.qs-rhythm-btn-txt { font-size:.78rem; font-weight:700; }
-.qs-rhythm[data-qs-r-phase="result"] .qs-rhythm-btn { opacity:.55; pointer-events:none; }
-.qs-rhythm-gauge { position:relative; width:min(100%,320px); height:14px; border-radius:7px; background:rgba(0,0,0,.1); }
-.qs-rhythm-zone { position:absolute; top:0; bottom:0; border-radius:7px; background:var(--qs-green-2); opacity:.85; }
-.qs-rhythm-marker { position:absolute; top:-4px; width:6px; height:22px; margin-left:-3px; border-radius:3px; background:#F4D242; border:2px solid #5a4700; transition:left .15s; }
-.qs-rhythm-scale { position:relative; width:min(100%,320px); height:1em; font-size:.75rem; font-weight:700; color:var(--qs-green-2); }
-.qs-rhythm-scale span { position:absolute; transform:translateX(-50%); }
-.qs-rhythm-hud { display:flex; gap:16px; font-size:.85rem; color:#333; flex-wrap:wrap; justify-content:center; }
-.qs-rhythm-act { font-family:var(--qs-font-b); font-weight:700; padding:10px 18px; border-radius:999px; border:2px solid var(--qs-green-2); background:#fff; color:var(--qs-green-2); cursor:pointer; }
-.qs-rhythm-act:hover { background:var(--qs-green-2); color:#fff; }
-.qs-rhythm-act[hidden], .qs-rhythm-marker[hidden] { display:none; }
-@media (max-height:679px) { .qs-rhythm-stage{width:120px;height:120px} .qs-rhythm-btn{width:92px;height:92px} .qs-rhythm{gap:8px} }
-@media (prefers-reduced-motion:reduce) { .qs-rhythm-ring.is-pulse{animation:none;opacity:.6} }
+.qs-screen.is-rhythm .qs-panel-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow: hidden;
+  padding-top: clamp(12px, 1.8vw, 20px);
+  padding-bottom: 14px;
+  gap: 0;
+}
+.qs-rhythm-head {
+  flex: 0 0 auto;
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto 6px;
+  width: 100%;
+}
+.qs-screen.is-rhythm .qs-title {
+  margin: 0 0 6px;
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+  text-align: center;
+}
+.qs-screen.is-rhythm .qs-body {
+  margin: 0 auto;
+  max-width: 40ch;
+  font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+  line-height: 1.4;
+  color: #466055;
+  text-align: center;
+}
+.qs-rhythm {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  width: 100%;
+}
+.qs-rhythm-status {
+  margin: 0;
+  min-height: 1.35em;
+  text-align: center;
+  font-weight: 700;
+  color: var(--qs-green-2);
+  font-size: clamp(0.82rem, 1.5vw, 0.92rem);
+  line-height: 1.35;
+  max-width: 36rem;
+}
+.qs-rhythm-stage {
+  position: relative;
+  width: 136px;
+  height: 136px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+.qs-rhythm-ring {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 4px solid rgba(0, 132, 113, 0.35);
+  opacity: 0;
+}
+.qs-rhythm-ring.is-pulse { animation: qsRhythmPulse 0.5s ease-out; }
+@keyframes qsRhythmPulse {
+  0% { transform: scale(0.72); opacity: 0.9; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+.qs-rhythm-btn {
+  position: relative;
+  z-index: 1;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  border: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+  background: linear-gradient(160deg, #2bb673 0%, #008471 55%, #006b5c 100%);
+  color: #fff;
+  font-family: var(--qs-font-b);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  box-shadow:
+    0 10px 24px rgba(0, 80, 64, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition: transform 0.08s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.qs-rhythm-btn:hover { filter: brightness(1.05); }
+.qs-rhythm-btn.is-down { transform: scale(0.92); }
+.qs-rhythm-ico { font-size: 1.75rem; line-height: 1; }
+.qs-rhythm-btn-txt { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.02em; }
+.qs-rhythm[data-qs-r-phase="result"] .qs-rhythm-btn {
+  opacity: 0.55;
+  pointer-events: none;
+}
+.qs-rhythm-meter {
+  width: min(100%, 340px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.qs-rhythm-gauge {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(0, 51, 44, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+.qs-rhythm-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2bb673, #008471);
+  opacity: 0.9;
+}
+.qs-rhythm-marker {
+  position: absolute;
+  top: -5px;
+  width: 8px;
+  height: 22px;
+  margin-left: -4px;
+  border-radius: 4px;
+  background: #F4D242;
+  border: 2px solid #5a4700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transition: left 0.15s;
+}
+.qs-rhythm-scale {
+  position: relative;
+  width: 100%;
+  height: 1.1em;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--qs-green-2);
+}
+.qs-rhythm-scale span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+.qs-rhythm-hud {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #3d554c;
+}
+.qs-rhythm-hud span {
+  background: rgba(0, 132, 113, 0.08);
+  border: 1px solid rgba(0, 132, 113, 0.14);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.qs-rhythm-actions {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+.qs-rhythm-act {
+  font-family: var(--qs-font-h);
+  font-weight: 800;
+  padding: 11px 22px;
+  border-radius: 999px;
+  border: 2px solid var(--qs-green-2);
+  background: #fff;
+  color: var(--qs-green-2);
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 14px rgba(0, 80, 64, 0.1);
+  transition: background 0.15s, color 0.15s, transform 0.12s;
+}
+.qs-rhythm-act:hover {
+  background: var(--qs-green-2);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.qs-rhythm-act[hidden],
+.qs-rhythm-marker[hidden] { display: none; }
+
+@media (max-height: 720px) {
+  .qs-rhythm { gap: 8px; }
+  .qs-rhythm-stage { width: 118px; height: 118px; }
+  .qs-rhythm-btn { width: 90px; height: 90px; }
+  .qs-rhythm-ico { font-size: 1.45rem; }
+  .qs-screen.is-rhythm .qs-body { font-size: 0.8rem; }
+  .qs-rhythm-status { font-size: 0.8rem; min-height: 1.2em; }
+}
+@media (max-height: 620px) {
+  .qs-rhythm-head { margin-bottom: 2px; }
+  .qs-rhythm-stage { width: 100px; height: 100px; }
+  .qs-rhythm-btn { width: 78px; height: 78px; }
+  .qs-rhythm-btn-txt { font-size: 0.66rem; }
+  .qs-rhythm-meter { gap: 4px; }
+  .qs-rhythm-act { padding: 8px 16px; font-size: 0.88rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qs-rhythm-ring.is-pulse { animation: none; opacity: 0.6; }
+  .qs-rhythm-act:hover { transform: none; }
+}
 
 /* ==========================================================================
    VARIANTES DE PERGUNTA — cada módulo com um jeito diferente de responder
