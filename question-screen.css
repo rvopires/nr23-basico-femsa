@@ -24,6 +24,10 @@
   --qs-font-b: 'Open Sans', sans-serif;
   --qs-radius: 22px;
   --qs-radius-sm: 14px;
+  /* Título de página (conteúdo, vídeo, steps, compare…): um tamanho só */
+  --qs-title-size: clamp(1.1rem, 2.3vw, 1.4rem);
+  /* Título de cerimônia (intro/resultado do desafio) */
+  --qs-title-size-hero: clamp(1.35rem, 3vw, 1.7rem);
 }
 
 /* ========== CAPA (referência) ========== */
@@ -1209,8 +1213,8 @@ html.qs-lightbox-open body {
 .qs-video-title {
   margin: 0;
   font-family: var(--qs-font-h);
-  font-weight: 800;
-  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 900;
+  font-size: var(--qs-title-size);
   color: var(--qs-ink);
   line-height: 1.2;
 }
@@ -1393,7 +1397,7 @@ html.qs-lightbox-open body {
   overflow: auto;
 }
 .qs-screen.has-split .qs-title {
-  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+  font-size: var(--qs-title-size);
 }
 .qs-screen.has-split .qs-body {
   font-size: 1rem;
@@ -1429,7 +1433,7 @@ html.qs-lightbox-open body {
   margin-bottom: 2px;
 }
 .qs-screen.is-norm-compact .qs-title {
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-size: var(--qs-title-size);
   margin: 0 0 6px;
   line-height: 1.2;
 }
@@ -1503,7 +1507,7 @@ html.qs-lightbox-open body {
   padding: 20px 22px 18px 20px;
 }
 .qs-screen.is-norm-stats .qs-title {
-  font-size: clamp(1.12rem, 2.1vw, 1.42rem);
+  font-size: var(--qs-title-size);
   margin: 0 0 2px;
   letter-spacing: -0.02em;
 }
@@ -1670,7 +1674,7 @@ html.qs-lightbox-open body {
   padding: 20px 22px 18px 20px;
 }
 .qs-screen.is-norm-rules .qs-title {
-  font-size: clamp(1.12rem, 2.1vw, 1.42rem);
+  font-size: var(--qs-title-size);
   margin: 0 0 2px;
   letter-spacing: -0.02em;
 }
@@ -2576,7 +2580,7 @@ html.qs-lightbox-open body {
 .qs-quiz-intro-title {
   margin: 0 0 12px;
   font-family: var(--qs-font-h);
-  font-size: clamp(1.35rem, 3vw, 1.7rem);
+  font-size: var(--qs-title-size-hero);
   font-weight: 800;
   color: var(--qs-ink);
   line-height: 1.25;
@@ -2719,7 +2723,7 @@ html.qs-lightbox-open body {
 .qs-quiz-result-title {
   margin: 0 0 8px;
   font-family: var(--qs-font-h);
-  font-size: clamp(1.4rem, 3.2vw, 1.9rem);
+  font-size: var(--qs-title-size-hero);
   font-weight: 800;
   color: var(--qs-ink);
 }
@@ -2920,10 +2924,11 @@ html.qs-lightbox-open body {
 .qs-title {
   font-family: var(--qs-font-h);
   font-weight: 900;
-  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+  font-size: var(--qs-title-size);
   color: var(--qs-ink);
   margin: 0 0 10px;
   line-height: 1.2;
+  text-align: left;
 }
 .qs-body {
   margin: 0 0 12px;
@@ -2958,8 +2963,8 @@ html.qs-lightbox-open body {
   justify-content: flex-start;
 }
 .qs-screen.is-text .qs-title {
-  font-size: clamp(1.28rem, 2.8vw, 1.85rem);
-  margin-bottom: 14px;
+  font-size: var(--qs-title-size);
+  margin-bottom: 12px;
 }
 .qs-screen.is-text .qs-body {
   font-size: clamp(0.98rem, 1.6vw, 1.12rem);
@@ -3318,7 +3323,7 @@ html.qs-lightbox-open body {
    relance o exercício que quer conferir, com a parte do corpo em cima
    e o movimento embaixo. */
 .qs-screen.is-text.is-dense .qs-title {
-  font-size: clamp(1.06rem, 2.1vw, 1.44rem);
+  font-size: var(--qs-title-size);
   margin-bottom: 10px;
 }
 .qs-screen.is-text.is-dense .qs-items {
@@ -3429,7 +3434,7 @@ html.qs-lightbox-open body {
 .qs-screen.is-ficha .qs-title {
   margin: 0 0 14px;
   color: #00332C;
-  font-size: clamp(1.18rem, 2.4vw, 1.6rem);
+  font-size: var(--qs-title-size);
 }
 .qs-ficha-list {
   display: grid;
@@ -3532,7 +3537,7 @@ html.qs-lightbox-open body {
 }
 .qs-screen.is-steps .qs-title {
   margin: 0;
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-size: var(--qs-title-size);
 }
 .qs-screen.is-text-steps .qs-step.is-text {
   grid-template-columns: minmax(160px, 0.85fr) minmax(240px, 1.15fr);
@@ -4740,7 +4745,7 @@ html.qs-lightbox-open body {
 @media (max-width: 760px) {
   .qs-panel { padding: 10px 12px 4px; }
   .qs-panel-text { padding: 12px 12px 14px; }
-  .qs-title { font-size: clamp(1.05rem, 2.4vw, 1.55rem); margin-bottom: 6px; }
+  .qs-title { font-size: var(--qs-title-size); margin-bottom: 6px; }
   .qs-screen.is-text .qs-title { margin-bottom: 8px; }
   .qs-body { font-size: 0.9rem; line-height: 1.4; }
 

@@ -66,7 +66,7 @@
 }
 .qs-screen.is-rhythm .qs-title {
   margin: 0 0 6px;
-  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+  font-size: var(--qs-title-size);
   text-align: center;
 }
 .qs-screen.is-rhythm .qs-body {

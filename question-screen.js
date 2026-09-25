@@ -1072,19 +1072,20 @@
     var guard = {
       maxWatched: 0,
       duration: parseClock(this.data.duration),
-      seekingBack: false,
-      isSeeking: false,
+      lockUntil: 0,
       lastWall: 0,
-      seekTimer: null,
-      backTimer: null
+      lastSnapAt: 0,
+      snapTimer: null,
+      wasPlaying: false
     };
     this._videoGuard = guard;
     this._videoUnlocked = false;
 
-    function snapBack() {
-      if (self._videoUnlocked) return;
-      guard.seekingBack = true;
-      var target = Math.max(0, guard.maxWatched);
+    function isLocked() {
+      return Date.now() < guard.lockUntil;
+    }
+
+    function applyTime(target) {
       try {
         if (self._pandaPlayer && self._pandaPlayer.setCurrentTime) self._pandaPlayer.setCurrentTime(target);
       } catch (e) {}
@@ -1094,30 +1095,56 @@
         }
       } catch (e) {}
       if (native) { try { native.currentTime = target; } catch (e) {} }
-      clearTimeout(guard.backTimer);
-      guard.backTimer = setTimeout(function () {
-        guard.seekingBack = false;
+    }
+
+    function resumePlay() {
+      try {
+        if (self._pandaPlayer && typeof self._pandaPlayer.play === 'function') self._pandaPlayer.play();
+      } catch (e) {}
+      if (native) {
+        try {
+          var p = native.play();
+          if (p && typeof p.catch === 'function') p.catch(function () {});
+        } catch (e) {}
+      }
+      expand();
+    }
+
+    function snapBack() {
+      if (self._videoUnlocked) return;
+      var now = Date.now();
+      var target = Math.max(0, guard.maxWatched);
+      /* Trava curta: vários cliques pra frente não rearmam loop infinito. */
+      guard.lockUntil = Math.max(guard.lockUntil, now + 1000);
+      if (now - guard.lastSnapAt > 180) {
+        guard.lastSnapAt = now;
+        applyTime(target);
+      }
+      clearTimeout(guard.snapTimer);
+      guard.snapTimer = setTimeout(function () {
+        guard.lockUntil = 0;
         guard.lastWall = Date.now();
-      }, 350);
+        applyTime(Math.max(0, guard.maxWatched));
+        if (guard.wasPlaying) resumePlay();
+      }, 1000);
     }
 
     function handleSeek(t) {
-      if (self._videoUnlocked) return;
-      guard.isSeeking = true;
-      if (typeof t === 'number' && !isNaN(t) && t > guard.maxWatched + VIDEO_SEEK_TOLERANCE) snapBack();
-      clearTimeout(guard.seekTimer);
-      guard.seekTimer = setTimeout(function () {
-        guard.isSeeking = false;
-        guard.lastWall = Date.now();
-      }, 280);
+      if (self._videoUnlocked || isLocked()) return;
+      if (typeof t === 'number' && !isNaN(t) && t > guard.maxWatched + VIDEO_SEEK_TOLERANCE) {
+        snapBack();
+      }
     }
 
     function handleTime(t, dur) {
       if (typeof dur === 'number' && dur > 0) guard.duration = dur;
       if (typeof t !== 'number' || isNaN(t)) return;
-      if (self._videoUnlocked || guard.seekingBack) return;
-      if (guard.isSeeking) {
-        if (t > guard.maxWatched + VIDEO_SEEK_TOLERANCE) snapBack();
+      if (self._videoUnlocked) return;
+      if (isLocked()) {
+        if (t > guard.maxWatched + VIDEO_SEEK_TOLERANCE && Date.now() - guard.lastSnapAt > 220) {
+          guard.lastSnapAt = Date.now();
+          applyTime(Math.max(0, guard.maxWatched));
+        }
         return;
       }
       var now = Date.now();
@@ -1134,8 +1161,11 @@
     this._videoOnSeek = handleSeek;
 
     if (native) {
-      native.addEventListener('play', expand);
-      native.addEventListener('pause', collapse);
+      native.addEventListener('play', function () { guard.wasPlaying = true; expand(); });
+      native.addEventListener('pause', function () {
+        if (!isLocked()) guard.wasPlaying = false;
+        collapse();
+      });
       native.addEventListener('ended', function () { collapse(); self._unlockVideo(); });
       native.addEventListener('loadedmetadata', function () { handleTime(0, native.duration); });
       native.addEventListener('seeking', function () { handleSeek(native.currentTime); });
@@ -1167,8 +1197,15 @@
       var t = payload && typeof payload.currentTime === 'number' ? payload.currentTime : null;
       var dur = payload && typeof payload.duration === 'number' ? payload.duration : null;
 
-      if (msg.indexOf('panda_play') !== -1) { expand(); guard.lastWall = Date.now(); }
-      if (msg.indexOf('panda_pause') !== -1) collapse();
+      if (msg.indexOf('panda_play') !== -1) {
+        guard.wasPlaying = true;
+        expand();
+        guard.lastWall = Date.now();
+      }
+      if (msg.indexOf('panda_pause') !== -1) {
+        if (!isLocked()) guard.wasPlaying = false;
+        collapse();
+      }
       if (msg.indexOf('panda_ended') !== -1 || msg.indexOf('panda_complete') !== -1) {
         collapse();
         self._unlockVideo();
@@ -1194,8 +1231,15 @@
           player.onEvent(function (e) {
             var msg = e && e.message;
             var t = e && typeof e.currentTime === 'number' ? e.currentTime : null;
-            if (msg === 'panda_play') { expand(); guard.lastWall = Date.now(); }
-            if (msg === 'panda_pause') collapse();
+            if (msg === 'panda_play') {
+              guard.wasPlaying = true;
+              expand();
+              guard.lastWall = Date.now();
+            }
+            if (msg === 'panda_pause') {
+              if (!isLocked()) guard.wasPlaying = false;
+              collapse();
+            }
             if (msg === 'panda_ended') { collapse(); self._unlockVideo(); return; }
             if (msg === 'panda_seeking' || msg === 'panda_seeked') { handleSeek(t); return; }
             if (msg === 'panda_timeupdate') {
@@ -1850,6 +1894,7 @@
     var vid = this.el.querySelector('video');
     if (vid) { try { vid.pause(); } catch (e) {} }
     if (this._videoGuard) {
+      clearTimeout(this._videoGuard.snapTimer);
       clearTimeout(this._videoGuard.seekTimer);
       clearTimeout(this._videoGuard.backTimer);
       this._videoGuard = null;
