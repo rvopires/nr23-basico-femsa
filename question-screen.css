@@ -3535,16 +3535,34 @@ html.qs-lightbox-open body {
   font-size: clamp(1.05rem, 2vw, 1.35rem);
 }
 .qs-screen.is-text-steps .qs-step.is-text {
-  grid-template-columns: minmax(140px, 0.7fr) minmax(260px, 1.3fr);
-  max-width: 820px;
+  grid-template-columns: minmax(160px, 0.85fr) minmax(240px, 1.15fr);
+  max-width: 780px;
   margin: 0 auto;
   left: 0;
   right: 0;
+  gap: 18px;
+  align-items: center;
 }
 .qs-screen.is-text-steps .qs-step-media {
   background: linear-gradient(160deg, #e8f7ee 0%, #d4efe3 55%, #fff3c4 100%);
   border-color: rgba(0, 132, 113, 0.16);
   transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+/* Fotos da ficha (retrato ~4:5): card fixo, sem esticar na grade larga */
+.qs-screen.is-text-steps .qs-step.has-photo .qs-step-media {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  max-height: min(52dvh, 420px);
+  margin: 0 auto;
+  padding: 0;
+  background: #fff;
+  overflow: hidden;
+}
+.qs-screen.is-text-steps .qs-step.has-photo .qs-step-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 .qs-screen.is-text-steps .qs-step-info {
   transition: background 0.35s ease, border-color 0.35s ease;
@@ -3560,68 +3578,68 @@ html.qs-lightbox-open body {
 }
 
 /* Cores por emergência na ficha rápida */
-.qs-screen.is-text-steps .qs-step.tone-e1 .qs-step-media {
-  background: linear-gradient(160deg, #ffe4cc 0%, #ffb366 100%);
-  border-color: rgba(232, 93, 4, 0.28);
-  box-shadow: 0 10px 28px rgba(232, 93, 4, 0.18);
-}
 .qs-screen.is-text-steps .qs-step.tone-e1 .qs-step-num {
   background: #e85d04;
   color: #fff;
 }
-.qs-screen.is-text-steps .qs-step.tone-e2 .qs-step-media {
-  background: linear-gradient(160deg, #fff3c4 0%, #F4D242 100%);
-  border-color: rgba(201, 160, 0, 0.35);
-  box-shadow: 0 10px 28px rgba(244, 210, 66, 0.28);
+.qs-screen.is-text-steps .qs-step.tone-e1:not(.has-photo) .qs-step-media {
+  background: linear-gradient(160deg, #ffe4cc 0%, #ffb366 100%);
+  border-color: rgba(232, 93, 4, 0.28);
+  box-shadow: 0 10px 28px rgba(232, 93, 4, 0.18);
 }
 .qs-screen.is-text-steps .qs-step.tone-e2 .qs-step-num {
   background: #c9a000;
   color: #00332C;
 }
-.qs-screen.is-text-steps .qs-step.tone-e3 .qs-step-media {
-  background: linear-gradient(160deg, #ffe0e8 0%, #ff7a9a 100%);
-  border-color: rgba(196, 18, 69, 0.28);
-  box-shadow: 0 10px 28px rgba(196, 18, 69, 0.16);
+.qs-screen.is-text-steps .qs-step.tone-e2:not(.has-photo) .qs-step-media {
+  background: linear-gradient(160deg, #fff3c4 0%, #F4D242 100%);
+  border-color: rgba(201, 160, 0, 0.35);
+  box-shadow: 0 10px 28px rgba(244, 210, 66, 0.28);
 }
 .qs-screen.is-text-steps .qs-step.tone-e3 .qs-step-num {
   background: #c41245;
   color: #fff;
 }
-.qs-screen.is-text-steps .qs-step.tone-e4 .qs-step-media {
-  background: linear-gradient(160deg, #ece6ff 0%, #b8a6ff 100%);
-  border-color: rgba(79, 47, 196, 0.28);
-  box-shadow: 0 10px 28px rgba(79, 47, 196, 0.16);
+.qs-screen.is-text-steps .qs-step.tone-e3:not(.has-photo) .qs-step-media {
+  background: linear-gradient(160deg, #ffe0e8 0%, #ff7a9a 100%);
+  border-color: rgba(196, 18, 69, 0.28);
+  box-shadow: 0 10px 28px rgba(196, 18, 69, 0.16);
 }
 .qs-screen.is-text-steps .qs-step.tone-e4 .qs-step-num {
   background: #4f2fc4;
   color: #fff;
 }
-.qs-screen.is-text-steps .qs-step.tone-e5 .qs-step-media {
-  background: linear-gradient(160deg, #dceeff 0%, #6eb6ff 100%);
-  border-color: rgba(21, 88, 192, 0.28);
-  box-shadow: 0 10px 28px rgba(21, 88, 192, 0.16);
+.qs-screen.is-text-steps .qs-step.tone-e4:not(.has-photo) .qs-step-media {
+  background: linear-gradient(160deg, #ece6ff 0%, #b8a6ff 100%);
+  border-color: rgba(79, 47, 196, 0.28);
+  box-shadow: 0 10px 28px rgba(79, 47, 196, 0.16);
 }
 .qs-screen.is-text-steps .qs-step.tone-e5 .qs-step-num {
   background: #1558c0;
   color: #fff;
 }
-.qs-screen.is-text-steps .qs-step.tone-e6 .qs-step-media {
-  background: linear-gradient(160deg, #d4f5ee 0%, #2ec4a8 100%);
-  border-color: rgba(0, 132, 113, 0.28);
-  box-shadow: 0 10px 28px rgba(0, 132, 113, 0.16);
+.qs-screen.is-text-steps .qs-step.tone-e5:not(.has-photo) .qs-step-media {
+  background: linear-gradient(160deg, #dceeff 0%, #6eb6ff 100%);
+  border-color: rgba(21, 88, 192, 0.28);
+  box-shadow: 0 10px 28px rgba(21, 88, 192, 0.16);
 }
 .qs-screen.is-text-steps .qs-step.tone-e6 .qs-step-num {
   background: #008471;
   color: #fff;
 }
-.qs-screen.is-text-steps .qs-step.tone-e7 .qs-step-media {
-  background: linear-gradient(160deg, #ffd9ea 0%, #e84d9a 100%);
-  border-color: rgba(155, 29, 92, 0.28);
-  box-shadow: 0 10px 28px rgba(155, 29, 92, 0.16);
+.qs-screen.is-text-steps .qs-step.tone-e6:not(.has-photo) .qs-step-media {
+  background: linear-gradient(160deg, #d4f5ee 0%, #2ec4a8 100%);
+  border-color: rgba(0, 132, 113, 0.28);
+  box-shadow: 0 10px 28px rgba(0, 132, 113, 0.16);
 }
 .qs-screen.is-text-steps .qs-step.tone-e7 .qs-step-num {
   background: #9b1d5c;
   color: #fff;
+}
+.qs-screen.is-text-steps .qs-step.tone-e7:not(.has-photo) .qs-step-media {
+  background: linear-gradient(160deg, #ffd9ea 0%, #e84d9a 100%);
+  border-color: rgba(155, 29, 92, 0.28);
+  box-shadow: 0 10px 28px rgba(155, 29, 92, 0.16);
 }
 
 .qs-steps-count {
@@ -3851,6 +3869,11 @@ html.qs-lightbox-open body {
     border-radius: 14px;
     padding: 6px;
     min-height: 180px;
+  }
+  .qs-screen.is-text-steps .qs-step.has-photo .qs-step-media {
+    max-height: min(42dvh, 320px);
+    min-height: 0;
+    width: min(100%, 260px);
   }
   .qs-step-info {
     padding: 0 2px;

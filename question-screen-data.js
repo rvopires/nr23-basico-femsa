@@ -1270,42 +1270,48 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Queimaduras",
               "text": "Abafar/rolar; químico → água; cobrir úmido; socorro.",
               "warn": "Nunca furar bolhas, usar pomada ou puxar roupa grudada.",
-              "tone": "e1"
+              "tone": "e1",
+              "image": "assets/fotos/queimaduras.png"
             },
             {
               "n": 2,
               "icon": "⚡",
               "title": "Choque elétrico",
               "text": "Desligar energia primeiro; checar respiração/pulso; cobrir; SAMU.",
-              "tone": "e2"
+              "tone": "e2",
+              "image": "assets/fotos/choque.png"
             },
             {
               "n": 3,
               "icon": "🩸",
               "title": "Hemorragia",
               "text": "Curativo compressivo; chamar socorro.",
-              "tone": "e3"
+              "tone": "e3",
+              "image": "assets/fotos/hemorragia.png"
             },
             {
               "n": 4,
               "icon": "😵",
               "title": "Desmaio",
               "text": "Local arejado; deitar com pernas elevadas; afrouxar roupas.",
-              "tone": "e4"
+              "tone": "e4",
+              "image": "assets/fotos/desmaio.png"
             },
             {
               "n": 5,
               "icon": "🫁",
               "title": "Engasgo adulto",
               "text": "Tosse → Heimlich → SAMU → RCP se necessário.",
-              "tone": "e5"
+              "tone": "e5",
+              "image": "assets/fotos/engasgo-adulto.png"
             },
             {
               "n": 6,
               "icon": "👶",
               "title": "Engasgo bebê",
               "text": "Bruços no antebraço + palmadas nas costas → SAMU → RCP se necessário.",
-              "tone": "e6"
+              "tone": "e6",
+              "image": "assets/fotos/engasgo-bebe.png"
             },
             {
               "n": 7,
@@ -1313,7 +1319,8 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Convulsão",
               "text": "Proteger a cabeça; afastar objetos; pano entre os dentes.",
               "warn": "Nunca medicação/líquido; nunca deixar sozinha.",
-              "tone": "e7"
+              "tone": "e7",
+              "image": "assets/fotos/convulsao.png"
             }
           ],
           "transcript": "Ficha rápida de conduta em cada emergência. Avance emergência por emergência."

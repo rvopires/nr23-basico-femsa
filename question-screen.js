@@ -599,6 +599,11 @@
       return !!(it.image && !(it.title || it.text || it.body));
     });
     var textOnly = items.every(function (it) { return !it.image; });
+    /* Ficha com texto + foto (ex.: emergências): mantém o layout compacto
+       da text-steps, em vez da grade larga feita pras sequências com ilustração. */
+    var textLayout = !photoOnly && items.every(function (it) {
+      return !!(it.title || it.text || it.body);
+    });
     var slides = items.map(function (it, i) {
       var raw = it.text || it.body || '';
       var d = splitDose(raw);
@@ -621,20 +626,20 @@
         </div>`
         : '';
       var mediaInner = it.image
-        ? zoomWrap(it.image, `<img class="qs-step-img" src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">`)
+        ? `<img class="qs-step-img" src="${esc(it.image)}" alt="${esc(it.imageAlt || it.title || '')}" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async">`
         : (it.icon
           ? `<div class="qs-step-fallback is-icon"><span aria-hidden="true">${esc(it.icon)}</span></div>`
           : `<div class="qs-step-fallback">${esc(num)}</div>`);
-      var tone = it.tone || (textOnly ? ('e' + ((i % 7) + 1)) : '');
+      var tone = it.tone || (textLayout ? ('e' + ((i % 7) + 1)) : '');
       var toneClass = tone ? ' tone-' + esc(tone) : '';
-      return `<div class="qs-step${i === 0 ? ' is-on' : ''}${photoOnly ? ' is-photo' : ''}${textOnly ? ' is-text' : ''}${toneClass}" data-qs-step="${i}"${i === 0 ? '' : ' hidden'}>
+      return `<div class="qs-step${i === 0 ? ' is-on' : ''}${photoOnly ? ' is-photo' : ''}${textLayout ? ' is-text' : ''}${it.image ? ' has-photo' : ''}${toneClass}" data-qs-step="${i}"${i === 0 ? '' : ' hidden'}>
         <div class="qs-step-media">${mediaInner}</div>
         ${info}
       </div>`;
     }).join('');
 
     return `
-      <article class="qs-screen is-content is-steps${photoOnly ? ' is-photo-steps' : ''}${textOnly ? ' is-text-steps' : ''}" data-qs-root data-type="content">
+      <article class="qs-screen is-content is-steps${photoOnly ? ' is-photo-steps' : ''}${textLayout ? ' is-text-steps' : ''}" data-qs-root data-type="content">
         <div class="qs-steps" data-qs-steps data-step-unit="${esc(unit)}" data-step-next="${esc(nextLbl)}" data-step-finish="${esc(data.stepFinish || 'Concluir sequência')}">
           <header class="qs-steps-top">
             <h2 class="qs-title">${esc(data.title || '')}</h2>
