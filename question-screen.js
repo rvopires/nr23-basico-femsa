@@ -393,7 +393,8 @@
       var aspectClass = (data.cardAspect === 'landscape' || data.cardAspect === 'horizontal')
         ? ' is-landscape'
         : (data.cardAspect === 'square' || data.cardAspect === '1x1' ? ' is-square' : '');
-      var skinClass = data.skin === 'actions' ? ' is-actions' : '';
+      var skinClass = data.skin === 'actions' ? ' is-actions'
+        : (data.skin === 'agents' ? ' is-agents' : '');
       html += `<div class="qs-cards count-${data.cards.length}${aspectClass}${skinClass}">${data.cards.map(function (c) {
         var imgOnly = !!(c.image && !c.title && !c.body && !c.icon && !(c.points && c.points.length));
         var img = c.image
@@ -556,7 +557,8 @@
       </article>`;
     }
     var dense = (data.items && data.items.length > 6) || (data.cards && data.cards.length > 3);
-    var skin = data.skin === 'actions' ? ' is-actions' : '';
+    var skin = data.skin === 'actions' ? ' is-actions'
+      : (data.skin === 'agents' ? ' is-agents' : '');
     return `
       <article class="qs-screen is-content is-text${dense ? ' is-dense' : ''}${skin}" data-qs-root data-type="content">
         <div class="qs-panel qs-panel-text">
@@ -730,8 +732,7 @@
       </button>`;
     }).join('');
     return `
-      <article class="qs-screen is-content is-text is-order is-timed" data-qs-root data-type="order">
-        <div class="qs-qbar-wrap"><div class="qs-qbar"><i data-qs-timer></i></div></div>
+      <article class="qs-screen is-content is-text is-order" data-qs-root data-type="order">
         <div class="qs-panel qs-panel-text">
           <h2 class="qs-title">${esc(data.title || 'Ordene a rotina')}</h2>
           <p class="qs-body">${esc(data.body || 'Toque nos cuidados na ordem que você seguiria.')}</p>
@@ -1006,7 +1007,7 @@
     if (type === 'content' && this.data && this.data.steps) this._bindSteps();
     if (fichaGate) this._bindFicha();
 
-    if ((type === 'question' || type === 'order') && this.options.quizScoring) {
+    if (type === 'question' && this.options.quizScoring) {
       if (this.root) this.root.classList.add('is-timed');
       this._startTimer();
     }
@@ -1537,7 +1538,6 @@
         var badge = btn.querySelector('.qs-seq-badge');
         if (badge) badge.textContent = '';
       });
-      if (self.options.quizScoring) self._startTimer();
     }
 
     this.el.querySelectorAll('[data-qs-seq]').forEach(function (btn) {

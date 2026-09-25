@@ -194,10 +194,13 @@
   text-align: center;
   gap: 10px;
   padding: 12px 14px;
-  background: rgba(0, 142, 151, 0.16);
-  border: 1px solid rgba(0, 142, 151, 0.4);
+  background: rgba(0, 142, 151, 0.42);
+  border: 1px solid rgba(157, 228, 233, 0.55);
   border-radius: 12px;
   color: #9DE4E9;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 .qs-home-badge strong {
   display: block;
@@ -207,7 +210,7 @@
 }
 .qs-home-badge span {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.88);
   font-weight: 600;
 }
 .qs-home-actions {
@@ -1900,7 +1903,7 @@ html.qs-lightbox-open body {
 
 .qs-screen.is-finale {
   position: relative;
-  background: #008e97;
+  background: #BC1A0D;
   overflow: hidden;
 }
 .qs-finale-photo {
@@ -1916,24 +1919,10 @@ html.qs-lightbox-open body {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 42%, rgba(168, 245, 236, 0.22) 0%, transparent 62%),
-    linear-gradient(180deg, rgba(0, 28, 32, 0.35) 0%, rgba(0, 142, 151, 0.22) 45%, rgba(0, 28, 32, 0.5) 100%);
+  background: linear-gradient(180deg, rgba(40, 8, 6, 0.28) 0%, rgba(40, 8, 6, 0.42) 100%);
 }
 .qs-finale-glow {
-  position: absolute;
-  left: 50%;
-  top: 46%;
-  width: min(520px, 90%);
-  height: min(420px, 78%);
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(255, 215, 106, 0.28) 0%, transparent 42%),
-    radial-gradient(circle at 50% 55%, rgba(124, 255, 178, 0.22) 0%, transparent 55%);
-  filter: blur(8px);
-  animation: qsFinaleGlow 3.6s ease-in-out infinite alternate;
+  display: none;
 }
 .qs-finale-inner {
   position: relative;
@@ -1955,17 +1944,12 @@ html.qs-lightbox-open body {
   width: min(100%, 440px);
   text-align: center;
   padding: 22px 22px 20px;
-  background:
-    linear-gradient(155deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 28%, transparent 52%),
-    linear-gradient(180deg, rgba(168, 245, 236, 0.14) 0%, transparent 38%),
-    linear-gradient(160deg, #00a8b2 0%, #006d75 32%, #00454a 68%, #005f66 100%);
-  border: 1.5px solid rgba(168, 245, 236, 0.45);
+  background: #BC1A0D;
+  border: 1.5px solid rgba(255, 180, 160, 0.4);
   border-radius: 20px;
   box-shadow:
-    0 22px 48px rgba(0, 0, 0, 0.38),
-    0 0 0 1px rgba(255, 255, 255, 0.18) inset,
-    0 0 48px rgba(124, 255, 178, 0.28),
-    0 0 80px rgba(255, 215, 106, 0.12);
+    0 22px 48px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset;
   animation: qsFinaleIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .qs-finale-shine {
@@ -1991,13 +1975,13 @@ html.qs-lightbox-open body {
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #E8FFF8;
+  color: #9DE4E9;
   margin-bottom: 10px;
   padding: 5px 12px;
   border-radius: 99px;
-  background: linear-gradient(135deg, rgba(188, 26, 13, 0.42), rgba(255, 120, 90, 0.22));
-  border: 1px solid rgba(255, 200, 180, 0.55);
-  box-shadow: 0 0 18px rgba(188, 26, 13, 0.28);
+  background: linear-gradient(135deg, rgba(0, 142, 151, 0.45), rgba(0, 168, 178, 0.22));
+  border: 1px solid rgba(157, 228, 233, 0.55);
+  box-shadow: 0 0 18px rgba(0, 142, 151, 0.28);
 }
 .qs-finale-trophy {
   position: relative;
@@ -2008,12 +1992,12 @@ html.qs-lightbox-open body {
   display: grid;
   place-items: center;
   font-size: 30px;
-  background: linear-gradient(145deg, #E85A48, #E04A38 38%, #1F9D55 100%);
+  background: linear-gradient(145deg, #E85A48, #BC1A0D 45%, #008e97 100%);
   box-shadow:
     0 0 0 4px rgba(255, 255, 255, 0.22),
-    0 0 0 7px rgba(255, 215, 106, 0.28),
-    0 8px 28px rgba(255, 180, 60, 0.45),
-    0 0 36px rgba(124, 255, 178, 0.4);
+    0 0 0 7px rgba(0, 142, 151, 0.28),
+    0 8px 28px rgba(188, 26, 13, 0.45),
+    0 0 36px rgba(0, 142, 151, 0.35);
   animation: qsFinaleTrophy 2.4s ease-in-out infinite;
 }
 .qs-finale-title {
@@ -2025,18 +2009,18 @@ html.qs-lightbox-open body {
   font-weight: 800;
   letter-spacing: 0.02em;
   text-shadow:
-    0 0 24px rgba(168, 245, 236, 0.45),
-    0 2px 18px rgba(188, 26, 13, 0.28);
+    0 0 24px rgba(188, 26, 13, 0.45),
+    0 2px 18px rgba(0, 0, 0, 0.35);
 }
-.qs-finale-title span { color: #E04A38; }
+.qs-finale-title span { color: #9DE4E9; }
 .qs-finale-line {
   position: relative;
   width: 64px;
   height: 3px;
   margin: 0 auto 12px;
   border-radius: 3px;
-  background: linear-gradient(90deg, transparent, #9DE4E9, #E04A38, #E04A38, transparent);
-  box-shadow: 0 0 12px rgba(168, 245, 236, 0.55);
+  background: linear-gradient(90deg, transparent, #9DE4E9, #fff, #9DE4E9, transparent);
+  box-shadow: 0 0 12px rgba(157, 228, 233, 0.55);
 }
 .qs-finale-medal-name {
   position: relative;
@@ -2045,9 +2029,9 @@ html.qs-lightbox-open body {
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #E04A38;
+  color: #9DE4E9;
   margin: 0 0 4px;
-  text-shadow: 0 0 14px rgba(255, 215, 106, 0.55);
+  text-shadow: 0 0 14px rgba(0, 142, 151, 0.55);
 }
 .qs-finale-card.medal-silver .qs-finale-medal-name { color: #e8f0f8; }
 .qs-finale-card.medal-bronze .qs-finale-medal-name { color: #f0c29a; }
@@ -2076,7 +2060,7 @@ html.qs-lightbox-open body {
   margin: 0 0 8px;
   font-size: 0.78rem;
   font-weight: 700;
-  color: #C8FFF4;
+  color: #9DE4E9;
 }
 .qs-finale-body {
   position: relative;
@@ -2097,17 +2081,17 @@ html.qs-lightbox-open body {
   font-weight: 700;
   font-style: italic;
   line-height: 1.45;
-  color: #FFF8E6;
-  background: linear-gradient(135deg, rgba(255, 215, 106, 0.18), rgba(168, 245, 236, 0.1));
-  border: 1px solid rgba(255, 215, 106, 0.42);
+  color: #fff;
+  background: linear-gradient(135deg, rgba(0, 142, 151, 0.28), rgba(255, 255, 255, 0.1));
+  border: 1px solid rgba(157, 228, 233, 0.42);
   border-radius: 14px;
   box-shadow:
-    0 0 24px rgba(255, 215, 106, 0.16),
+    0 0 24px rgba(0, 142, 151, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
 .qs-finale-quote span {
-  color: #E04A38;
+  color: #9DE4E9;
   font-style: normal;
   font-weight: 900;
   font-size: 1.05em;
@@ -2127,14 +2111,14 @@ html.qs-lightbox-open body {
   text-transform: uppercase;
   color: #fff;
   background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(168, 245, 236, 0.4);
+  border: 1px solid rgba(255, 180, 160, 0.4);
   border-radius: 99px;
   padding: 5px 10px;
-  box-shadow: 0 0 12px rgba(124, 255, 178, 0.12);
+  box-shadow: 0 0 12px rgba(188, 26, 13, 0.18);
 }
 .qs-finale-chip:first-child {
-  background: linear-gradient(135deg, rgba(188, 26, 13, 0.42), rgba(255, 120, 90, 0.18));
-  border-color: rgba(255, 180, 160, 0.55);
+  background: linear-gradient(135deg, rgba(0, 142, 151, 0.5), rgba(0, 168, 178, 0.22));
+  border-color: rgba(157, 228, 233, 0.55);
   color: #E8FFF8;
 }
 @keyframes qsFinaleIn {
@@ -3114,6 +3098,118 @@ html.qs-lightbox-open body {
   line-height: 1.45;
 }
 
+/* Agente × classe — cards com foto e selo da classe */
+.qs-screen.is-agents {
+  background:
+    radial-gradient(ellipse 65% 50% at 50% -10%, rgba(0, 142, 151, 0.18), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(188, 26, 13, 0.12), transparent 50%),
+    linear-gradient(165deg, #f7fcfc 0%, #eef6f7 55%, #e8f3f4 100%);
+}
+.qs-screen.is-agents .qs-panel-text {
+  justify-content: center;
+  gap: 4px;
+}
+.qs-screen.is-agents .qs-title {
+  text-align: center;
+  margin-bottom: 16px;
+  color: var(--qs-ink);
+}
+.qs-cards.is-agents {
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.qs-cards.is-agents .qs-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(0, 142, 151, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 40, 44, 0.1);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.qs-cards.is-agents .qs-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0, 40, 44, 0.14);
+}
+.qs-cards.is-agents .qs-card-media {
+  margin: 0;
+  border-radius: 0;
+  aspect-ratio: 1 / 1;
+  max-height: none;
+  background: #0a3a3e;
+}
+.qs-cards.is-agents .qs-card-img {
+  object-fit: cover;
+  object-position: center 30%;
+}
+.qs-cards.is-agents .qs-card-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px 14px 0;
+}
+.qs-cards.is-agents .qs-card-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+.qs-cards.is-agents .qs-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--qs-ink);
+  line-height: 1.25;
+}
+.qs-cards.is-agents .qs-card-lead {
+  display: inline-flex;
+  align-items: center;
+  order: -1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--qs-font-h);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--qs-green);
+}
+.qs-cards.is-agents .qs-card.tone-agua .qs-card-lead {
+  background: linear-gradient(135deg, #00a8b2, #008e97);
+}
+.qs-cards.is-agents .qs-card.tone-pqs .qs-card-lead {
+  background: linear-gradient(135deg, #E04A38, #BC1A0D);
+}
+.qs-cards.is-agents .qs-card.tone-co2 .qs-card-lead {
+  background: linear-gradient(135deg, #007880, #00454a);
+}
+.qs-cards.is-agents .qs-card > p {
+  padding: 8px 14px 16px;
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--qs-muted);
+  line-height: 1.4;
+}
+@media (max-width: 720px) {
+  .qs-cards.is-agents {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+  }
+  .qs-cards.is-agents .qs-card-media {
+    aspect-ratio: 16 / 10;
+  }
+}
+
 /* Prevenir × Papel — versão colorida */
 .qs-screen.is-actions {
   background:
@@ -3202,6 +3298,10 @@ html.qs-lightbox-open body {
   text-transform: uppercase;
   background: rgba(0, 69, 74, 0.12);
   color: #00454a;
+}
+.qs-cards.is-actions .qs-card.tone-prevent .qs-card-lead {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
 }
 .qs-cards.is-actions .qs-card.tone-role .qs-card-lead {
   background: rgba(255, 255, 255, 0.22);
@@ -3841,6 +3941,42 @@ html.qs-lightbox-open body {
   background: linear-gradient(135deg, #00a8b2, var(--qs-ok-dk));
   box-shadow: 0 8px 20px rgba(31, 157, 85, 0.35);
 }
+
+/* Ficha rápida (página emergências): botão "Próxima emergência" bem visível */
+.qs-screen.is-text-steps .qs-step-cta {
+  min-width: min(360px, 100%);
+  padding: 16px 26px;
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, #E85A48 0%, #BC1A0D 45%, #9A1509 100%);
+  box-shadow:
+    0 0 0 3px rgba(188, 26, 13, 0.35),
+    0 10px 28px rgba(188, 26, 13, 0.55),
+    0 4px 12px rgba(0, 69, 74, 0.18);
+  animation: qsStepCtaPulse 1.6s ease-in-out infinite;
+}
+.qs-screen.is-text-steps .qs-step-cta:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 0 0 4px rgba(188, 26, 13, 0.45),
+    0 14px 32px rgba(188, 26, 13, 0.6),
+    0 6px 14px rgba(0, 69, 74, 0.2);
+}
+.qs-screen.is-text-steps .qs-step-cta.is-finish {
+  color: #fff;
+  text-transform: none;
+  background: linear-gradient(135deg, #00a8b2, #008e97);
+  box-shadow:
+    0 0 0 3px rgba(0, 142, 151, 0.28),
+    0 10px 28px rgba(0, 142, 151, 0.4);
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .qs-screen.is-text-steps .qs-step-cta { animation: none; }
+}
 .qs-step-back {
   border: 0;
   background: transparent;
@@ -4251,8 +4387,9 @@ html.qs-lightbox-open body {
 .qs-screen.is-order {
   overflow: hidden;
 }
-.qs-screen.is-order .qs-qbar-wrap {
-  margin: 10px 16px 0;
+.qs-screen.is-order .qs-qbar-wrap,
+.qs-screen.is-order .qs-timer {
+  display: none;
 }
 .qs-screen.is-order .qs-panel-text {
   display: flex;

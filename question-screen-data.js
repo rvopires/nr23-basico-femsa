@@ -459,28 +459,36 @@ window.QUESTION_SCREEN_SESSION = {
           "id": "m3-agentes",
           "type": "content",
           "kicker": "📄 Texto",
-          "title": "Qual Agente Extintor Usar em Cada Classe",
+          "skin": "agents",
+          "cardAspect": "square",
+          "title": "Qual agente usar em cada classe",
           "cards": [
             {
               "title": "Água",
-              "body": "Indicada para Classe A.",
+              "lead": "Classe A",
+              "body": "Madeira, papel, tecidos e resíduos sólidos comuns.",
               "image": "assets/fotos/agua.png",
-              "imageAlt": "Extintor de água"
+              "imageAlt": "Extintor de água em uso",
+              "tone": "agua"
             },
             {
-              "title": "Pó Químico Seco (PQS)",
-              "body": "Indicado para Classes B e C.",
+              "title": "Pó Químico Seco",
+              "lead": "Classes B e C",
+              "body": "Líquidos inflamáveis e equipamentos elétricos energizados.",
               "image": "assets/fotos/pqs.png",
-              "imageAlt": "Extintor de pó químico seco"
+              "imageAlt": "Extintor de pó químico seco em uso",
+              "tone": "pqs"
             },
             {
               "title": "Gás Carbônico (CO₂)",
-              "body": "Classes B e C — especialmente equipamentos elétricos sensíveis.",
+              "lead": "Classes B e C",
+              "body": "Painéis e equipamentos elétricos sensíveis — sem deixar resíduos.",
               "image": "assets/fotos/m3-gas.png",
-              "imageAlt": "Extintor de gás carbônico"
+              "imageAlt": "Extintor de gás carbônico em painel elétrico",
+              "tone": "co2"
             }
           ],
-          "transcript": "Tabela agente x classe."
+          "transcript": "Três agentes extintores: água na classe A; PQS e CO₂ nas classes B e C."
         },
         {
           "id": "m3-equipamentos",
@@ -491,7 +499,7 @@ window.QUESTION_SCREEN_SESSION = {
             {
               "title": "Mangueira",
               "body": "Fibra sintética com revestimento de borracha; 15 ou 30 m (30 m não é mais usado).",
-              "image": "assets/fotos/mangueira.png",
+              "image": "assets/fotos/mangueira.jpg",
               "imageAlt": "Mangueira de incêndio"
             },
             {
@@ -1282,10 +1290,6 @@ window.QUESTION_SCREEN_SESSION = {
               "label": "Polícia Militar — segurança pública"
             }
           ],
-          "note": {
-            "label": "Interno FEMSA",
-            "text": "Conheça também o procedimento de acionamento da portaria/segurança do prédio."
-          },
           "transcript": "Números de emergência: 192, 193 e 190."
         },
         {
@@ -1317,7 +1321,6 @@ window.QUESTION_SCREEN_SESSION = {
           "kicker": "🔢 Roleta da RCP",
           "title": "Ordene as etapas da RCP",
           "body": "Toque nas etapas na ordem correta do procedimento.",
-          "time": 30,
           "items": [
             {
               "key": "resp",
@@ -1367,16 +1370,16 @@ window.QUESTION_SCREEN_SESSION = {
           "id": "m7-finale",
           "type": "finale",
           "kicker": "🏆 Conclusão",
-          "eyebrow": "Certificado de conclusão",
-          "title": "Parabéns",
-          "body": "Você concluiu o treinamento NR 23 — Curso de Prevenção de Incêndios (Básico).",
-          "quote": "Todos têm o direito de viver em um ambiente seguro, sem correr riscos desnecessários e sem receios de danos à sua saúde e vida.",
+          "eyebrow": "Treinamento concluído",
+          "title": "Parabéns!",
+          "body": "Você finalizou o NR 23 — Curso de Prevenção de Incêndios (Básico).",
+          "quote": "Toda pessoa tem o direito a um ambiente seguro, sem riscos desnecessários e sem medo por sua saúde e vida.",
           "chips": [
             "NR 23",
             "Brigada de Incêndio",
             "Básico"
           ],
-          "transcript": "Parabéns pela conclusão do treinamento NR 23. Todos têm o direito de viver em um ambiente seguro.",
+          "transcript": "Parabéns. Você finalizou o treinamento NR 23. Toda pessoa tem o direito a um ambiente seguro.",
           "image": "assets/fotos/capafinal.png",
           "imageAlt": "Imagem final de parabéns pelo treinamento concluído"
         }
