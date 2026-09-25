@@ -69,6 +69,12 @@ function buildTexts(session) {
   for (const m of mods) texts.set(T.menuAudioKey(m.id), T.buildMenuText(session, m.id));
   texts.set(T.menuAudioKey(0), T.buildMenuText(session, 0));
 
+  // resultado do desafio: aprovado / reprovado (sem placar)
+  for (const m of mods) {
+    texts.set(T.resultAudioKey(m.id, true), T.buildResultText(m, true));
+    texts.set(T.resultAudioKey(m.id, false), T.buildResultText(m, false));
+  }
+
   for (const item of catalog) {
     const id = item.screen && item.screen.id;
     if (!id) continue;

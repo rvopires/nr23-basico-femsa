@@ -13,14 +13,18 @@
 })(typeof window !== 'undefined' ? window : globalThis, function () {
   'use strict';
 
-  // Abertura: o conteúdo é HTML fixo, então o texto mora aqui.
+  // Abertura: o conteúdo é HTML fixo, então o texto mora aqui
+  // (incluindo as imagens — o gerador Node não lê o DOM).
   // "100%" vira extenso para a voz não ler "por cento" errado.
   var HOME_TEXT = [
     'Abertura do treinamento.',
+    'Segurança do trabalho.',
     'NR 23, Brigada de Incêndio Intermediário.',
     'Aprenda a prevenir, combater o princípio de incêndio, apoiar na evacuação',
     'e prestar os primeiros socorros no escritório FEMSA.',
-    'São sete módulos, com conteúdo completo, em treinamento cem por cento online.'
+    'São sete módulos, com conteúdo completo, em treinamento cem por cento online.',
+    'Na imagem: capa do treinamento, brigadistas em ação no ambiente de trabalho.',
+    'Na imagem: logo TecnoCursos.'
   ].join(' ');
 
   function stripHtml(value) {
@@ -110,12 +114,15 @@
     });
     list(screen.cards).forEach(function (c) {
       parts.push(labelled(c.title, c.body));
+      if (c.imageAlt) parts.push('Na imagem: ' + clean(c.imageAlt) + '.');
     });
     list(screen.items).forEach(function (it) {
       parts.push(labelled(it.title, it.text || it.body));
+      if (it.imageAlt) parts.push('Na imagem: ' + clean(it.imageAlt) + '.');
     });
     list(screen.compare).forEach(function (c) {
       parts.push(labelled(c.label, c.text || c.body));
+      if (c.imageAlt) parts.push('Na imagem: ' + clean(c.imageAlt) + '.');
     });
     list(screen.bullets).forEach(function (b) {
       parts.push(sentence(b));
@@ -164,6 +171,7 @@
       list(screen.alternatives).slice(0, 4).forEach(function (a, i) {
         if (a && a.text) parts.push('Opção ' + (i + 1) + ': ' + clean(a.text) + '.');
       });
+      if (screen.imageAlt) parts.push('Na imagem: ' + clean(screen.imageAlt) + '.');
       return joinParts(parts);
     }
 
@@ -210,10 +218,41 @@
     return 'menu-' + (nextModule ? nextModule : 'done');
   }
 
+  /** Áudio da tela de resultado do desafio (módulo concluído / reprovado). */
+  function resultAudioKey(modId, passed) {
+    return 'm' + Number(modId) + '-result-' + (passed ? 'pass' : 'fail');
+  }
+
+  /**
+   * Texto do resultado — sem placar (pts / acertos / sequência).
+   * Aprovado: eyebrow + título conquistado + corpo.
+   * Reprovado: aviso genérico (sem números dinâmicos).
+   */
+  function buildResultText(module, passed) {
+    var m = module || {};
+    var id = m.id || 0;
+    if (!passed) {
+      return joinParts([
+        'Desafio não concluído.',
+        'É necessário acertar o mínimo de questões para avançar.',
+        'Revise os temas listados na tela e tente novamente.'
+      ]);
+    }
+    var unlock = m.titleUnlock || {};
+    var parts = [
+      'Módulo ' + id + ' concluído.',
+      'Título conquistado.',
+      unlock.title ? clean(unlock.title) + '.' : '',
+      unlock.body ? clean(stripHtml(unlock.body)) : ''
+    ];
+    return joinParts(parts);
+  }
+
   function buildMenuText(session, nextModule) {
     var mods = (session && session.modules) || [];
+    // Título do menu (sem "Intermediário" — isso fica só na capa)
     var parts = [
-      'NR 17, Trilha da Ergonomia.',
+      'NR 23, Brigada de Incêndio.',
       'Conteúdo programático do treinamento.',
       'As atividades ficam só no final de cada módulo.'
     ];
@@ -240,6 +279,8 @@
     buildHomeText: buildHomeText,
     menuAudioKey: menuAudioKey,
     buildMenuText: buildMenuText,
+    resultAudioKey: resultAudioKey,
+    buildResultText: buildResultText,
     audioFileName: audioFileName
   };
 });

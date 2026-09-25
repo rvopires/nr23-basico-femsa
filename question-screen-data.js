@@ -41,6 +41,7 @@ window.QUESTION_SCREEN_SESSION = {
           "subtitle": "Abertura, composição da brigada e procedimentos básicos — do alerta ao confinamento.",
           "transcript": "Módulo 1: Fundamentos da Brigada de Incêndio.",
           "image": "assets/fotos/capa-modulo1.png",
+          "imageAlt": "Instrutora com EPI em fábrica, apontando para equipamentos de combate a incêndio e sinalização da brigada",
           "imagePosition": "18% 82%"
         },
         {
@@ -163,6 +164,7 @@ window.QUESTION_SCREEN_SESSION = {
           "review": "Definição de Brigada de Incêndio",
           "transcript": "O que é a Brigada de Incêndio?",
           "image": "assets/fotos/m1p1.png",
+          "imageAlt": "Equipamentos de brigada: extintores, mangueira, colete, capacete, abrigo de mangueira, kit de primeiros socorros e cone de sinalização",
           "imagePosition": "center 28%"
         },
         {
@@ -194,7 +196,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "O Líder da Brigada comanda a ação nos primeiros minutos.",
           "review": "Papel do Líder da Brigada",
           "transcript": "Quem comanda a ação nos primeiros minutos de uma emergência?",
-          "image": "assets/fotos/m1p2.png"
+          "image": "assets/fotos/m1p2.png",
+          "imageAlt": "Líder da brigada com prancheta orientando dois brigadistas, com extintor e ponto de encontro ao fundo"
         },
         {
           "id": "m1-q3",
@@ -225,7 +228,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "No abandono de área, remova todos para um local seguro a no mínimo 100 metros do sinistro.",
           "review": "Distância mínima no abandono de área",
           "transcript": "Qual é a distância mínima recomendada no abandono de área?",
-          "image": "assets/fotos/m1p3.png"
+          "image": "assets/fotos/m1p3.png",
+          "imageAlt": "Colaboradores evacuando pela saída de emergência em direção ao ponto de encontro"
         },
         {
           "id": "m1-q4",
@@ -256,7 +260,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "A sequência é: alerta, análise, corte de energia, abandono, primeiros socorros e confinamento.",
           "review": "Ordem dos procedimentos básicos",
           "transcript": "Qual é a ordem correta dos procedimentos básicos de emergência?",
-          "image": "assets/fotos/m1p4.png"
+          "image": "assets/fotos/m1p4.png",
+          "imageAlt": "Quatro etapas de emergência: telefone de alerta, acionamento do alarme, saída de emergência e extintor combatendo o fogo"
         }
       ]
     },
@@ -277,6 +282,7 @@ window.QUESTION_SCREEN_SESSION = {
           "subtitle": "Tetraedro do fogo e os três métodos: abafamento, resfriamento e retirada do material.",
           "transcript": "Módulo 2: O Fogo — teoria e métodos de extinção.",
           "image": "assets/fotos/m2-capa.png",
+          "imageAlt": "Instrutora com EPI apontando para o triângulo do fogo na parede, com extintor e hidrante ao lado",
           "imagePosition": "70% 78%"
         },
         {
@@ -328,25 +334,21 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Condução",
               "body": "Transmite a temperatura molécula a molécula. Ex.: colher na água fervente.",
               "image": "assets/fotos/m2-conducao.png",
-              "imageAlt": "Condução de calor"
+              "imageAlt": "Colher no vapor de água fervente, com o cabo aquecido — condução de calor"
             },
             {
               "title": "Convecção",
               "body": "Ar quente sobe e encontra ar frio, formando looping. Pode atingir o ponto de fulgor e iniciar novo foco.",
               "image": "assets/fotos/m2-conveccao.png",
-              "imageAlt": "Convecção de calor"
+              "imageAlt": "Panela fervendo com setas de ar quente subindo e ar frio descendo — convecção"
             },
             {
               "title": "Irradiação",
               "body": "Transmissão por ondas caloríferas de uma fonte de calor, como o sol.",
               "image": "assets/fotos/m2-irradiacao.png",
-              "imageAlt": "Irradiação de calor"
+              "imageAlt": "Pessoa aquecendo as mãos diante da lareira — irradiação de calor"
             }
           ],
-          "note": {
-            "label": "Por que importa",
-            "text": "Explica por que um incêndio pode se espalhar sem contato direto com a chama."
-          },
           "transcript": "Três formas de transmissão de calor: condução, convecção e irradiação."
         },
         {
@@ -409,7 +411,8 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 3 — Classes de Incêndio e Extintores",
           "subtitle": "Classes A, B, C e D e como operar água, PQS e CO₂.",
           "transcript": "Módulo 3: Classes de Incêndio e Extintores.",
-          "image": "assets/fotos/capa-modulo3.png"
+          "image": "assets/fotos/capa-modulo3.png",
+          "imageAlt": "Capa do módulo 3: classes de incêndio e extintores no ambiente de trabalho"
         },
         {
           "id": "m3-v-classes",
@@ -533,7 +536,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Água é indicada para Classe A.",
           "review": "Agente para Classe A",
           "transcript": "Classe A — papel, tecido, madeira. Qual agente?",
-          "image": "assets/fotos/m3p1.png"
+          "image": "assets/fotos/m3p1.png",
+          "imageAlt": "Materiais combustíveis de classe A: papel, tecido e madeira"
         },
         {
           "id": "m3-q2",
@@ -560,7 +564,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "PQS é indicado para Classes B e C. (CO₂ também serve em B/C; nesta rodada o gabarito do roteiro é PQS.)",
           "review": "Agente para Classe B",
           "transcript": "Classe B — álcool, gasolina, GLP. Qual agente?",
-          "image": "assets/fotos/m3p2.png"
+          "image": "assets/fotos/m3p2.png",
+          "imageAlt": "Líquidos inflamáveis de classe B: álcool, gasolina e GLP"
         },
         {
           "id": "m3-q3",
@@ -587,7 +592,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "CO₂ (ou PQS) para Classe C. Nunca água em equipamento energizado.",
           "review": "Agente para Classe C",
           "transcript": "Classe C — quadro elétrico energizado. Qual agente?",
-          "image": "assets/fotos/m3p3.png"
+          "image": "assets/fotos/m3p3.png",
+          "imageAlt": "Quadro elétrico energizado, típico de incêndio classe C"
         },
         {
           "id": "m3-q4",
@@ -614,7 +620,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Classe D exige agente específico para metais — não use água nem PQS comum.",
           "review": "Agente para Classe D",
           "transcript": "Classe D — raspas de metal. Qual agente?",
-          "image": "assets/fotos/m3p4.png"
+          "image": "assets/fotos/m3p4.png",
+          "imageAlt": "Raspas e resíduos de metal, típicos de incêndio classe D"
         }
       ]
     },
@@ -634,7 +641,8 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 4 — Prevenção, Riscos e Ação em Emergência",
           "subtitle": "Hábitos de prevenção, primeiros segundos, rotas de fuga e riscos da edificação.",
           "transcript": "Módulo 4: Prevenção, riscos da edificação e ação em emergência.",
-          "image": "assets/fotos/capa-modulo4.png"
+          "image": "assets/fotos/capa-modulo4.png",
+          "imageAlt": "Capa do módulo 4: prevenção, riscos e ação em emergência"
         },
         {
           "id": "m4-v-prevenir",
@@ -887,7 +895,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Plugue em T sobrecarrega a tomada — risco real.",
           "review": "Plugue em T na copa",
           "transcript": "Na copa: várias tomadas ligadas num único plugue em T atrás do micro-ondas. Isso é…",
-          "image": "assets/fotos/m4p1.png"
+          "image": "assets/fotos/m4p1.png",
+          "imageAlt": "Várias tomadas ligadas num plugue em T atrás do micro-ondas"
         },
         {
           "id": "m4-q2",
@@ -914,7 +923,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Não se deve cobrir fios elétricos com tapetes.",
           "review": "Fio sob o tapete",
           "transcript": "Fio da cafeteira passando por baixo de um tapete. Isso é…",
-          "image": "assets/fotos/m4p2.png"
+          "image": "assets/fotos/m4p2.png",
+          "imageAlt": "Fio da cafeteira passando por baixo de um tapete"
         },
         {
           "id": "m4-q3",
@@ -941,7 +951,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Extintor instalado corretamente é isca — não clique como risco.",
           "review": "Extintor correto (isca)",
           "transcript": "Extintor de PQS fixado na parede, com o pino no lugar. Isso é…",
-          "image": "assets/fotos/m4p3.png"
+          "image": "assets/fotos/m4p3.png",
+          "imageAlt": "Extintor de pó químico seco fixado na parede, com o pino no lugar"
         },
         {
           "id": "m4-q4",
@@ -968,7 +979,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Material combustível junto ao quadro elétrico é risco grave.",
           "review": "Caixas no quadro elétrico",
           "transcript": "Caixas de papelão empilhadas encostadas no quadro de distribuição elétrica. Isso é…",
-          "image": "assets/fotos/m4p4.png"
+          "image": "assets/fotos/m4p4.png",
+          "imageAlt": "Caixas de papelão empilhadas encostadas no quadro elétrico"
         }
       ]
     },
@@ -988,7 +1000,8 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 5 — Psicologia em Emergências",
           "subtitle": "Comportamento humano, reações ao perigo e liderança do brigadista.",
           "transcript": "Módulo 5: Psicologia em Emergências.",
-          "image": "assets/fotos/capa-modulo5.png"
+          "image": "assets/fotos/capa-modulo5.png",
+          "imageAlt": "Capa do módulo 5: psicologia em emergências"
         },
         {
           "id": "m5-v-porque",
@@ -1133,7 +1146,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Pânico é uma reação intensa e desorganizada — o foco é reconhecê-la e conter com calma, não “eliminar a qualquer custo”.",
           "review": "Afirmativa sobre pânico",
           "transcript": "O pânico é sempre a pior reação possível numa emergência e deve ser eliminado a qualquer custo.",
-          "image": "assets/fotos/m5-p1.png"
+          "image": "assets/fotos/m5-p1.png",
+          "imageAlt": "Cena ilustrando reação de pânico em emergência"
         },
         {
           "id": "m5-q2",
@@ -1155,7 +1169,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Pessoas tendem a seguir quem demonstra controle e calma.",
           "review": "Calma do brigadista",
           "transcript": "Um brigadista calmo pode evitar o pânico se espalhar entre as outras pessoas.",
-          "image": "assets/fotos/m5-p2.png"
+          "image": "assets/fotos/m5-p2.png",
+          "imageAlt": "Brigadista calmo orientando outras pessoas"
         },
         {
           "id": "m5-q3",
@@ -1177,7 +1192,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Obediência cega é uma reação possível — não é sempre positiva; o brigadista precisa de comunicação clara e segura.",
           "review": "Obediência cega",
           "transcript": "A obediência cega, seguir ordens sem questionar, é sempre uma reação positiva numa emergência.",
-          "image": "assets/fotos/m5-p3.png"
+          "image": "assets/fotos/m5-p3.png",
+          "imageAlt": "Pessoas seguindo ordens em situação de emergência"
         },
         {
           "id": "m5-q4",
@@ -1199,7 +1215,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Cuidar de quem cuida faz parte do preparo.",
           "review": "Apoio psicológico após evento crítico",
           "transcript": "O brigadista também deve buscar apoio psicológico após viver um evento crítico.",
-          "image": "assets/fotos/m5-p4.png"
+          "image": "assets/fotos/m5-p4.png",
+          "imageAlt": "Brigadista buscando apoio após evento crítico"
         }
       ]
     },
@@ -1219,7 +1236,8 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 6 — Primeiros Socorros",
           "subtitle": "Queimaduras, choque, hemorragia, desmaio, engasgo e convulsão.",
           "transcript": "Módulo 6: Primeiros Socorros — traumas e emergências clínicas.",
-          "image": "assets/fotos/capa-modulo6.png"
+          "image": "assets/fotos/capa-modulo6.png",
+          "imageAlt": "Capa do módulo 6: primeiros socorros"
         },
         {
           "id": "m6-v-intro",
@@ -1303,7 +1321,8 @@ window.QUESTION_SCREEN_SESSION = {
               "text": "Abafar/rolar; químico → água; cobrir úmido; socorro.",
               "warn": "Nunca furar bolhas, usar pomada ou puxar roupa grudada.",
               "tone": "e1",
-              "image": "assets/fotos/queimaduras.png"
+              "image": "assets/fotos/queimaduras.png",
+          "imageAlt": "Atendimento a queimadura"
             },
             {
               "n": 2,
@@ -1311,7 +1330,8 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Choque elétrico",
               "text": "Desligar energia primeiro; checar respiração/pulso; cobrir; SAMU.",
               "tone": "e2",
-              "image": "assets/fotos/choque.png"
+              "image": "assets/fotos/choque.png",
+          "imageAlt": "Atendimento a choque elétrico"
             },
             {
               "n": 3,
@@ -1319,7 +1339,8 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Hemorragia",
               "text": "Curativo compressivo; chamar socorro.",
               "tone": "e3",
-              "image": "assets/fotos/hemorragia.png"
+              "image": "assets/fotos/hemorragia.png",
+          "imageAlt": "Controle de hemorragia"
             },
             {
               "n": 4,
@@ -1327,7 +1348,8 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Desmaio",
               "text": "Local arejado; deitar com pernas elevadas; afrouxar roupas.",
               "tone": "e4",
-              "image": "assets/fotos/desmaio.png"
+              "image": "assets/fotos/desmaio.png",
+          "imageAlt": "Atendimento a desmaio"
             },
             {
               "n": 5,
@@ -1335,7 +1357,8 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Engasgo adulto",
               "text": "Tosse → Heimlich → SAMU → RCP se necessário.",
               "tone": "e5",
-              "image": "assets/fotos/engasgo-adulto.png"
+              "image": "assets/fotos/engasgo-adulto.png",
+          "imageAlt": "Manobra de desengasgo em adulto"
             },
             {
               "n": 6,
@@ -1343,7 +1366,8 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Engasgo bebê",
               "text": "Bruços no antebraço + palmadas nas costas → SAMU → RCP se necessário.",
               "tone": "e6",
-              "image": "assets/fotos/engasgo-bebe.png"
+              "image": "assets/fotos/engasgo-bebe.png",
+          "imageAlt": "Manobra de desengasgo em bebê"
             },
             {
               "n": 7,
@@ -1352,7 +1376,8 @@ window.QUESTION_SCREEN_SESSION = {
               "text": "Proteger a cabeça; afastar objetos; pano entre os dentes.",
               "warn": "Nunca medicação/líquido; nunca deixar sozinha.",
               "tone": "e7",
-              "image": "assets/fotos/convulsao.png"
+              "image": "assets/fotos/convulsao.png",
+          "imageAlt": "Atendimento a convulsão"
             }
           ],
           "transcript": "Ficha rápida de conduta em cada emergência. Avance emergência por emergência."
@@ -1387,7 +1412,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Se você puxar a vítima com a energia ligada, a corrente passa para você também. Desligue a eletricidade antes de qualquer contato.",
           "review": "Primeira decisão — choque elétrico",
           "transcript": "Decisão 1 de 3 · Colega caído perto de uma tomada, aparentemente após choque. O que fazer primeiro?",
-          "image": "assets/fotos/m6-p1.png"
+          "image": "assets/fotos/m6-p1.png",
+          "imageAlt": "Colega caído perto de uma tomada após choque elétrico"
         },
         {
           "id": "m6-q2",
@@ -1409,7 +1435,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Pomadas em queimaduras podem piorar a lesão — a orientação nunca é essa. Primeiro, verifique a respiração e a pulsação.",
           "review": "Segunda decisão — avaliação",
           "transcript": "Decisão 2 de 3 · Energia desligada. Próximo passo?",
-          "image": "assets/fotos/m6-p2.png"
+          "image": "assets/fotos/m6-p2.png",
+          "imageAlt": "Energia desligada, pronto para o próximo passo do atendimento"
         },
         {
           "id": "m6-q3",
@@ -1431,7 +1458,8 @@ window.QUESTION_SCREEN_SESSION = {
           "explanation": "Gelo direto na lesão agrava o dano nos tecidos — nunca aplique. Cubra com compressa limpa e úmida e chame o SAMU.",
           "review": "Terceira decisão — conduta final",
           "transcript": "Decisão 3 de 3 · Vítima respirando, com queimadura visível no braço. Ação final?",
-          "image": "assets/fotos/m6-p3.png"
+          "image": "assets/fotos/m6-p3.png",
+          "imageAlt": "Vítima respirando com queimadura visível no braço"
         }
       ]
     },
@@ -1451,7 +1479,8 @@ window.QUESTION_SCREEN_SESSION = {
           "title": "Módulo 7 — RCP, Infarto e Encerramento",
           "subtitle": "AVC, infarto, passo a passo da RCP, números de emergência e certificado.",
           "transcript": "Módulo 7: RCP, infarto e encerramento.",
-          "image": "assets/fotos/capa-modulo7.png"
+          "image": "assets/fotos/capa-modulo7.png",
+          "imageAlt": "Capa do módulo 7: RCP, infarto e encerramento"
         },
         {
           "id": "m7-v-avc-infarto",
@@ -1593,7 +1622,8 @@ window.QUESTION_SCREEN_SESSION = {
             "Intermediário"
           ],
           "transcript": "Parabéns pela conclusão do treinamento NR 23. Todos têm o direito de viver em um ambiente seguro.",
-          "image": "assets/fotos/capafinal.png"
+          "image": "assets/fotos/capafinal.png",
+          "imageAlt": "Imagem final de parabéns pelo treinamento concluído"
         }
       ]
     }
