@@ -1,5 +1,5 @@
-﻿/**
- * Conteúdo — NR 23 Brigada de Incêndio (Intermediário) · FEMSA / Coca-Cola
+/**
+ * Conteúdo — NR 23 Brigada de Incêndio (Básico) · FEMSA / Coca-Cola
  * Gerado a partir de Roteiro-NR23-Brigada-Incendio.txt
  *
  * Tipos: cover | content | video | image | quiz-intro | question | order | match | compare | reflect | finale
@@ -13,10 +13,12 @@
  *  M2 Apaga ou Alimenta? → match (5 pares: situação → efeito no fogo)
  *  M3 Combinação Certa → question com foto (classe de incêndio → agente)
  *  M4 Caça ao Risco → 3 compare (certo × errado) + 4 question
- *  M5 Guerra de Palpites → 2 reflect (reconheça a reação) + 4 question V/F
- *  M6 Corrente de Decisão → 3 question em cadeia (o erro mostra a consequência)
- *  M7 Roleta da RCP → order (5 etapas) + rhythm (tocar no ritmo das compressões, 100–120/min)
-  */
+ *  M5 Corrente de Decisão → 3 question em cadeia (o erro mostra a consequência)
+ *  M6 Roleta da RCP → order (5 etapas) + rhythm (tocar no ritmo das compressões, 100–120/min)
+ *
+ * Nota: telas de Primeiros Socorros / RCP mantêm ids m6-* e m7-* (áudios).
+ *       O número exibido do módulo vem do campo id (5 e 6).
+ */
 window.QUESTION_SCREEN_SESSION = {
   "meta": {
     "title": "NR 23 — Brigada de Incêndio",
@@ -627,7 +629,7 @@ window.QUESTION_SCREEN_SESSION = {
     },
     {
       "id": 4,
-      "title": "Prevenção, Riscos e Ação em Emergência",
+      "title": "Prevenção e Ação em Emergência",
       "meta": "Vídeos + fotos + texto · Certo × errado + desafio Caça ao Risco",
       "titleUnlock": {
         "title": "OLHO NO RISCO",
@@ -638,11 +640,11 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m4-cover",
           "type": "cover",
-          "title": "Módulo 4 — Prevenção, Riscos e Ação em Emergência",
-          "subtitle": "Hábitos de prevenção, primeiros segundos, rotas de fuga e riscos da edificação.",
-          "transcript": "Módulo 4: Prevenção, riscos da edificação e ação em emergência.",
+          "title": "Módulo 4 — Prevenção e Ação em Emergência",
+          "subtitle": "Hábitos de prevenção, primeiros segundos e rotas de fuga.",
+          "transcript": "Módulo 4: Prevenção e ação em emergência.",
           "image": "assets/fotos/capa-modulo4.png",
-          "imageAlt": "Capa do módulo 4: prevenção, riscos e ação em emergência"
+          "imageAlt": "Capa do módulo 4: prevenção e ação em emergência"
         },
         {
           "id": "m4-v-prevenir",
@@ -711,50 +713,6 @@ window.QUESTION_SCREEN_SESSION = {
           "transcript": "Foto: sinalização das rotas de fuga — imagem 2."
         },
         {
-          "id": "m4-riscos",
-          "type": "content",
-          "kicker": "📄 Texto",
-          "title": "Riscos Específicos da Edificação",
-          "cardAspect": "square",
-          "cards": [
-            {
-              "title": "Estruturais",
-              "body": "Materiais inflamáveis, pé-direito baixo, ausência de rotas de fuga.",
-              "image": "assets/fotos/m4-estrutural.png",
-              "imageAlt": "Riscos estruturais"
-            },
-            {
-              "title": "Operacionais",
-              "body": "Máquinas quentes, eletricidade, soldas, combustíveis.",
-              "image": "assets/fotos/m4-operacionais.png",
-              "imageAlt": "Riscos operacionais"
-            }
-          ],
-          "transcript": "Riscos estruturais e operacionais."
-        },
-        {
-          "id": "m4-riscos-2",
-          "type": "content",
-          "kicker": "📄 Texto",
-          "title": "Riscos Específicos da Edificação",
-          "cardAspect": "square",
-          "cards": [
-            {
-              "title": "Ambientais",
-              "body": "Calor, ventilação inadequada, poeiras combustíveis.",
-              "image": "assets/fotos/m4-ambientais.png",
-              "imageAlt": "Riscos ambientais"
-            },
-            {
-              "title": "Humanos",
-              "body": "Falta de treinamento, negligência, uso incorreto de EPIs.",
-              "image": "assets/fotos/m4-humanos.png",
-              "imageAlt": "Riscos humanos"
-            }
-          ],
-          "transcript": "Riscos ambientais e humanos."
-        },
-        {
           "id": "m4-prevenir-brigada",
           "type": "content",
           "kicker": "📄 Texto",
@@ -767,12 +725,30 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Prevenir",
               "lead": "Antes do fogo começar",
               "points": [
-                { "icon": "🗺️", "text": "Mapear setores de risco" },
-                { "icon": "🔍", "text": "Fazer inspeções periódicas" },
-                { "icon": "🛢️", "text": "Armazenar inflamáveis corretamente" },
-                { "icon": "⚡", "text": "Manter a elétrica em dia" },
-                { "icon": "🧯", "text": "Conhecer extintores, hidrantes e saídas" },
-                { "icon": "🏃", "text": "Treinar e simular evacuação" }
+                {
+                  "icon": "🗺️",
+                  "text": "Mapear setores de risco"
+                },
+                {
+                  "icon": "🔍",
+                  "text": "Fazer inspeções periódicas"
+                },
+                {
+                  "icon": "🛢️",
+                  "text": "Armazenar inflamáveis corretamente"
+                },
+                {
+                  "icon": "⚡",
+                  "text": "Manter a elétrica em dia"
+                },
+                {
+                  "icon": "🧯",
+                  "text": "Conhecer extintores, hidrantes e saídas"
+                },
+                {
+                  "icon": "🏃",
+                  "text": "Treinar e simular evacuação"
+                }
               ]
             },
             {
@@ -781,11 +757,26 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Papel do brigadista",
               "lead": "Quando a emergência chega",
               "points": [
-                { "icon": "🚨", "text": "Agir primeiro, com segurança" },
-                { "icon": "🔎", "text": "Identificar causas potenciais" },
-                { "icon": "🛠️", "text": "Inspecionar áreas e equipamentos" },
-                { "icon": "📋", "text": "Monitorar o cumprimento das normas" },
-                { "icon": "📢", "text": "Comunicar irregularidades ao superior" }
+                {
+                  "icon": "🚨",
+                  "text": "Agir primeiro, com segurança"
+                },
+                {
+                  "icon": "🔎",
+                  "text": "Identificar causas potenciais"
+                },
+                {
+                  "icon": "🛠️",
+                  "text": "Inspecionar áreas e equipamentos"
+                },
+                {
+                  "icon": "📋",
+                  "text": "Monitorar o cumprimento das normas"
+                },
+                {
+                  "icon": "📢",
+                  "text": "Comunicar irregularidades ao superior"
+                }
               ]
             }
           ],
@@ -986,242 +977,6 @@ window.QUESTION_SCREEN_SESSION = {
     },
     {
       "id": 5,
-      "title": "Psicologia em Emergências",
-      "meta": "Vídeos + texto · Reconheça a reação + desafio Guerra de Palpites",
-      "titleUnlock": {
-        "title": "LÍDER SERENO",
-        "body": "Você reconhece reações e lidera com calma.",
-        "icon": "🧠"
-      },
-      "screens": [
-        {
-          "id": "m5-cover",
-          "type": "cover",
-          "title": "Módulo 5 — Psicologia em Emergências",
-          "subtitle": "Comportamento humano, reações ao perigo e liderança do brigadista.",
-          "transcript": "Módulo 5: Psicologia em Emergências.",
-          "image": "assets/fotos/capa-modulo5.png",
-          "imageAlt": "Capa do módulo 5: psicologia em emergências"
-        },
-        {
-          "id": "m5-v-porque",
-          "type": "video",
-          "kicker": "🎥 Vídeo",
-          "title": "Por Que Falar de Psicologia em Emergência?",
-          "duration": "0:35",
-          "embed": "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=02e9a463-3588-4b60-af48-2936299c4208",
-          "playerId": "panda-02e9a463-3588-4b60-af48-2936299c4208",
-          "scene": "Brigadista observando o open space com calma",
-          "brief": "Preparação técnica e emocional para manter a calma, orientar e liderar.",
-          "body": "Emergências provocam medo, estresse e reações instintivas. O comportamento humano impacta combate, evacuação e primeiros socorros. O brigadista precisa estar preparado técnica e emocionalmente.",
-          "transcript": "Vídeo: por que falar de psicologia em emergência."
-        },
-        {
-          "id": "m5-v-reacoes",
-          "type": "video",
-          "kicker": "🎥 Vídeo",
-          "title": "Reações Psicológicas: Medo, Pânico e Paralisia",
-          "duration": "1:15",
-          "embed": "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=1b8232e1-30c0-4b13-bfcb-1564808fc05d",
-          "playerId": "panda-1b8232e1-30c0-4b13-bfcb-1564808fc05d",
-          "scene": "Animação Pixar das reações",
-          "brief": "Negação, paralisia, pânico, obediência cega, histeria coletiva e heroísmo.",
-          "body": "Conceitos: emergência, estresse, pânico e resiliência. Reações: negação, paralisia, pânico, obediência cega, histeria coletiva e heroísmo. Reconhecer é o primeiro passo para agir.",
-          "transcript": "Vídeo: reações psicológicas em emergência."
-        },
-        {
-          "id": "m5-v-lideranca",
-          "type": "video",
-          "kicker": "🎥 Vídeo",
-          "title": "O Papel e a Liderança do Brigadista em Momentos de Crise",
-          "duration": "1:20",
-          "embed": "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=59365249-1853-4a68-a21d-e3f8019d0db9",
-          "playerId": "panda-59365249-1853-4a68-a21d-e3f8019d0db9",
-          "scene": "Simulação de apoio emocional entre colegas",
-          "brief": "Referência de calma: respiração guiada, contato visual, comandos simples, sem agressividade.",
-          "body": "Pessoas seguem quem demonstra controle. Técnicas: respiração guiada, contato visual/verbal, comandos simples e diretos, evitar confrontos. Identificar colapso emocional evita o caos.",
-          "transcript": "Vídeo: liderança do brigadista em crise."
-        },
-        {
-          "id": "m5-cuidado",
-          "type": "content",
-          "kicker": "📄 Texto",
-          "title": "Cuidando de Quem Cuida: Saúde Emocional do Brigadista",
-          "items": [
-            {
-              "icon": "🧭",
-              "text": "Reconhecer os próprios limites emocionais"
-            },
-            {
-              "icon": "🧘",
-              "text": "Controlar o estresse, manter o foco e a calma"
-            },
-            {
-              "icon": "🤝",
-              "text": "Buscar apoio psicológico após eventos críticos"
-            }
-          ],
-          "quote": "Liderar em crise tem custo emocional real — reconhecer isso não é fraqueza, é preparo.",
-          "transcript": "Saúde emocional do próprio brigadista."
-        },
-        {
-          "id": "m5-refl-paralisia",
-          "type": "reflect",
-          "title": "Reconheça a reação",
-          "prompt": "Durante o alarme, um colega para no meio do corredor e não consegue decidir nem se mover.",
-          "promptAccent": "Que reação é essa?",
-          "choices": [
-            {
-              "icon": "🙅",
-              "text": "Negação",
-              "correct": false
-            },
-            {
-              "icon": "🧊",
-              "text": "Paralisia",
-              "correct": true
-            },
-            {
-              "icon": "🏃",
-              "text": "Pânico",
-              "correct": false
-            }
-          ],
-          "answer": "É a paralisia: a pessoa fica incapaz de tomar decisões ou de se mover. Aproxime-se com calma, mantenha contato visual e use comandos simples e diretos.",
-          "transcript": "Reconheça a reação: um colega paralisado no corredor."
-        },
-        {
-          "id": "m5-refl-negacao",
-          "type": "reflect",
-          "title": "Reconheça a reação",
-          "prompt": "Um colega diz “deve ser só um teste” e continua na mesa, ignorando o alarme.",
-          "promptAccent": "Que reação é essa?",
-          "choices": [
-            {
-              "icon": "🙈",
-              "text": "Negação",
-              "correct": true
-            },
-            {
-              "icon": "🐑",
-              "text": "Obediência cega",
-              "correct": false
-            },
-            {
-              "icon": "😱",
-              "text": "Histeria coletiva",
-              "correct": false
-            }
-          ],
-          "answer": "É a negação: a pessoa se recusa a acreditar na gravidade da situação. Fale de forma clara e direta, sem discutir nem impor ordens com agressividade, e conduza-a à saída.",
-          "transcript": "Reconheça a reação: um colega que ignora o alarme."
-        },
-        {
-          "id": "m5-quiz-intro",
-          "type": "quiz-intro",
-          "title": "Desafio — Guerra de Palpites",
-          "count": 4,
-          "minCorrect": 3,
-          "icon": "🗳️",
-          "body": "Verdadeiro ou falso. Mínimo de <strong>3 acertos</strong>. (Uma rodada era bônus 2× no roteiro.)",
-          "transcript": "Desafio do módulo 5: Guerra de Palpites."
-        },
-        {
-          "id": "m5-q1",
-          "type": "question",
-          "variant": "duelo",
-          "question": "O pânico é sempre a pior reação possível numa emergência e deve ser eliminado a qualquer custo.",
-          "alternatives": [
-            {
-              "id": "a",
-              "text": "Verdadeiro",
-              "correct": false
-            },
-            {
-              "id": "b",
-              "text": "Falso",
-              "correct": true
-            }
-          ],
-          "explanation": "Pânico é uma reação intensa e desorganizada — o foco é reconhecê-la e conter com calma, não “eliminar a qualquer custo”.",
-          "review": "Afirmativa sobre pânico",
-          "transcript": "O pânico é sempre a pior reação possível numa emergência e deve ser eliminado a qualquer custo.",
-          "image": "assets/fotos/m5-p1.png",
-          "imageAlt": "Cena ilustrando reação de pânico em emergência"
-        },
-        {
-          "id": "m5-q2",
-          "type": "question",
-          "variant": "duelo",
-          "question": "Um brigadista calmo pode evitar o pânico se espalhar entre as outras pessoas.",
-          "alternatives": [
-            {
-              "id": "a",
-              "text": "Verdadeiro",
-              "correct": true
-            },
-            {
-              "id": "b",
-              "text": "Falso",
-              "correct": false
-            }
-          ],
-          "explanation": "Pessoas tendem a seguir quem demonstra controle e calma.",
-          "review": "Calma do brigadista",
-          "transcript": "Um brigadista calmo pode evitar o pânico se espalhar entre as outras pessoas.",
-          "image": "assets/fotos/m5-p2.png",
-          "imageAlt": "Brigadista calmo orientando outras pessoas"
-        },
-        {
-          "id": "m5-q3",
-          "type": "question",
-          "variant": "duelo",
-          "question": "A obediência cega, seguir ordens sem questionar, é sempre uma reação positiva numa emergência.",
-          "alternatives": [
-            {
-              "id": "a",
-              "text": "Verdadeiro",
-              "correct": false
-            },
-            {
-              "id": "b",
-              "text": "Falso",
-              "correct": true
-            }
-          ],
-          "explanation": "Obediência cega é uma reação possível — não é sempre positiva; o brigadista precisa de comunicação clara e segura.",
-          "review": "Obediência cega",
-          "transcript": "A obediência cega, seguir ordens sem questionar, é sempre uma reação positiva numa emergência.",
-          "image": "assets/fotos/m5-p3.png",
-          "imageAlt": "Pessoas seguindo ordens em situação de emergência"
-        },
-        {
-          "id": "m5-q4",
-          "type": "question",
-          "variant": "duelo",
-          "question": "O brigadista também deve buscar apoio psicológico após viver um evento crítico.",
-          "alternatives": [
-            {
-              "id": "a",
-              "text": "Verdadeiro",
-              "correct": true
-            },
-            {
-              "id": "b",
-              "text": "Falso",
-              "correct": false
-            }
-          ],
-          "explanation": "Cuidar de quem cuida faz parte do preparo.",
-          "review": "Apoio psicológico após evento crítico",
-          "transcript": "O brigadista também deve buscar apoio psicológico após viver um evento crítico.",
-          "image": "assets/fotos/m5-p4.png",
-          "imageAlt": "Brigadista buscando apoio após evento crítico"
-        }
-      ]
-    },
-    {
-      "id": 6,
       "title": "Primeiros Socorros: Traumas e Emergências Clínicas",
       "meta": "Vídeos + ficha · desafio Corrente de Decisão",
       "titleUnlock": {
@@ -1233,11 +988,11 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m6-cover",
           "type": "cover",
-          "title": "Módulo 6 — Primeiros Socorros",
+          "title": "Módulo 5 — Primeiros Socorros",
           "subtitle": "Queimaduras, choque, hemorragia, desmaio, engasgo e convulsão.",
-          "transcript": "Módulo 6: Primeiros Socorros — traumas e emergências clínicas.",
+          "transcript": "Módulo 5: Primeiros Socorros — traumas e emergências clínicas.",
           "image": "assets/fotos/capa-modulo6.png",
-          "imageAlt": "Capa do módulo 6: primeiros socorros"
+          "imageAlt": "Capa do módulo 5: primeiros socorros"
         },
         {
           "id": "m6-v-intro",
@@ -1322,7 +1077,7 @@ window.QUESTION_SCREEN_SESSION = {
               "warn": "Nunca furar bolhas, usar pomada ou puxar roupa grudada.",
               "tone": "e1",
               "image": "assets/fotos/queimaduras.png",
-          "imageAlt": "Atendimento a queimadura"
+              "imageAlt": "Atendimento a queimadura"
             },
             {
               "n": 2,
@@ -1331,7 +1086,7 @@ window.QUESTION_SCREEN_SESSION = {
               "text": "Desligar energia primeiro; checar respiração/pulso; cobrir; SAMU.",
               "tone": "e2",
               "image": "assets/fotos/choque.png",
-          "imageAlt": "Atendimento a choque elétrico"
+              "imageAlt": "Atendimento a choque elétrico"
             },
             {
               "n": 3,
@@ -1340,7 +1095,7 @@ window.QUESTION_SCREEN_SESSION = {
               "text": "Curativo compressivo; chamar socorro.",
               "tone": "e3",
               "image": "assets/fotos/hemorragia.png",
-          "imageAlt": "Controle de hemorragia"
+              "imageAlt": "Controle de hemorragia"
             },
             {
               "n": 4,
@@ -1349,7 +1104,7 @@ window.QUESTION_SCREEN_SESSION = {
               "text": "Local arejado; deitar com pernas elevadas; afrouxar roupas.",
               "tone": "e4",
               "image": "assets/fotos/desmaio.png",
-          "imageAlt": "Atendimento a desmaio"
+              "imageAlt": "Atendimento a desmaio"
             },
             {
               "n": 5,
@@ -1358,7 +1113,7 @@ window.QUESTION_SCREEN_SESSION = {
               "text": "Tosse → Heimlich → SAMU → RCP se necessário.",
               "tone": "e5",
               "image": "assets/fotos/engasgo-adulto.png",
-          "imageAlt": "Manobra de desengasgo em adulto"
+              "imageAlt": "Manobra de desengasgo em adulto"
             },
             {
               "n": 6,
@@ -1367,7 +1122,7 @@ window.QUESTION_SCREEN_SESSION = {
               "text": "Bruços no antebraço + palmadas nas costas → SAMU → RCP se necessário.",
               "tone": "e6",
               "image": "assets/fotos/engasgo-bebe.png",
-          "imageAlt": "Manobra de desengasgo em bebê"
+              "imageAlt": "Manobra de desengasgo em bebê"
             },
             {
               "n": 7,
@@ -1377,7 +1132,7 @@ window.QUESTION_SCREEN_SESSION = {
               "warn": "Nunca medicação/líquido; nunca deixar sozinha.",
               "tone": "e7",
               "image": "assets/fotos/convulsao.png",
-          "imageAlt": "Atendimento a convulsão"
+              "imageAlt": "Atendimento a convulsão"
             }
           ],
           "transcript": "Ficha rápida de conduta em cada emergência. Avance emergência por emergência."
@@ -1464,7 +1219,7 @@ window.QUESTION_SCREEN_SESSION = {
       ]
     },
     {
-      "id": 7,
+      "id": 6,
       "title": "RCP, Infarto e Encerramento",
       "meta": "Vídeos + números · Roleta da RCP + certificado",
       "titleUnlock": {
@@ -1476,11 +1231,11 @@ window.QUESTION_SCREEN_SESSION = {
         {
           "id": "m7-cover",
           "type": "cover",
-          "title": "Módulo 7 — RCP, Infarto e Encerramento",
+          "title": "Módulo 6 — RCP, Infarto e Encerramento",
           "subtitle": "AVC, infarto, passo a passo da RCP, números de emergência e certificado.",
-          "transcript": "Módulo 7: RCP, infarto e encerramento.",
+          "transcript": "Módulo 6: RCP, infarto e encerramento.",
           "image": "assets/fotos/capa-modulo7.png",
-          "imageAlt": "Capa do módulo 7: RCP, infarto e encerramento"
+          "imageAlt": "Capa do módulo 6: RCP, infarto e encerramento"
         },
         {
           "id": "m7-v-avc-infarto",
@@ -1543,7 +1298,7 @@ window.QUESTION_SCREEN_SESSION = {
           "playerId": "panda-4821065b-d6e7-4715-aa3e-3ce8cdf013d9",
           "scene": "Brigadista confiante no corredor + logo FEMSA",
           "brief": "Mensagem final e frase de fechamento do material NR 23.",
-          "body": "Todos têm o direito de viver em um ambiente seguro, sem correr riscos desnecessários e sem receios de danos à sua saúde e vida. Você concluiu o NR 23 Intermediário — esteja sempre pronto.",
+          "body": "Todos têm o direito de viver em um ambiente seguro, sem correr riscos desnecessários e sem receios de danos à sua saúde e vida. Você concluiu o NR 23 Básico — esteja sempre pronto.",
           "transcript": "Vídeo de encerramento."
         },
         {
@@ -1614,12 +1369,12 @@ window.QUESTION_SCREEN_SESSION = {
           "kicker": "🏆 Conclusão",
           "eyebrow": "Certificado de conclusão",
           "title": "Parabéns",
-          "body": "Você concluiu o treinamento NR 23 — Curso de Prevenção de Incêndios (Intermediário).",
+          "body": "Você concluiu o treinamento NR 23 — Curso de Prevenção de Incêndios (Básico).",
           "quote": "Todos têm o direito de viver em um ambiente seguro, sem correr riscos desnecessários e sem receios de danos à sua saúde e vida.",
           "chips": [
             "NR 23",
             "Brigada de Incêndio",
-            "Intermediário"
+            "Básico"
           ],
           "transcript": "Parabéns pela conclusão do treinamento NR 23. Todos têm o direito de viver em um ambiente seguro.",
           "image": "assets/fotos/capafinal.png",

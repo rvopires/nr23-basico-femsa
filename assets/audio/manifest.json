@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T17:08:35.785Z",
+  "generatedAt": "2026-09-25T17:50:02.724Z",
   "items": {
     "home": {
       "file": "assets/audio/home.mp3",
@@ -28,10 +28,6 @@
     "menu-4": {
       "file": "assets/audio/menu-4.mp3",
       "text": "NR 23, Brigada de Incêndio. Conteúdo programático do treinamento. As atividades ficam só no final de cada módulo. Módulo 1, Fundamentos da Brigada de Incêndio. Módulo 2, O Fogo: Teoria e Métodos de Extinção. Módulo 3, Classes de Incêndio e Extintores. Módulo 4, Prevenção, Riscos e Ação em Emergência. Módulo 5, Psicologia em Emergências. Módulo 6, Primeiros Socorros: Traumas e Emergências Clínicas. Módulo 7, RCP, Infarto e Encerramento. Módulo 4 de 7 liberado."
-    },
-    "menu-5": {
-      "file": "assets/audio/menu-5.mp3",
-      "text": "NR 23, Brigada de Incêndio. Conteúdo programático do treinamento. As atividades ficam só no final de cada módulo. Módulo 1, Fundamentos da Brigada de Incêndio. Módulo 2, O Fogo: Teoria e Métodos de Extinção. Módulo 3, Classes de Incêndio e Extintores. Módulo 4, Prevenção, Riscos e Ação em Emergência. Módulo 5, Psicologia em Emergências. Módulo 6, Primeiros Socorros: Traumas e Emergências Clínicas. Módulo 7, RCP, Infarto e Encerramento. Módulo 5 de 7 liberado."
     },
     "menu-done": {
       "file": "assets/audio/menu-done.mp3",
@@ -273,14 +269,6 @@
       "file": "assets/audio/m2-match.mp3",
       "text": "Apaga ou Alimenta?. Toque numa situação e depois no efeito dela sobre o fogo."
     },
-    "menu-6": {
-      "file": "assets/audio/menu-6.mp3",
-      "text": "NR 23, Brigada de Incêndio. Conteúdo programático do treinamento. As atividades ficam só no final de cada módulo. Módulo 1, Fundamentos da Brigada de Incêndio. Módulo 2, O Fogo: Teoria e Métodos de Extinção. Módulo 3, Classes de Incêndio e Extintores. Módulo 4, Prevenção, Riscos e Ação em Emergência. Módulo 5, Psicologia em Emergências. Módulo 6, Primeiros Socorros: Traumas e Emergências Clínicas. Módulo 7, RCP, Infarto e Encerramento. Módulo 6 de 7 liberado."
-    },
-    "menu-7": {
-      "file": "assets/audio/menu-7.mp3",
-      "text": "NR 23, Brigada de Incêndio. Conteúdo programático do treinamento. As atividades ficam só no final de cada módulo. Módulo 1, Fundamentos da Brigada de Incêndio. Módulo 2, O Fogo: Teoria e Métodos de Extinção. Módulo 3, Classes de Incêndio e Extintores. Módulo 4, Prevenção, Riscos e Ação em Emergência. Módulo 5, Psicologia em Emergências. Módulo 6, Primeiros Socorros: Traumas e Emergências Clínicas. Módulo 7, RCP, Infarto e Encerramento. Módulo 7 de 7 liberado."
-    },
     "m3-v-classes": {
       "file": "assets/audio/m3-v-classes.mp3",
       "text": "Vídeo. As 4 Classes de Incêndio."
@@ -513,28 +501,40 @@
       "file": "assets/audio/m4-result-fail.mp3",
       "text": "Desafio não concluído. É necessário acertar o mínimo de questões para avançar. Revise os temas listados na tela e tente novamente."
     },
-    "m5-result-pass": {
+    "_removido-menu-5": {
+      "file": "assets/audio/menu-5.mp3",
+      "text": "NR 23, Brigada de Incêndio. Conteúdo programático do treinamento. As atividades ficam só no final de cada módulo. Módulo 1, Fundamentos da Brigada de Incêndio. Módulo 2, O Fogo: Teoria e Métodos de Extinção. Módulo 3, Classes de Incêndio e Extintores. Módulo 4, Prevenção, Riscos e Ação em Emergência. Módulo 5, Psicologia em Emergências. Módulo 6, Primeiros Socorros: Traumas e Emergências Clínicas. Módulo 7, RCP, Infarto e Encerramento. Módulo 5 de 7 liberado."
+    },
+    "_removido-m5-result-pass": {
       "file": "assets/audio/m5-result-pass.mp3",
       "text": "Módulo 5 concluído. Título conquistado. LÍDER SERENO. Você reconhece reações e lidera com calma."
     },
-    "m5-result-fail": {
+    "_removido-m5-result-fail": {
       "file": "assets/audio/m5-result-fail.mp3",
       "text": "Desafio não concluído. É necessário acertar o mínimo de questões para avançar. Revise os temas listados na tela e tente novamente."
     },
+    "menu-6": {
+      "file": "assets/audio/menu-6.mp3",
+      "text": "NR 23, Brigada de Incêndio. Conteúdo programático do treinamento. As atividades ficam só no final de cada módulo. Módulo 1, Fundamentos da Brigada de Incêndio. Módulo 2, O Fogo: Teoria e Métodos de Extinção. Módulo 3, Classes de Incêndio e Extintores. Módulo 4, Prevenção, Riscos e Ação em Emergência. Módulo 5, Psicologia em Emergências. Módulo 6, Primeiros Socorros: Traumas e Emergências Clínicas. Módulo 7, RCP, Infarto e Encerramento. Módulo 7 de 7 liberado."
+    },
     "m6-result-pass": {
       "file": "assets/audio/m6-result-pass.mp3",
-      "text": "Módulo 6 concluído. Título conquistado. PRIMEIRA RESPOSTA. Você sabe conduzir as emergências clínicas mais comuns."
+      "text": "Módulo 7 concluído. Título conquistado. PRONTO PARA AGIR. Você reconhece AVC/infarto, sabe a RCP e quem ligar."
     },
     "m6-result-fail": {
       "file": "assets/audio/m6-result-fail.mp3",
       "text": "Desafio não concluído. É necessário acertar o mínimo de questões para avançar. Revise os temas listados na tela e tente novamente."
     },
-    "m7-result-pass": {
-      "file": "assets/audio/m7-result-pass.mp3",
-      "text": "Módulo 7 concluído. Título conquistado. PRONTO PARA AGIR. Você reconhece AVC/infarto, sabe a RCP e quem ligar."
+    "menu-5": {
+      "file": "assets/audio/menu-5.mp3",
+      "text": "NR 23, Brigada de Incêndio. Conteúdo programático do treinamento. As atividades ficam só no final de cada módulo. Módulo 1, Fundamentos da Brigada de Incêndio. Módulo 2, O Fogo: Teoria e Métodos de Extinção. Módulo 3, Classes de Incêndio e Extintores. Módulo 4, Prevenção, Riscos e Ação em Emergência. Módulo 5, Psicologia em Emergências. Módulo 6, Primeiros Socorros: Traumas e Emergências Clínicas. Módulo 7, RCP, Infarto e Encerramento. Módulo 6 de 7 liberado."
     },
-    "m7-result-fail": {
-      "file": "assets/audio/m7-result-fail.mp3",
+    "m5-result-pass": {
+      "file": "assets/audio/m5-result-pass.mp3",
+      "text": "Módulo 6 concluído. Título conquistado. PRIMEIRA RESPOSTA. Você sabe conduzir as emergências clínicas mais comuns."
+    },
+    "m5-result-fail": {
+      "file": "assets/audio/m5-result-fail.mp3",
       "text": "Desafio não concluído. É necessário acertar o mínimo de questões para avançar. Revise os temas listados na tela e tente novamente."
     }
   }

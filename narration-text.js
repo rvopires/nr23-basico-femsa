@@ -19,10 +19,10 @@
   var HOME_TEXT = [
     'Abertura do treinamento.',
     'Segurança do trabalho.',
-    'NR 23, Brigada de Incêndio Intermediário.',
+    'NR 23, Brigada de Incêndio Básico.',
     'Aprenda a prevenir, combater o princípio de incêndio, apoiar na evacuação',
     'e prestar os primeiros socorros no escritório FEMSA.',
-    'São sete módulos, com conteúdo completo, em treinamento cem por cento online.',
+    'São seis módulos, com conteúdo completo, em treinamento cem por cento online.',
     'Na imagem: capa do treinamento, brigadistas em ação no ambiente de trabalho.',
     'Na imagem: logo TecnoCursos.'
   ].join(' ');
@@ -250,7 +250,7 @@
 
   function buildMenuText(session, nextModule) {
     var mods = (session && session.modules) || [];
-    // Título do menu (sem "Intermediário" — isso fica só na capa)
+    // Título do menu (sem "Básico" — isso fica só na capa)
     var parts = [
       'NR 23, Brigada de Incêndio.',
       'Conteúdo programático do treinamento.',
