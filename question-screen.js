@@ -737,7 +737,10 @@
           <p class="qs-body">${esc(data.body || 'Toque nos cuidados na ordem que você seguiria.')}</p>
           <p class="qs-seq-progress" data-qs-seq-progress>0 de ${items.length} selecionados</p>
           <div class="qs-seq-wrap">${cards}</div>
-          <p class="qs-seq-fb" data-qs-seq-fb hidden></p>
+          <div class="qs-seq-foot">
+            <p class="qs-seq-fb" data-qs-seq-fb hidden></p>
+            <button type="button" class="qs-seq-retry" data-qs-seq-retry hidden>Tentar de novo</button>
+          </div>
         </div>
       </article>`;
   }
@@ -1513,6 +1516,30 @@
   QuestionScreen.prototype._bindOrder = function () {
     var self = this;
     this._seqTapped = [];
+    this._seqTries = 0;
+    var maxTries = Math.max(1, Number(this.data.tries) || 5);
+    var retryBtn = this.el.querySelector('[data-qs-seq-retry]');
+
+    function resetRound() {
+      self._seqTapped = [];
+      self.state.answered = false;
+      var root = self.el.querySelector('[data-qs-root]') || self.root;
+      if (root) root.classList.remove('is-feedback');
+      var fb = self.el.querySelector('[data-qs-seq-fb]');
+      if (fb) { fb.hidden = true; fb.textContent = ''; fb.className = 'qs-seq-fb'; }
+      if (retryBtn) retryBtn.hidden = true;
+      var prog = self.el.querySelector('[data-qs-seq-progress]');
+      var total = (self.data.items || []).length;
+      if (prog) prog.textContent = '0 de ' + total + ' selecionados';
+      self.el.querySelectorAll('[data-qs-seq]').forEach(function (btn) {
+        btn.classList.remove('is-picked');
+        btn.style.pointerEvents = '';
+        var badge = btn.querySelector('.qs-seq-badge');
+        if (badge) badge.textContent = '';
+      });
+      if (self.options.quizScoring) self._startTimer();
+    }
+
     this.el.querySelectorAll('[data-qs-seq]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         if (self.state.answered || btn.classList.contains('is-picked')) return;
@@ -1528,6 +1555,14 @@
         if (self._seqTapped.length >= total) self._finishOrder(false);
       });
     });
+
+    if (retryBtn) {
+      retryBtn.addEventListener('click', function () {
+        beep('click');
+        resetRound();
+      });
+    }
+    this._orderMaxTries = maxTries;
   };
 
   QuestionScreen.prototype._finishOrder = function (timedOut) {
@@ -1547,19 +1582,53 @@
       c.style.pointerEvents = 'none';
     });
     var fb = this.el.querySelector('[data-qs-seq-fb]');
+    var retryBtn = this.el.querySelector('[data-qs-seq-retry]');
+    var root = this.el.querySelector('[data-qs-root]') || this.root;
+    if (root) root.classList.add('is-feedback');
+
+    function shortLabel(it) {
+      var t = String(it.text || '');
+      var cut = t.split('—')[0].split('–')[0].split(' - ')[0].trim();
+      return cut.length > 48 ? cut.slice(0, 46) + '…' : cut;
+    }
+    var listHtml = items.slice().sort(function (a, b) { return a.rank - b.rank; }).map(function (it) {
+      return '<li>' + esc(shortLabel(it)) + '</li>';
+    }).join('');
+
+    if (correct) {
+      if (fb) {
+        fb.hidden = false;
+        fb.className = 'qs-seq-fb is-ok';
+        fb.innerHTML = 'Ordem certa!';
+      }
+      if (retryBtn) retryBtn.hidden = true;
+      var pts = this.options.quizScoring ? this._quizPoints(true) : 0;
+      beep('ok');
+      this._complete({ kind: 'order', correct: true, points: pts, timedOut: false });
+      return;
+    }
+
+    this._seqTries = (this._seqTries || 0) + 1;
+    var maxTries = this._orderMaxTries || 5;
+    var prefix = timedOut ? 'Tempo esgotado.' : 'Ordem incorreta.';
+    var triesTxt = this._seqTries < maxTries
+      ? ' Tentativa ' + this._seqTries + ' de ' + maxTries + '.'
+      : '';
     if (fb) {
       fb.hidden = false;
-      fb.className = 'qs-seq-fb ' + (correct ? 'is-ok' : 'is-nok');
-      var orderTxt = items.slice().sort(function (a, b) { return a.rank - b.rank; }).map(function (it, i) {
-        return (i + 1) + '. ' + it.text;
-      }).join(' · ');
-      fb.textContent = (timedOut ? 'Tempo esgotado. ' : '') + (correct ? 'Ordem certa! ' : 'Essa não é a ordem mais lógica. ') + orderTxt;
-      /* a lista + o feedback podem passar da altura do cartão: leva o texto para a vista */
-      try { fb.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {}
+      fb.className = 'qs-seq-fb is-nok';
+      fb.innerHTML = esc(prefix) + triesTxt +
+        '<ol class="qs-seq-fb-list" aria-label="Ordem correta">' + listHtml + '</ol>';
     }
-    var pts = this.options.quizScoring ? this._quizPoints(correct) : 0;
-    beep(correct ? 'ok' : 'nok');
-    this._complete({ kind: 'order', correct: correct, points: pts, timedOut: !!timedOut });
+    beep('nok');
+
+    if (this._seqTries < maxTries) {
+      if (retryBtn) retryBtn.hidden = false;
+      return;
+    }
+    if (retryBtn) retryBtn.hidden = true;
+    var pts0 = 0;
+    this._complete({ kind: 'order', correct: false, points: pts0, timedOut: !!timedOut });
   };
 
   QuestionScreen.prototype._bindMatch = function () {

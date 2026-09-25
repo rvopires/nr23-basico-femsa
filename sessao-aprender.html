@@ -6,11 +6,11 @@
   <meta name="referrer" content="no-referrer">
   <title>NR 23 — Brigada de Incêndio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="question-screen.css?v=titulos">
+  <link rel="stylesheet" href="question-screen.css?v=orderFb">
   <link rel="stylesheet" href="capa-animada.css?v=12">
   <link rel="stylesheet" href="fundo-novo.css?v=1">
   <link rel="stylesheet" href="menu-compacto.css?v=1">
-  <link rel="stylesheet" href="atividades.css?v=9">
+  <link rel="stylesheet" href="atividades.css?v=10">
   <style>
     html, body { margin: 0; height: 100%; overflow: hidden; }
   </style>
@@ -151,7 +151,7 @@
   <audio id="bg-music" loop preload="metadata" aria-hidden="true"></audio>
 
   <script src="question-screen-data.js?v=videosM2M7"></script>
-  <script src="question-screen.js?v=videoSeek2"></script>
+  <script src="question-screen.js?v=orderFb"></script>
   <script src="capa-animada.js?v=10"></script>
   <script src="narration-text.js?v=mob40"></script>
   <script src="narration.js?v=mob40"></script>
@@ -374,63 +374,19 @@
     }
   }
 
-  /* Progresso e posição da página: salvos no navegador para o F5 não
-     jogar de volta na abertura enquanto se revisa o conteúdo. */
+  /* Progresso dos módulos só vale nesta sessão (memória).
+     F5 / Ctrl+F5 zera tudo e volta pra capa — como antes. */
   var RESUME_KEY = 'nr23-sessao-aprender-resume';
   var progress = { unlockedUpTo: 0, completed: {} };
 
   function saveResume() {
-    try {
-      var s = (mode === 'play') ? current() : null;
-      localStorage.setItem(RESUME_KEY, JSON.stringify({
-        v: 1,
-        mode: mode,
-        modIndex: modIndex,
-        slideIndex: slideIndex,
-        screenId: s && s.id ? s.id : null,
-        progress: progress,
-        demoMode: !!demoMode
-      }));
-    } catch (err) {}
+    /* no-op: não persiste mais no navegador */
   }
 
-  function readResume() {
-    try {
-      var raw = localStorage.getItem(RESUME_KEY);
-      return raw ? JSON.parse(raw) : null;
-    } catch (err) {
-      return null;
-    }
-  }
-
-  function findScreenById(id) {
-    if (!id) return null;
-    for (var mi = 0; mi < modules.length; mi++) {
-      var list = modules[mi].screens || [];
-      for (var si = 0; si < list.length; si++) {
-        if (list[si] && list[si].id === id) return { mi: mi, si: si };
-      }
-    }
-    return null;
-  }
-
-  function markSeenUpTo(mi, si) {
-    var list = (modules[mi] && modules[mi].screens) || [];
-    for (var i = 0; i <= si && i < list.length; i++) {
-      if (list[i] && list[i].id) answered[list[i].id] = true;
-    }
-  }
+  try { localStorage.removeItem(RESUME_KEY); } catch (err) {}
 
   var demoMode = false;
   try { demoMode = sessionStorage.getItem('nr17-demoMode') === '1'; } catch (err) {}
-  var savedBoot = readResume();
-  if (savedBoot) {
-    if (savedBoot.progress && typeof savedBoot.progress === 'object') {
-      progress.unlockedUpTo = Math.max(0, Number(savedBoot.progress.unlockedUpTo) || 0);
-      progress.completed = savedBoot.progress.completed || {};
-    }
-    if (savedBoot.demoMode) demoMode = true;
-  }
 
   function isUnlocked(i) {
     if (demoMode) return true;
@@ -687,7 +643,11 @@
     if (next >= list.length) {
       completeCurrentModule();
       var nextMod = modIndex + 1;
-      if (nextMod < modules.length) { openModule(nextMod); return; }
+      if (nextMod < modules.length) {
+        progress.unlockedUpTo = Math.max(progress.unlockedUpTo, nextMod);
+        openModule(nextMod);
+        return;
+      }
       showMenu();
       return;
     }
@@ -723,9 +683,13 @@
     }
     if (slideIndex >= screens().length - 1) {
       completeCurrentModule();
+      var nextMod = modIndex + 1;
+      if (nextMod < modules.length) {
+        progress.unlockedUpTo = Math.max(progress.unlockedUpTo, nextMod);
+        openModule(nextMod);
+        return;
+      }
       if (isFinale()) {
-        var nextMod = modIndex + 1;
-        if (nextMod < modules.length) { openModule(nextMod); return; }
         updateNav();
         return;
       }
@@ -1078,12 +1042,15 @@
         }
         if (!isQuizStep(s)) return;
         clearAutoAdvance();
-        /* ordenar errado: a tela mostra a ordem certa, então dá tempo de ler */
-        var ordemErrada = s.type === 'order' && !(result && result.correct);
+        /* ordenar: erro com tentativas ainda disponíveis não chega aqui (_complete
+           só roda no acerto ou esgotou tentativas). No fail final, dá tempo de ler. */
         autoAdvanceTimer = setTimeout(function () {
           if (isLastQuizQuestion()) showQuizResult();
           else go(1);
-        }, ordemErrada ? 8000 : (s.type === 'rhythm' ? 4000 : s.type === 'order' || s.type === 'match' ? 1600 : 3000));
+        }, s.type === 'rhythm' ? 4000
+          : (s.type === 'order' && !(result && result.correct)) ? 4500
+          : s.type === 'order' || s.type === 'match' ? 1600
+          : 3000);
       },
       onContinue: handleContinue
     });
@@ -1419,28 +1386,6 @@
   });
 
   function bootFromResume() {
-    var saved = savedBoot || readResume();
-    if (!saved || !saved.mode) {
-      showHome();
-      return;
-    }
-    if (saved.mode === 'menu') {
-      showMenu();
-      return;
-    }
-    if (saved.mode === 'play') {
-      var where = findScreenById(saved.screenId);
-      var mi = where ? where.mi : Number(saved.modIndex);
-      var si = where ? where.si : Number(saved.slideIndex);
-      if (!modules[mi] || !modules[mi].screens || !modules[mi].screens[si]) {
-        showHome();
-        return;
-      }
-      progress.unlockedUpTo = Math.max(progress.unlockedUpTo, mi);
-      markSeenUpTo(mi, si);
-      jumpToScreen(mi, si);
-      return;
-    }
     showHome();
   }
 

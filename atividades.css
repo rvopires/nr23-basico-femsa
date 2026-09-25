@@ -24,11 +24,16 @@
 }
 
 /* celular: o botão redondo "ver conteúdo abaixo" cobria as últimas linhas do
-   feedback da ordem; deixa uma folga pra ele */
+   feedback da ordem; deixa uma folga pra ele — exceto na tela de ordenar,
+   que agora cabe sem rolagem */
 @media (max-width: 599px) {
   .qs-seq-fb {
     scroll-margin-bottom: 64px;
     margin-bottom: 56px;
+  }
+  .qs-screen.is-order .qs-seq-fb {
+    scroll-margin-bottom: 0;
+    margin-bottom: 0;
   }
 }
 
