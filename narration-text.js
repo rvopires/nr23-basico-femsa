@@ -20,8 +20,8 @@
     'Abertura do treinamento.',
     'Segurança do trabalho.',
     'NR 23, Brigada de Incêndio Básico.',
-    'Aprenda a prevenir, combater o princípio de incêndio, apoiar na evacuação',
-    'e prestar os primeiros socorros no escritório FEMSA.',
+    'Capacite-se para prevenir incêndios, agir no princípio do fogo, apoiar a evacuação',
+    'e prestar primeiros socorros no ambiente FEMSA.',
     'São seis módulos, com conteúdo completo, em treinamento cem por cento online.',
     'Na imagem: capa do treinamento, brigadistas em ação no ambiente de trabalho.',
     'Na imagem: logo TecnoCursos.'
