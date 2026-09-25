@@ -483,7 +483,7 @@ window.QUESTION_SCREEN_SESSION = {
               "title": "Gás Carbônico (CO₂)",
               "lead": "Classes B e C",
               "body": "Painéis e equipamentos elétricos sensíveis — sem deixar resíduos.",
-              "image": "assets/fotos/m3-gas.png",
+              "image": "assets/fotos/m3-gas.png?v=nova",
               "imageAlt": "Extintor de gás carbônico em painel elétrico",
               "tone": "co2"
             }
@@ -1298,8 +1298,8 @@ window.QUESTION_SCREEN_SESSION = {
           "kicker": "🎥 Vídeo",
           "title": "Encerramento: Você Está Pronto",
           "duration": "0:30",
-          "embed": "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=4821065b-d6e7-4715-aa3e-3ce8cdf013d9",
-          "playerId": "panda-4821065b-d6e7-4715-aa3e-3ce8cdf013d9",
+          "embed": "https://player-vz-d35edf2a-8e7.tv.pandavideo.com.br/embed/?v=4c34f17a-7980-47b3-8a60-675ab644f04e",
+          "playerId": "panda-4c34f17a-7980-47b3-8a60-675ab644f04e",
           "scene": "Brigadista confiante no corredor + logo FEMSA",
           "brief": "Mensagem final e frase de fechamento do material NR 23.",
           "body": "Todos têm o direito de viver em um ambiente seguro, sem correr riscos desnecessários e sem receios de danos à sua saúde e vida. Você concluiu o NR 23 Básico — esteja sempre pronto.",
