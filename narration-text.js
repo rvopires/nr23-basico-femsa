@@ -19,7 +19,7 @@
   var HOME_TEXT = [
     'Abertura do treinamento.',
     'Segurança do trabalho.',
-    'NR 23, Brigada de Incêndio Básico.',
+    'NR 23, Proteção Contra Incêndios, Brigada de Incêndio, Nível Básico.',
     'Capacite-se para prevenir incêndios, agir no princípio do fogo, apoiar a evacuação',
     'e prestar primeiros socorros no ambiente FEMSA.',
     'São seis módulos, com conteúdo completo, em treinamento cem por cento online.',
@@ -250,11 +250,10 @@
 
   function buildMenuText(session, nextModule) {
     var mods = (session && session.modules) || [];
-    // Título do menu (sem "Básico" — isso fica só na capa)
     var parts = [
-      'NR 23, Brigada de Incêndio.',
-      'Conteúdo programático do treinamento.',
-      'As atividades ficam só no final de cada módulo.'
+      'NR 23, Proteção Contra Incêndios, Brigada de Incêndio, Nível Básico.',
+      'Conteúdo programático completo.',
+      'Só o módulo liberado pode ser aberto.'
     ];
     mods.forEach(function (m) {
       parts.push('Módulo ' + m.id + ', ' + clean(m.title) + '.');

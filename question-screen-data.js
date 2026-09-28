@@ -1,5 +1,5 @@
 /**
- * Conteúdo — NR 23 Brigada de Incêndio (Básico) · FEMSA / Coca-Cola
+ * Conteúdo — NR 23 Proteção Contra Incêndios (Brigada de Incêndio - Nível Básico) · FEMSA / Coca-Cola
  * Gerado a partir de Roteiro-NR23-Brigada-Incendio.txt
  *
  * Tipos: cover | content | video | image | quiz-intro | question | order | match | compare | reflect | finale
@@ -21,7 +21,7 @@
  */
 window.QUESTION_SCREEN_SESSION = {
   "meta": {
-    "title": "NR 23 — Brigada de Incêndio",
+    "title": "NR 23 – Proteção Contra Incêndios (Brigada de Incêndio - Nível Básico)",
     "brand": "TecnoCursos",
     "musicSrc": "musica/musica_foco.mp3"
   },
@@ -29,7 +29,7 @@ window.QUESTION_SCREEN_SESSION = {
     {
       "id": 1,
       "title": "Fundamentos da Brigada de Incêndio",
-      "meta": "Vídeos + texto · desafio Contra o Alarme",
+      "meta": "Papéis da equipe e a ordem do alerta ao confinamento",
       "titleUnlock": {
         "title": "GUARDIÃO DO ALERTA",
         "body": "Você já sabe o que a brigada faz e a ordem dos primeiros minutos.",
@@ -270,7 +270,7 @@ window.QUESTION_SCREEN_SESSION = {
     {
       "id": 2,
       "title": "O Fogo: Teoria e Métodos de Extinção",
-      "meta": "Vídeos + texto · desafio Apaga ou Alimenta?",
+      "meta": "Tetraedro, calor e como interromper a combustão",
       "titleUnlock": {
         "title": "MESTRE DO TETRAEDRO",
         "body": "Você entende o fogo e sabe o que o apaga — ou o alimenta.",
@@ -400,7 +400,7 @@ window.QUESTION_SCREEN_SESSION = {
     {
       "id": 3,
       "title": "Classes de Incêndio e Extintores",
-      "meta": "Vídeos + texto · desafio Combinação Certa",
+      "meta": "Água, PQS, CO₂ e equipamentos de apoio",
       "titleUnlock": {
         "title": "AGENTE CERTO",
         "body": "Você escolhe a classe e o extintor corretos.",
@@ -638,7 +638,7 @@ window.QUESTION_SCREEN_SESSION = {
     {
       "id": 4,
       "title": "Prevenção e Ação em Emergência",
-      "meta": "Vídeos + fotos + texto · Certo × errado + desafio Caça ao Risco",
+      "meta": "Riscos do cotidiano, rotas de fuga e primeiros segundos",
       "titleUnlock": {
         "title": "OLHO NO RISCO",
         "body": "Você previne no dia a dia e age nos primeiros segundos.",
@@ -986,7 +986,7 @@ window.QUESTION_SCREEN_SESSION = {
     {
       "id": 5,
       "title": "Primeiros Socorros: Traumas e Emergências Clínicas",
-      "meta": "Vídeos + ficha · desafio Corrente de Decisão",
+      "meta": "Queimadura, choque, engasgo, desmaio e convulsão",
       "titleUnlock": {
         "title": "PRIMEIRA RESPOSTA",
         "body": "Você sabe conduzir as emergências clínicas mais comuns.",
@@ -1229,7 +1229,7 @@ window.QUESTION_SCREEN_SESSION = {
     {
       "id": 6,
       "title": "RCP, Infarto e Encerramento",
-      "meta": "Vídeos + números · Roleta da RCP + certificado",
+      "meta": "Sinais de AVC, compressões e quem ligar",
       "titleUnlock": {
         "title": "PRONTO PARA AGIR",
         "body": "Você reconhece AVC/infarto, sabe a RCP e quem ligar.",
@@ -1372,14 +1372,14 @@ window.QUESTION_SCREEN_SESSION = {
           "kicker": "🏆 Conclusão",
           "eyebrow": "Treinamento concluído",
           "title": "Parabéns!",
-          "body": "Você finalizou o NR 23 — Curso de Prevenção de Incêndios (Básico).",
+          "body": "Você finalizou o NR 23 – Proteção Contra Incêndios (Brigada de Incêndio - Nível Básico).",
           "quote": "Toda pessoa tem o direito a um ambiente seguro, sem riscos desnecessários e sem medo por sua saúde e vida.",
           "chips": [
             "NR 23",
             "Brigada de Incêndio",
-            "Básico"
+            "Nível Básico"
           ],
-          "transcript": "Parabéns. Você finalizou o treinamento NR 23. Toda pessoa tem o direito a um ambiente seguro.",
+          "transcript": "Parabéns. Você finalizou o NR 23, Proteção Contra Incêndios, Brigada de Incêndio, Nível Básico. Toda pessoa tem o direito a um ambiente seguro.",
           "image": "assets/fotos/capafinal.png",
           "imageAlt": "Imagem final de parabéns pelo treinamento concluído"
         }
