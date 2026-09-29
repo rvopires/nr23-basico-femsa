@@ -21,7 +21,7 @@
     'Segurança do trabalho.',
     'NR 23, Proteção Contra Incêndios, Brigada de Incêndio, Nível Básico.',
     'Capacite-se para prevenir incêndios, agir no princípio do fogo, apoiar a evacuação',
-    'e prestar primeiros socorros no ambiente FEMSA.',
+    'e prestar primeiros socorros no ambiente Coca-Cola.',
     'São seis módulos, com conteúdo completo, em treinamento cem por cento online.',
     'Na imagem: capa do treinamento, brigadistas em ação no ambiente de trabalho.',
     'Na imagem: logo TecnoCursos.'
